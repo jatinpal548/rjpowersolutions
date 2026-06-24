@@ -67,16 +67,16 @@ export default async function ServiceDetailPage({ params }: Props) {
               <p className="text-gray-500 text-lg md:text-[21px] max-w-2xl leading-relaxed font-medium mb-8">
                 {service.desc}
               </p>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-col md:flex-row gap-3 md:gap-4">
                 <a
                   href={whatsappLink(`Hello! I am interested in ${service.title}. Please share details and pricing.`)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-brand-orange text-white font-semibold py-3.5 px-8 rounded-full flex items-center gap-2 hover:bg-[#C96A1E] transition-colors"
+                  className="bg-brand-orange text-white font-semibold py-3.5 px-8 w-full md:w-auto min-h-[48px] rounded-full flex items-center justify-center gap-2 hover:bg-[#C96A1E] transition-colors"
                 >
                   <MessageCircle size={18} /> Get Quote on WhatsApp
                 </a>
-                <Link href="/contact" className="border border-gray-200 text-gray-700 hover:border-brand-green hover:text-brand-green font-semibold py-3.5 px-8 rounded-full flex items-center gap-2 transition-colors bg-white">
+                <Link href="/contact" className="border border-gray-200 text-gray-700 hover:border-brand-green hover:text-brand-green font-semibold py-3.5 px-8 w-full md:w-auto min-h-[48px] rounded-full flex items-center justify-center gap-2 transition-colors bg-white">
                   Contact Us <ArrowRight size={16} />
                 </Link>
               </div>
@@ -123,9 +123,9 @@ export default async function ServiceDetailPage({ params }: Props) {
             </div>
             <h2 className="section-title text-[#1A1A1A]">How We Deliver<br /><span className="text-brand-orange">Your {service.title}</span></h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {service.process.map((p, i) => (
-              <div key={p.step} className="bg-brand-bg rounded-2xl p-8 relative overflow-hidden group border border-gray-100 shadow-sm hover:shadow-md transition-all">
+              <div key={p.step} className="bg-brand-bg rounded-2xl p-6 md:p-8 relative overflow-hidden group border border-gray-100 shadow-sm hover:shadow-md transition-all">
                 <div className="absolute top-5 right-5 font-poppins font-extrabold text-5xl text-gray-200/50 group-hover:text-brand-orange/10 transition-colors">
                   {String(i + 1).padStart(2, '0')}
                 </div>
@@ -170,16 +170,16 @@ export default async function ServiceDetailPage({ params }: Props) {
         <div className="container-custom text-center">
           <h2 className="font-poppins font-bold text-3xl text-white mb-4">Ready to Get Started?</h2>
           <p className="text-green-50 mb-8 text-lg">Get a free site visit and detailed quote for your {service.title.toLowerCase()} project.</p>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-col md:flex-row justify-center gap-3 md:gap-4 w-full">
             <a
               href={whatsappLink(`Hello! I want a free site visit and quote for ${service.title}.`)}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-brand-orange text-white font-semibold py-3.5 px-8 rounded-full flex items-center gap-2 hover:bg-[#C96A1E] transition-colors"
+              className="bg-brand-orange text-white w-full md:w-auto min-h-[48px] font-semibold py-3.5 px-8 rounded-full flex items-center justify-center gap-2 hover:bg-[#C96A1E] transition-colors"
             >
               <MessageCircle size={18} /> Get Free Quote
             </a>
-            <Link href="/calculator" className="bg-white text-brand-green font-semibold py-3.5 px-8 rounded-full flex items-center gap-2 hover:bg-gray-50 transition-colors">
+            <Link href="/calculator" className="bg-white text-brand-green w-full md:w-auto min-h-[48px] font-semibold py-3.5 px-8 rounded-full flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors">
               Calculate Savings <ArrowRight size={16} />
             </Link>
           </div>

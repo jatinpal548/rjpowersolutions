@@ -63,7 +63,7 @@ export default function AboutPage() {
             <p className="text-gray-600 mb-8 leading-relaxed">
               Our end-to-end approach — survey, design, procurement, installation, net metering, and maintenance — means our customers get a seamless experience from inquiry to years of solar savings.
             </p>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {SITE.stats.map((stat, i) => (
                 <motion.div
                   key={stat.label}
@@ -73,8 +73,8 @@ export default function AboutPage() {
                   transition={{ duration: 0.4, delay: i * 0.1 }}
                   className="bg-white rounded-2xl p-5 text-center shadow-sm border border-gray-100"
                 >
-                  <div className="font-poppins font-extrabold text-3xl text-brand-green">{stat.value}</div>
-                  <div className="text-gray-500 text-sm mt-1">{stat.label}</div>
+                  <div className="font-poppins font-extrabold text-2xl md:text-3xl text-brand-green">{stat.value}</div>
+                  <div className="text-gray-500 text-xs md:text-sm mt-1">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
@@ -101,7 +101,7 @@ export default function AboutPage() {
 
       {/* Mission & Vision */}
       <section className="py-20 lg:py-28 bg-white">
-        <div className="container-custom grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="container-custom flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -144,7 +144,7 @@ export default function AboutPage() {
             </div>
             <h2 className="section-title text-[#1A1A1A]">Built on <span className="text-brand-orange">Trust &amp; Excellence</span></h2>
           </AnimatedSection>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {TRUST_PILLARS.map(({ icon: Icon, title, desc }, i) => (
               <motion.div
                 key={title}

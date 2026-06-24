@@ -277,9 +277,9 @@ export default function HomePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
-                className="text-center md:text-left text-4xl sm:text-5xl lg:text-[4rem] font-extrabold text-[#111827] mb-4 md:mb-6 tracking-tight leading-[1.1] font-poppins md:whitespace-nowrap"
+                className="text-center md:text-left text-4xl sm:text-5xl lg:text-[4rem] font-extrabold text-[#111827] mb-4 md:mb-6 tracking-tight leading-[1.1] font-poppins"
               >
-                Power Your Future<br />
+                Power Your Future
                 with <span className="text-[#F97316]">Solar Energy</span>
               </motion.h1>
 
@@ -289,9 +289,7 @@ export default function HomePage() {
                 transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
                 className="text-center md:text-left mx-auto md:mx-0 text-[#64748B] text-[15px] sm:text-lg lg:text-xl font-medium mb-8 md:mb-10 leading-relaxed max-w-lg"
               >
-                Save up to 90% on electricity bills with<br className="hidden sm:block" />
-                high-efficiency solar solutions for<br className="hidden sm:block" />
-                homes, businesses and industries.
+                Save up to 90% on electricity bills with high-efficiency solar solutions for homes, businesses and industries.
               </motion.p>
 
               {/* Desktop Buttons */}
@@ -324,15 +322,18 @@ export default function HomePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
-                className="flex md:hidden items-center gap-3 w-full mb-8"
+                className="grid md:hidden grid-cols-2 gap-3 w-full mb-8"
               >
-                <a href={heroWhatsApp} className="flex-1 bg-[#F97316] text-white font-bold py-3.5 px-2 rounded-xl flex items-center justify-center gap-1.5 shadow-md text-[13px] leading-tight text-center">
-                  <MessageCircle size={14} />
-                  <span>Get Free Quote</span>
-                  <span aria-hidden="true">→</span>
+                <a href={heroWhatsApp} className="w-full bg-[#F97316] text-white font-bold py-3 px-2 rounded-xl flex items-center justify-center gap-1.5 shadow-md text-[11px] sm:text-[13px] leading-tight text-center">
+                  <MessageCircle size={14} className="flex-shrink-0" />
+                  <span>Get Free Quote &rarr;</span>
                 </a>
-                <Link href="/calculator" className="flex-1 bg-white text-[#111827] font-bold py-3.5 px-2 rounded-xl flex items-center justify-center gap-1.5 shadow-sm border border-gray-200 text-[13px] leading-tight text-center">
-                  <Calculator size={14} /> Calculate Savings &rarr;
+                <Link href="/calculator" className="w-full bg-white text-[#111827] font-bold py-2 px-2 rounded-xl flex items-center justify-center gap-1.5 shadow-sm border border-gray-200 text-[11px] sm:text-[13px] leading-tight text-center">
+                  <Calculator size={14} className="flex-shrink-0" />
+                  <div className="flex flex-col items-center">
+                    <span>Calculate Savings</span>
+                    <span aria-hidden="true">&rarr;</span>
+                  </div>
                 </Link>
               </motion.div>
 
@@ -341,21 +342,23 @@ export default function HomePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
-                className="md:hidden w-full mb-6 bg-white rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.05)] border border-gray-100 px-2 py-5"
+                className="md:hidden w-full mb-6 bg-white rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.05)] border border-gray-100 py-5"
               >
-                <div className="grid grid-cols-4 gap-1 divide-x divide-gray-100">
+                <div className="grid grid-cols-4 divide-x divide-gray-100">
                   {[
                     { value: '500+', label: 'Installations', icon: Sun },
                     { value: '25+', label: 'Years Experience', icon: Users },
                     { value: '100%', label: 'Quality Assurance', icon: Shield },
                     { value: '500+', label: 'Happy Customers', icon: Star },
                   ].map((stat, i) => (
-                    <div key={i} className="flex flex-col items-center text-center px-1">
+                    <div key={i} className="flex flex-col items-center justify-start text-center px-1">
                       <div className="w-8 h-8 rounded-full bg-[#E8F5EE] flex items-center justify-center mb-2">
-                        <stat.icon size={16} className="text-[#16A34A]" strokeWidth={2} />
+                        <stat.icon size={14} className="text-[#16A34A]" strokeWidth={2} />
                       </div>
-                      <div className="text-sm font-poppins font-extrabold text-[#16A34A] leading-tight mb-0.5">{stat.value}</div>
-                      <div className="text-[9px] font-bold text-[#64748B] leading-tight mt-1">{stat.label}</div>
+                      <div className="text-[12px] sm:text-sm font-poppins font-extrabold text-[#16A34A] leading-tight mb-1">{stat.value}</div>
+                      <div className="text-[8px] sm:text-[10px] font-bold text-[#64748B] leading-[1.2]">
+                        {stat.label.split(' ').map((word, j) => <span key={j} className="block">{word}</span>)}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -368,7 +371,7 @@ export default function HomePage() {
                 transition={{ duration: 0.6, delay: 0.5, ease: 'easeOut' }}
                 className="relative w-full h-[220px] md:hidden rounded-2xl overflow-hidden mb-8 shadow-sm"
               >
-                <Image src="/hero-bg-mobile.png" alt="Solar Installation" fill className="object-cover object-center" priority />
+                <Image src="/hero-bg-mobile.png" alt="Solar Installation" fill sizes="(max-width: 768px) 100vw, 0vw" className="object-cover object-center" priority />
                 <motion.div animate={{ y: [-2, 2, -2] }} transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }} className="absolute top-[20%] left-[5%] bg-white/95 backdrop-blur-md rounded-lg px-2 py-1 text-[9px] font-bold text-[#111827] flex items-center gap-1 shadow-sm border border-gray-100">
                   <Home size={10} className="text-[#16A34A]" /> Residential
                 </motion.div>
@@ -451,7 +454,7 @@ export default function HomePage() {
         >
           <div className="container-custom">
             <div className="bg-white rounded-[2rem] shadow-[0_10px_40px_rgb(0,0,0,0.08)] border border-[#E5E7EB] overflow-hidden">
-              <div className="flex p-8 flex-row justify-between items-center gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 p-8 gap-6 justify-between items-center">
                 {[
                   { value: '500+', label: 'Installations', sub: 'Successfully Completed', icon: Sun },
                   { value: '5+', label: 'Years Experience', sub: 'In Solar Industry', icon: Award },
@@ -578,7 +581,7 @@ export default function HomePage() {
           </AnimatedSection>
 
           {/* Top Row: Featured Services (Desktop Grid) */}
-          <div className="hidden lg:grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+          <div className="hidden md:grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
             {FEATURED_SERVICES.slice(0, 3).map((svc, i) => (
               <motion.div
                 key={svc.id}
@@ -588,7 +591,7 @@ export default function HomePage() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="group bg-white rounded-[24px] border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col"
               >
-                <div className="relative h-[240px] w-full overflow-hidden bg-gray-50">
+                <div className="relative aspect-[16/9] w-full overflow-hidden bg-gray-50">
                   <Image src={svc.image} alt={svc.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
                   <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm border border-white/50">
                     <svc.icon size={14} className="text-[#16A34A]" />
@@ -609,12 +612,12 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  <div className="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
+                  <div className="mt-auto pt-4 border-t border-gray-100 flex flex-col gap-2 md:flex-row md:items-center justify-between">
                     <div className="flex items-center gap-2 text-[#16A34A] bg-[#E8F5EE] px-3 py-1.5 rounded-lg text-xs font-bold">
                       <svc.tagIcon size={14} /> {svc.tagText}
                     </div>
-                    <Link href={svc.link} className="flex items-center gap-1.5 text-[#F97316] font-bold text-sm group/btn hover:text-[#E66E00] transition-colors">
-                      Learn More <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
+                    <Link href={svc.link} className="flex items-center justify-center gap-1.5 text-white bg-[#F97316] font-bold text-sm w-full min-h-[44px] rounded-lg md:w-auto md:bg-transparent md:text-[#F97316] group/btn hover:text-[#E66E00] transition-colors">
+                      Learn More <ArrowRight size={16} className="md:group-hover/btn:translate-x-1 transition-transform" />
                     </Link>
                   </div>
                 </div>
@@ -623,85 +626,71 @@ export default function HomePage() {
           </div>
 
           {/* Top Row: Featured Services (Mobile Carousel) */}
-          <div 
-            className="lg:hidden mb-8 w-full overflow-hidden relative"
-            onTouchStart={onServiceTouchStart}
-            onTouchMove={onServiceTouchMove}
-            onTouchEnd={onServiceTouchEnd}
-          >
-            <div 
-              className="flex transition-transform duration-500 ease-out will-change-transform gap-4"
-              style={{ transform: `translateX(calc(-${activeService * 100}% - ${activeService * 16}px))` }}
+          <div className="flex flex-col md:hidden w-full relative mb-8">
+            <div
+              className="relative overflow-hidden touch-pan-y"
+              onTouchStart={onServiceTouchStart}
+              onTouchMove={onServiceTouchMove}
+              onTouchEnd={onServiceTouchEnd}
             >
-              {FEATURED_SERVICES.map((svc) => (
-                <div key={svc.id} className="min-w-full shrink-0 flex">
-                  <div className="group w-full bg-white rounded-[24px] border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.06)] overflow-hidden flex flex-col h-full transform transition-transform duration-300">
-                    <div className="relative h-[240px] w-full overflow-hidden bg-gray-50">
-                      <Image src={svc.image} alt={svc.title} fill className="object-cover" />
-                      <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-2.5 py-1.5 rounded-md flex items-center gap-1.5 shadow-sm border border-white/50">
-                        <svc.icon size={12} className="text-[#16A34A]" />
-                        <span className="text-[#16A34A] text-[10px] font-extrabold uppercase tracking-widest">{svc.badgeText}</span>
+              <div
+                className="flex transition-transform duration-500 ease-out"
+                style={{ transform: `translateX(-${activeService * 100}%)` }}
+              >
+                {FEATURED_SERVICES.map((svc) => (
+                  <div key={svc.id} className="w-full flex-shrink-0 px-2">
+                    <div className="w-full bg-white rounded-[24px] border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.06)] overflow-hidden flex flex-col h-full">
+                      <div className="relative aspect-[16/9] w-full overflow-hidden bg-gray-50">
+                        <Image src={svc.image} alt={svc.title} fill className="object-cover" />
+                        <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-2.5 py-1.5 rounded-md flex items-center gap-1.5 shadow-sm border border-white/50">
+                          <svc.icon size={12} className="text-[#16A34A]" />
+                          <span className="text-[#16A34A] text-[10px] font-extrabold uppercase tracking-widest">{svc.badgeText}</span>
+                        </div>
                       </div>
-                    </div>
-                    <div className="p-8 flex flex-col flex-grow">
-                      <h3 className="font-poppins font-bold text-[22px] text-[#111827] mb-2">{svc.title}</h3>
-                      <p className="text-[#64748B] text-[15px] font-medium mb-5">{svc.desc}</p>
+                      <div className="p-6 flex flex-col flex-grow">
+                        <h3 className="font-poppins font-bold text-[22px] text-[#111827] mb-2">{svc.title}</h3>
+                        <p className="text-[#64748B] text-[15px] font-medium mb-5">{svc.desc}</p>
 
-                      <div className="flex items-center gap-3 mb-5">
-                        <div className={`flex items-center gap-3 flex-1 ${svc.highlightBg} rounded-xl px-4 py-3`}>
-                          <svc.highlightIcon className={`${svc.highlightIconColor} w-5 h-5 shrink-0`} />
-                          <div>
-                            <div className="text-[#111827] text-[13px] font-extrabold">{svc.highlightTitle}</div>
-                            <div className="text-[#64748B] text-[9px] font-bold uppercase tracking-wider mt-0.5">{svc.highlightSubtitle}</div>
+                        <div className="flex items-center gap-3 mb-5">
+                          <div className={`flex items-center gap-3 flex-1 ${svc.highlightBg} rounded-xl px-4 py-3`}>
+                            <svc.highlightIcon className={`${svc.highlightIconColor} w-5 h-5 shrink-0`} />
+                            <div>
+                              <div className="text-[#111827] text-[13px] font-extrabold">{svc.highlightTitle}</div>
+                              <div className="text-[#64748B] text-[9px] font-bold uppercase tracking-wider mt-0.5">{svc.highlightSubtitle}</div>
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      <div className="mt-auto pt-4 flex items-center justify-between">
-                        <div className="flex items-center gap-1.5 text-[#16A34A] bg-[#E8F5EE] px-2.5 py-1 rounded-md text-[11px] font-bold">
-                          <svc.tagIcon size={12} /> {svc.tagText}
+                        <div className="mt-auto pt-4 flex flex-col gap-2">
+                          <div className="flex items-center gap-1.5 text-[#16A34A] bg-[#E8F5EE] px-2.5 py-2 w-max rounded-md text-[11px] font-bold">
+                            <svc.tagIcon size={12} /> {svc.tagText}
+                          </div>
+                          <Link href={svc.link} className="flex items-center justify-center gap-1 text-white bg-[#F97316] w-full min-h-[44px] rounded-lg font-bold text-sm">
+                            Learn More <ArrowRight size={14} />
+                          </Link>
                         </div>
-                        <Link href={svc.link} className="flex items-center gap-1 text-[#F97316] font-bold text-sm">
-                          Learn More <ArrowRight size={14} />
-                        </Link>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Carousel Controls */}
-            <div className="flex items-center justify-center gap-6 mt-8">
-              <button 
-                onClick={() => setActiveService(activeService === 0 ? FEATURED_SERVICES.length - 1 : activeService - 1)} 
-                className="w-10 h-10 rounded-full flex items-center justify-center border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 active:scale-95 shadow-sm transition-all duration-300"
-                aria-label="Previous service"
-              >
-                <ArrowLeft size={18} strokeWidth={2.5} />
-              </button>
-              <div className="flex gap-2.5">
-                {FEATURED_SERVICES.map((_, i) => (
-                  <button 
-                    key={i} 
-                    onClick={() => setActiveService(i)} 
-                    className={`h-2 rounded-full transition-all duration-300 ${activeService === i ? 'w-6 bg-[#16A34A]' : 'w-2 bg-gray-300'}`}
-                    aria-label={`Go to slide ${i + 1}`}
-                  />
                 ))}
               </div>
-              <button 
-                onClick={() => setActiveService((activeService + 1) % FEATURED_SERVICES.length)} 
-                className="w-10 h-10 rounded-full flex items-center justify-center border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 active:scale-95 shadow-sm transition-all duration-300"
-                aria-label="Next service"
-              >
-                <ArrowRight size={18} strokeWidth={2.5} />
-              </button>
+            </div>
+
+            {/* Dots */}
+            <div className="flex justify-center gap-2 mt-6">
+              {FEATURED_SERVICES.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveService(i)}
+                  className={`h-2 rounded-full transition-all duration-300 ${activeService === i ? 'w-6 bg-[#16A34A]' : 'w-2 bg-gray-200'}`}
+                  aria-label={`Go to slide ${i + 1}`}
+                />
+              ))}
             </div>
           </div>
 
-          {/* Bottom Row: Support Services */}
-          <div className="hidden lg:grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Bottom Row: Support Services (Desktop Only) */}
+          <div className="hidden md:grid grid-cols-1 md:grid-cols-3 gap-6">
 
             {/* 4. Maintenance */}
             <motion.div
@@ -946,7 +935,7 @@ export default function HomePage() {
           </div>
 
           {/* Projects Desktop Grid */}
-          <div className="hidden lg:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {PROJECTS.map((project, i) => (
               <motion.div
                 key={project.id}
@@ -990,71 +979,57 @@ export default function HomePage() {
           </div>
 
           {/* Projects Mobile Carousel */}
-          <div 
-            className="lg:hidden w-full overflow-hidden relative"
-            onTouchStart={onProjectTouchStart}
-            onTouchMove={onProjectTouchMove}
-            onTouchEnd={onProjectTouchEnd}
-          >
-            <div 
-              className="flex transition-transform duration-500 ease-out will-change-transform gap-4"
-              style={{ transform: `translateX(calc(-${activeProject * 100}% - ${activeProject * 16}px))` }}
+          <div className="flex flex-col md:hidden w-full relative">
+            <div
+              className="relative overflow-hidden touch-pan-y"
+              onTouchStart={onProjectTouchStart}
+              onTouchMove={onProjectTouchMove}
+              onTouchEnd={onProjectTouchEnd}
             >
-              {PROJECTS.map((project) => (
-                <div key={project.id} className="min-w-full shrink-0 flex">
-                  <div className="group relative w-full rounded-2xl overflow-hidden shadow-card cursor-pointer">
-                    <div className="relative aspect-[4/3] w-full">
-                      <Image src={project.image} alt={project.title} fill className="object-cover" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/90 via-[#111827]/30 to-transparent"></div>
-                      
-                      <div className="absolute top-4 left-4 flex gap-2">
-                        <span className="badge text-xs py-1 px-2.5 bg-white/20 backdrop-blur-md text-white border-white/20">
-                          {project.category.charAt(0).toUpperCase() + project.category.slice(1)}
-                        </span>
-                        <span className="bg-solar-orange text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider font-poppins">
-                          {project.capacity}
-                        </span>
-                      </div>
+              <div
+                className="flex transition-transform duration-500 ease-out"
+                style={{ transform: `translateX(-${activeProject * 100}%)` }}
+              >
+                {PROJECTS.map((project) => (
+                  <div key={project.id} className="w-full flex-shrink-0 px-2">
+                    <div className="group relative w-full rounded-2xl overflow-hidden shadow-card cursor-pointer">
+                      <div className="relative aspect-[4/3] w-full">
+                        <Image src={project.image} alt={project.title} fill className="object-cover" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/90 via-[#111827]/30 to-transparent"></div>
+                        
+                        <div className="absolute top-4 left-4 flex gap-2">
+                          <span className="badge text-xs py-1 px-2.5 bg-white/20 backdrop-blur-md text-white border-white/20">
+                            {project.category.charAt(0).toUpperCase() + project.category.slice(1)}
+                          </span>
+                          <span className="bg-solar-orange text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider font-poppins">
+                            {project.capacity}
+                          </span>
+                        </div>
 
-                      <div className="absolute bottom-0 left-0 p-5 w-full">
-                        <h3 className="font-poppins font-bold text-lg text-white mb-2">{project.title}</h3>
-                        <div className="flex flex-wrap items-center gap-3 text-white/90 text-xs">
-                          <span className="flex items-center gap-1"><MapPin size={12} className="text-solar-orange" /> {project.location}</span>
-                          <span className="flex items-center gap-1"><Zap size={12} className="text-solar-orange" /> {project.savings}</span>
+                        <div className="absolute bottom-0 left-0 p-5 w-full">
+                          <h3 className="font-poppins font-bold text-lg text-white mb-2">{project.title}</h3>
+                          <div className="flex flex-wrap items-center gap-3 text-white/90 text-xs">
+                            <span className="flex items-center gap-1"><MapPin size={12} className="text-solar-orange" /> {project.location}</span>
+                            <span className="flex items-center gap-1"><Zap size={12} className="text-solar-orange" /> {project.savings}</span>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Carousel Controls */}
-            <div className="flex items-center justify-center gap-6 mt-8">
-              <button 
-                onClick={() => setActiveProject(activeProject === 0 ? PROJECTS.length - 1 : activeProject - 1)} 
-                className="w-10 h-10 rounded-full flex items-center justify-center border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 active:scale-95 shadow-sm transition-all duration-300"
-                aria-label="Previous project"
-              >
-                <ArrowLeft size={18} strokeWidth={2.5} />
-              </button>
-              <div className="flex gap-2.5">
-                {PROJECTS.map((_, i) => (
-                  <button 
-                    key={i} 
-                    onClick={() => setActiveProject(i)} 
-                    className={`h-2 rounded-full transition-all duration-300 ${activeProject === i ? 'w-6 bg-[#F97316]' : 'w-2 bg-gray-300'}`}
-                    aria-label={`Go to slide ${i + 1}`}
-                  />
                 ))}
               </div>
-              <button 
-                onClick={() => setActiveProject((activeProject + 1) % PROJECTS.length)} 
-                className="w-10 h-10 rounded-full flex items-center justify-center border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 active:scale-95 shadow-sm transition-all duration-300"
-                aria-label="Next project"
-              >
-                <ArrowRight size={18} strokeWidth={2.5} />
-              </button>
+            </div>
+
+            {/* Dots */}
+            <div className="flex justify-center gap-2 mt-6">
+              {PROJECTS.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveProject(i)}
+                  className={`h-2 rounded-full transition-all duration-300 ${activeProject === i ? 'w-6 bg-[#F97316]' : 'w-2 bg-gray-200'}`}
+                  aria-label={`Go to slide ${i + 1}`}
+                />
+              ))}
             </div>
           </div>
         </div>

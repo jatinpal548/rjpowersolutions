@@ -49,7 +49,7 @@ export default function ServicesPage() {
                   transition={{ duration: 0.5, delay: i * 0.1 }}
                   className="group bg-white rounded-[24px] border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col"
                 >
-                  <div className="relative h-[240px] w-full overflow-hidden bg-gray-50">
+                  <div className="relative aspect-[16/9] md:h-[240px] w-full overflow-hidden bg-gray-50 flex-shrink-0">
                     <Image src={`/services/${imgName}.png`} alt={service.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
                     <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm border border-white/50">
                       <Icon size={14} className="text-[#16A34A]" />
@@ -72,18 +72,18 @@ export default function ServicesPage() {
                       ))}
                     </ul>
 
-                    <div className="flex gap-3 mt-auto pt-6 border-t border-gray-100">
+                    <div className="flex flex-col gap-2 md:flex-row mt-auto pt-6 border-t border-gray-100">
                       <Link
                         href={`/services/${service.slug}`}
-                        className="bg-white text-[#111827] font-bold py-3 px-4 flex-1 rounded-xl flex items-center justify-center whitespace-nowrap border border-[#E5E7EB] hover:bg-gray-50 hover:border-gray-300 transition-all shadow-sm text-[14px] group/btn"
+                        className="bg-white text-[#111827] font-bold py-3 px-4 w-full min-h-[44px] rounded-xl flex items-center justify-center whitespace-nowrap border border-[#E5E7EB] hover:bg-gray-50 hover:border-gray-300 transition-all shadow-sm text-[14px] group/btn"
                       >
-                        Learn More <ArrowRight size={14} className="ml-1.5 group-hover/btn:translate-x-1 transition-transform" />
+                        Learn More <ArrowRight size={14} className="ml-1.5 md:group-hover/btn:translate-x-1 transition-transform" />
                       </Link>
                       <a
                         href={whatsappLink(`Hello! I am interested in ${service.title}. Can you please provide details?`)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-gradient-to-r from-[#F97316] to-[#E07B2A] text-white font-bold py-3 px-4 flex-1 rounded-xl flex items-center justify-center whitespace-nowrap hover:shadow-lg hover:-translate-y-0.5 transition-all text-[14px]"
+                        className="bg-gradient-to-r from-[#F97316] to-[#E07B2A] text-white font-bold py-3 px-4 w-full min-h-[44px] rounded-xl flex items-center justify-center whitespace-nowrap hover:shadow-lg hover:-translate-y-0.5 transition-all text-[14px]"
                       >
                         Enquire Now
                       </a>

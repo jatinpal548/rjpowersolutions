@@ -46,12 +46,12 @@ export default function ProjectsPage() {
             </div>
 
             {/* Filter Tabs */}
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex overflow-x-auto md:flex-wrap items-center gap-2 md:gap-3 pb-2 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0">
               {CATEGORIES.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setActive(cat)}
-                  className={`px-6 py-2.5 rounded-full font-medium text-sm transition-all capitalize whitespace-nowrap shadow-sm ${
+                  className={`px-6 py-2.5 rounded-full font-medium text-sm transition-all capitalize whitespace-nowrap shadow-sm flex-shrink-0 ${
                     active === cat
                       ? 'bg-[#16A34A] text-white border border-[#16A34A]'
                       : 'bg-white text-[#111827] border border-gray-200 hover:border-[#16A34A] hover:text-[#16A34A]'
@@ -64,7 +64,7 @@ export default function ProjectsPage() {
           </div>
 
           {/* Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {filtered.map((project, i) => (
               <motion.div
                 key={project.id}

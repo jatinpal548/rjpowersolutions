@@ -232,8 +232,8 @@ export default function CalculatorPage() {
 
       {/* 2. MAIN CALCULATOR SECTION */}
       <section className="py-20 bg-white relative" id="calculator">
-        <div className="container-custom max-w-6xl">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="container-custom max-w-6xl overflow-hidden">
+          <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8 items-start w-full">
 
             {/* Left: Calculator Form (40% roughly lg:col-span-5) */}
             <div className="lg:col-span-5">
@@ -256,7 +256,7 @@ export default function CalculatorPage() {
                         value={bill}
                         onChange={e => setBill(e.target.value)}
                         placeholder="e.g. 5000"
-                        className="w-full pl-8 pr-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-2 focus:ring-[#16A34A]/20 outline-none transition-all text-lg font-medium text-[#111827]"
+                        className="w-full pl-8 pr-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-2 focus:ring-[#16A34A]/20 outline-none transition-all text-base min-h-[48px] font-medium text-[#111827]"
                         min="100"
                       />
                     </div>
@@ -270,7 +270,7 @@ export default function CalculatorPage() {
                       <select
                         value={state}
                         onChange={e => setState(e.target.value)}
-                        className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-2 focus:ring-[#16A34A]/20 outline-none transition-all appearance-none text-[#111827] font-medium bg-white"
+                        className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-2 focus:ring-[#16A34A]/20 outline-none transition-all appearance-none text-base min-h-[48px] text-[#111827] font-medium bg-white"
                       >
                         {STATES.map(s => <option key={s}>{s}</option>)}
                       </select>
@@ -281,7 +281,7 @@ export default function CalculatorPage() {
                   {/* Property Type Segmented Control */}
                   <div>
                     <label className="block text-sm font-bold text-[#111827] mb-3 font-poppins">Property Type</label>
-                    <div className="grid grid-cols-3 gap-2 bg-[#F8FAF7] p-1.5 rounded-xl border border-gray-100">
+                    <div className="flex flex-col sm:grid sm:grid-cols-3 gap-2 bg-[#F8FAF7] p-1.5 rounded-xl border border-gray-100">
                       {[
                         { id: 'Residential', icon: Home },
                         { id: 'Commercial', icon: Building2 },
@@ -310,7 +310,7 @@ export default function CalculatorPage() {
                   <button
                     onClick={calculate}
                     disabled={!bill || parseInt(bill) < 100 || isCalculating}
-                    className="w-full mt-4 bg-gradient-to-r from-[#16A34A] to-[#22C55E] text-white font-bold rounded-2xl py-4 flex items-center justify-center gap-2 hover:scale-[1.02] hover:shadow-[0_8px_25px_rgba(22,163,74,0.4)] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 text-lg shadow-md"
+                    className="w-full mt-4 bg-gradient-to-r from-[#16A34A] to-[#22C55E] text-white font-bold rounded-2xl py-4 flex items-center justify-center gap-2 hover:scale-[1.02] hover:shadow-[0_8px_25px_rgba(22,163,74,0.4)] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 min-h-[52px] text-base shadow-md"
                   >
                     {isCalculating ? (
                       <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
@@ -328,7 +328,7 @@ export default function CalculatorPage() {
             </div>
 
             {/* Right: Results / Preview (60% roughly lg:col-span-7) */}
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-7 w-full overflow-hidden">
               <AnimatePresence mode="wait">
                 {!result ? (
                   // Preview Placeholder State
@@ -388,60 +388,60 @@ export default function CalculatorPage() {
                     <p className="text-sm text-[#64748B] font-medium -mt-4 mb-4">Based on industry averages for {state}.</p>
 
                     {/* 4 Dashboard Metric Cards */}
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {/* Card 1 */}
-                      <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group flex items-start gap-4">
+                      <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group flex items-start gap-4 w-full overflow-hidden">
                         <div className="w-12 h-12 rounded-xl bg-[#E8F5EE] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                           <IndianRupee size={24} className="text-[#16A34A]" />
                         </div>
-                        <div>
-                          <div className="text-xs text-[#64748B] font-bold uppercase tracking-wider mb-1">Monthly Savings</div>
-                          <div className="font-poppins font-bold text-3xl text-[#111827] leading-none mb-1">
+                        <div className="min-w-0">
+                          <div className="text-xs text-[#64748B] font-bold uppercase tracking-wider mb-1 truncate">Monthly Savings</div>
+                          <div className="font-poppins font-bold text-xl md:text-3xl text-[#111827] leading-none mb-1 break-words">
                             ₹{result.monthlySavings.toLocaleString('en-IN')}
                           </div>
-                          <div className="text-xs text-[#16A34A] font-semibold">Estimated Savings</div>
+                          <div className="text-xs text-[#16A34A] font-semibold truncate">Estimated Savings</div>
                         </div>
                       </div>
 
                       {/* Card 2 */}
-                      <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group flex items-start gap-4">
+                      <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group flex items-start gap-4 w-full overflow-hidden">
                         <div className="w-12 h-12 rounded-xl bg-[#EFF6FF] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                           <Zap size={24} className="text-[#3B82F6]" />
                         </div>
-                        <div>
-                          <div className="text-xs text-[#64748B] font-bold uppercase tracking-wider mb-1">System Size</div>
-                          <div className="font-poppins font-bold text-3xl text-[#111827] leading-none mb-1">
+                        <div className="min-w-0">
+                          <div className="text-xs text-[#64748B] font-bold uppercase tracking-wider mb-1 truncate">System Size</div>
+                          <div className="font-poppins font-bold text-xl md:text-3xl text-[#111827] leading-none mb-1 break-words">
                             {result.systemSize} kW
                           </div>
-                          <div className="text-xs text-[#3B82F6] font-semibold">Recommended Size</div>
+                          <div className="text-xs text-[#3B82F6] font-semibold truncate">Recommended Size</div>
                         </div>
                       </div>
 
                       {/* Card 3 */}
-                      <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group flex items-start gap-4">
+                      <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group flex items-start gap-4 w-full overflow-hidden">
                         <div className="w-12 h-12 rounded-xl bg-[#FEF2ED] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                           <TrendingUp size={24} className="text-[#F97316]" />
                         </div>
-                        <div>
-                          <div className="text-xs text-[#64748B] font-bold uppercase tracking-wider mb-1">Payback Period</div>
-                          <div className="font-poppins font-bold text-3xl text-[#111827] leading-none mb-1">
+                        <div className="min-w-0">
+                          <div className="text-xs text-[#64748B] font-bold uppercase tracking-wider mb-1 truncate">Payback Period</div>
+                          <div className="font-poppins font-bold text-xl md:text-3xl text-[#111827] leading-none mb-1 break-words">
                             {result.payback} Years
                           </div>
-                          <div className="text-xs text-[#F97316] font-semibold">Return on Investment</div>
+                          <div className="text-xs text-[#F97316] font-semibold truncate">Return on Investment</div>
                         </div>
                       </div>
 
                       {/* Card 4 */}
-                      <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group flex items-start gap-4">
+                      <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group flex items-start gap-4 w-full overflow-hidden">
                         <div className="w-12 h-12 rounded-xl bg-[#F0FDF4] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                           <Leaf size={24} className="text-[#22C55E]" />
                         </div>
-                        <div>
-                          <div className="text-xs text-[#64748B] font-bold uppercase tracking-wider mb-1">CO₂ Reduction</div>
-                          <div className="font-poppins font-bold text-3xl text-[#111827] leading-none mb-1">
+                        <div className="min-w-0">
+                          <div className="text-xs text-[#64748B] font-bold uppercase tracking-wider mb-1 truncate">CO₂ Reduction</div>
+                          <div className="font-poppins font-bold text-xl md:text-3xl text-[#111827] leading-none mb-1 break-words">
                             {result.co2Reduction} Tons
                           </div>
-                          <div className="text-xs text-[#22C55E] font-semibold">Annual Env. Impact</div>
+                          <div className="text-xs text-[#22C55E] font-semibold truncate">Annual Env. Impact</div>
                         </div>
                       </div>
                     </div>
@@ -459,9 +459,9 @@ export default function CalculatorPage() {
                             - ₹{result.subsidy.toLocaleString('en-IN')}
                           </span>
                         </div>
-                        <div className="flex justify-between items-center pt-2">
+                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center pt-2">
                           <span className="font-bold text-[#111827]">Net Payable Amount</span>
-                          <span className="font-poppins font-bold text-2xl text-[#111827]">
+                          <span className="font-poppins font-bold text-xl md:text-2xl text-[#111827] break-words">
                             ₹{result.netCost.toLocaleString('en-IN')}
                           </span>
                         </div>
@@ -620,7 +620,7 @@ export default function CalculatorPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-3xl p-8 lg:p-12 shadow-sm border border-gray-100 grid grid-cols-2 gap-8">
+            <div className="bg-white rounded-3xl p-8 lg:p-12 shadow-sm border border-gray-100 grid grid-cols-2 md:grid-cols-4 gap-8">
               {[
                 { value: '500+', label: 'Installations', icon: Sun, color: 'text-[#F97316]' },
                 { value: '₹2 Cr+', label: 'Monthly Client Savings', icon: IndianRupee, color: 'text-[#16A34A]' },
@@ -656,18 +656,18 @@ export default function CalculatorPage() {
                   Get a free site assessment and customized engineering quotation tailored to your roof.
                 </p>
 
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col md:flex-row gap-3">
                   <a
                     href={whatsappLink(`Hello! I used the calculator and want a free site assessment. My estimated bill is ₹${bill || '...'}`)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-[#16A34A] text-white font-bold py-4 px-8 rounded-full flex items-center justify-center gap-2 hover:bg-[#15803d] hover:-translate-y-1 hover:shadow-lg transition-all"
+                    className="w-full md:w-auto bg-[#16A34A] text-white font-bold py-4 px-8 rounded-full flex items-center justify-center gap-2 hover:bg-[#15803d] hover:-translate-y-1 hover:shadow-lg transition-all min-h-[48px]"
                   >
                     Get Free Consultation <ArrowRight size={18} />
                   </a>
                   <a
                     href="tel:+919876543210"
-                    className="bg-white text-[#111827] font-bold py-4 px-8 rounded-full flex items-center justify-center gap-2 hover:bg-gray-50 hover:-translate-y-1 hover:shadow-md transition-all border border-gray-200"
+                    className="w-full md:w-auto bg-white text-[#111827] font-bold py-4 px-8 rounded-full flex items-center justify-center gap-2 hover:bg-gray-50 hover:-translate-y-1 hover:shadow-md transition-all border border-gray-200 min-h-[48px]"
                   >
                     <PhoneCall size={18} /> Call Now
                   </a>

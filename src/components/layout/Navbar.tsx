@@ -34,13 +34,13 @@ export default function Navbar() {
   return (
     <>
       <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-16 md:h-auto flex items-center overflow-x-hidden ${
         scrolled
-          ? 'bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100 py-3'
-          : 'bg-white shadow-sm border-b border-gray-100 py-4 lg:py-5'
+          ? 'bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100 py-0 md:py-3'
+          : 'bg-white shadow-sm border-b border-gray-100 py-0 md:py-4 lg:py-5'
       }`}
     >
-        <div className="container-custom flex items-center justify-between">
+        <div className="container-custom flex items-center justify-between w-full">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 flex-shrink-0 group">
             <Image
@@ -48,7 +48,7 @@ export default function Navbar() {
               alt="RJ Power Solutions"
               width={120}
               height={60}
-              className="h-12 w-auto"
+              className="h-10 md:h-12 w-auto max-w-[120px]"
               priority
             />
           </Link>
@@ -91,9 +91,6 @@ export default function Navbar() {
 
           {/* Mobile controls */}
           <div className="flex lg:hidden items-center gap-2.5">
-            <a href={`tel:${SITE.phone}`} className="w-10 h-10 rounded-xl bg-[#E8F5EE] flex items-center justify-center text-[#16A34A] shadow-sm border border-green-50 transition-transform active:scale-95">
-              <Phone size={18} />
-            </a>
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="w-10 h-10 rounded-xl flex items-center justify-center border border-gray-100 shadow-sm transition-colors text-gray-700 bg-white hover:bg-gray-50 active:scale-95"

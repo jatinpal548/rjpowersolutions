@@ -79,7 +79,7 @@ export default function ContactPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-[110%] max-w-2xl bg-white rounded-2xl shadow-xl border border-gray-100 p-6 hidden md:grid grid-cols-4 gap-4 divide-x divide-gray-100"
+                className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-[110%] max-w-2xl bg-white rounded-2xl shadow-xl border border-gray-100 p-4 md:p-6 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 md:divide-x md:divide-gray-100"
               >
                 <div className="flex flex-col items-center text-center px-2">
                   <div className="w-10 h-10 rounded-full bg-[#E8F5EE] flex items-center justify-center mb-3 shrink-0">
@@ -118,7 +118,7 @@ export default function ContactPage() {
 
       {/* 2. MAIN CONTENT LAYOUT (Two Column) */}
       <section className="py-20 lg:pt-32 lg:pb-24 bg-[#FAFBFC] relative z-20">
-        <div className="container-custom grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <div className="container-custom flex flex-col lg:grid lg:grid-cols-3 gap-10">
           
           {/* 3. CONTACT FORM (Left Card) */}
           <motion.div
@@ -145,7 +145,7 @@ export default function ContactPage() {
                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                       <User size={18} className="text-gray-400" />
                     </div>
-                    <input type="text" name="name" required value={form.name} onChange={handleChange} placeholder="e.g. Rajesh Sharma" className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] outline-none transition-all text-sm bg-gray-50/50 focus:bg-white" />
+                    <input type="text" name="name" required value={form.name} onChange={handleChange} placeholder="e.g. Rajesh Sharma" className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] outline-none transition-all text-base min-h-[48px] bg-gray-50/50 focus:bg-white" />
                   </div>
                 </div>
                 <div>
@@ -154,7 +154,7 @@ export default function ContactPage() {
                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                       <Phone size={18} className="text-gray-400" />
                     </div>
-                    <input type="tel" name="phone" required value={form.phone} onChange={handleChange} placeholder="+91 98765 43210" className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] outline-none transition-all text-sm bg-gray-50/50 focus:bg-white" />
+                    <input type="tel" name="phone" required value={form.phone} onChange={handleChange} placeholder="+91 98765 43210" className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] outline-none transition-all text-base min-h-[48px] bg-gray-50/50 focus:bg-white" />
                   </div>
                 </div>
               </div>
@@ -166,7 +166,7 @@ export default function ContactPage() {
                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                       <Mail size={18} className="text-gray-400" />
                     </div>
-                    <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="e.g. rajesh@example.com" className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] outline-none transition-all text-sm bg-gray-50/50 focus:bg-white" />
+                    <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="e.g. rajesh@example.com" className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] outline-none transition-all text-base min-h-[48px] bg-gray-50/50 focus:bg-white" />
                   </div>
                 </div>
                 <div>
@@ -175,7 +175,7 @@ export default function ContactPage() {
                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                       <MapPin size={18} className="text-gray-400" />
                     </div>
-                    <input type="text" name="location" value={form.location} onChange={handleChange} placeholder="e.g. Vijay Nagar, Indore" className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] outline-none transition-all text-sm bg-gray-50/50 focus:bg-white" />
+                    <input type="text" name="location" value={form.location} onChange={handleChange} placeholder="e.g. Vijay Nagar, Indore" className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] outline-none transition-all text-base min-h-[48px] bg-gray-50/50 focus:bg-white" />
                   </div>
                 </div>
               </div>
@@ -187,12 +187,12 @@ export default function ContactPage() {
                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                       <IndianRupee size={18} className="text-gray-400" />
                     </div>
-                    <input type="number" name="bill" value={form.bill} onChange={handleChange} placeholder="e.g. 3000" className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] outline-none transition-all text-sm bg-gray-50/50 focus:bg-white" />
+                    <input type="number" name="bill" value={form.bill} onChange={handleChange} placeholder="e.g. 3000" className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] outline-none transition-all text-base min-h-[48px] bg-gray-50/50 focus:bg-white" />
                   </div>
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-[#111827] mb-2 font-poppins">Property Type</label>
-                  <select name="propertyType" value={form.propertyType} onChange={handleChange} className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] outline-none transition-all text-sm bg-gray-50/50 focus:bg-white">
+                  <select name="propertyType" value={form.propertyType} onChange={handleChange} className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] outline-none transition-all text-base min-h-[48px] bg-gray-50/50 focus:bg-white">
                     <option>Residential</option>
                     <option>Commercial</option>
                     <option>Industrial</option>
@@ -214,13 +214,13 @@ export default function ContactPage() {
                     onChange={handleChange}
                     rows={4}
                     placeholder="Tell us about your requirements, any questions, or how we can help you..."
-                    className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] outline-none transition-all text-sm resize-none bg-gray-50/50 focus:bg-white"
+                    className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] outline-none transition-all text-base min-h-[120px] resize-none bg-gray-50/50 focus:bg-white"
                   />
                 </div>
               </div>
 
               <div className="pt-2">
-                <button type="submit" className="w-full bg-[#F97316] hover:bg-[#E66E00] text-white font-bold rounded-xl flex items-center justify-center gap-2 py-4 transition-colors shadow-sm">
+                <button type="submit" className="w-full min-h-[52px] bg-[#F97316] hover:bg-[#E66E00] text-white font-bold rounded-xl flex items-center justify-center gap-2 py-4 transition-colors shadow-sm">
                   <MessageCircle size={20} /> Send via WhatsApp
                 </button>
                 <div className="flex items-center justify-center gap-1.5 mt-4 text-xs font-medium text-gray-500 text-center px-4">
@@ -325,9 +325,9 @@ export default function ContactPage() {
       {/* 5. BOTTOM INFO STRIP (Full Width) */}
       <section className="bg-[#FFF5ED] border-t border-[#F97316]/10 py-16">
         <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 lg:divide-x lg:divide-[#F97316]/20">
+          <div className="flex flex-col gap-4 md:grid md:grid-cols-2 lg:grid-cols-4 lg:gap-8 lg:divide-x lg:divide-[#F97316]/20">
             
-            <div className="flex flex-col items-center lg:items-start text-center lg:text-left px-4">
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left p-4 rounded-xl w-full">
               <div className="w-12 h-12 rounded-full bg-white text-[#F97316] flex items-center justify-center mb-4 shadow-sm border border-[#F97316]/20">
                 <Phone size={20} />
               </div>
@@ -336,7 +336,7 @@ export default function ContactPage() {
               <div className="text-sm text-[#64748B] font-medium">Mon–Sat, 9 AM – 6 PM</div>
             </div>
 
-            <div className="flex flex-col items-center lg:items-start text-center lg:text-left px-4">
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left p-4 rounded-xl w-full">
               <div className="w-12 h-12 rounded-full bg-white text-[#F97316] flex items-center justify-center mb-4 shadow-sm border border-[#F97316]/20">
                 <Mail size={20} />
               </div>
@@ -345,7 +345,7 @@ export default function ContactPage() {
               <div className="text-sm text-[#64748B] font-medium">We reply within 24 hrs</div>
             </div>
 
-            <div className="flex flex-col items-center lg:items-start text-center lg:text-left px-4">
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left p-4 rounded-xl w-full">
               <div className="w-12 h-12 rounded-full bg-white text-[#F97316] flex items-center justify-center mb-4 shadow-sm border border-[#F97316]/20">
                 <MapPin size={20} />
               </div>
@@ -354,7 +354,7 @@ export default function ContactPage() {
               <div className="text-sm text-[#64748B] font-medium">Visit us for consultation</div>
             </div>
 
-            <div className="flex flex-col items-center lg:items-start text-center lg:text-left px-4">
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left p-4 rounded-xl w-full">
               <div className="w-12 h-12 rounded-full bg-white text-[#F97316] flex items-center justify-center mb-4 shadow-sm border border-[#F97316]/20">
                 <Globe size={20} />
               </div>

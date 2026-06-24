@@ -69,12 +69,12 @@ export default function FaqPage() {
       <section className="pt-12 lg:pt-16 pb-20 lg:pb-28 bg-brand-bg">
         <div className="container-custom max-w-4xl">
           {/* Category Filter */}
-          <div className="flex flex-wrap gap-3 mb-10 justify-center">
+          <div className="flex flex-wrap gap-2 justify-center mb-10">
             {CATEGORIES.map(cat => (
               <button
                 key={cat.value}
                 onClick={() => { setActiveCat(cat.value); setActiveIdx(null); }}
-                className={`px-6 py-2.5 rounded-full text-sm font-semibold font-poppins transition-all ${
+                className={`px-3 py-2 rounded-full text-xs md:text-sm font-semibold font-poppins transition-all whitespace-nowrap min-h-[36px] ${
                   activeCat === cat.value ? 'bg-brand-green text-white shadow-sm' : 'bg-white text-gray-600 hover:text-brand-green border border-gray-200'
                 }`}
               >
@@ -98,12 +98,12 @@ export default function FaqPage() {
               >
                 <button
                   onClick={() => setActiveIdx(activeIdx === i ? null : i)}
-                  className="w-full flex items-start justify-between p-6 text-left"
+                  className="w-full flex items-start justify-between p-4 min-h-[48px] text-left"
                 >
                   <span className="font-poppins font-semibold text-[#1A1A1A] text-sm sm:text-base pr-4 leading-snug">{faq.q}</span>
                   <ChevronDown
                     size={20}
-                    className={`flex-shrink-0 mt-0.5 transition-transform duration-300 text-brand-orange ${activeIdx === i ? 'rotate-180' : ''}`}
+                    className={`flex-shrink-0 ml-2 mt-0.5 transition-transform duration-300 text-brand-orange ${activeIdx === i ? 'rotate-180' : ''}`}
                   />
                 </button>
                 <AnimatePresence initial={false}>
@@ -139,7 +139,7 @@ export default function FaqPage() {
               href={whatsappLink('Hello! I have a question about solar installation that I couldn\'t find in the FAQ.')}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-brand-orange text-white font-poppins font-semibold px-8 py-4 rounded-full hover:bg-[#C96A1E] transition-all inline-flex items-center gap-2 shadow-sm"
+              className="bg-brand-orange text-white font-poppins font-semibold px-8 py-4 rounded-full hover:bg-[#C96A1E] transition-all inline-flex items-center justify-center gap-2 shadow-sm w-full md:w-auto min-h-[52px]"
             >
               <MessageCircle size={18} /> Ask on WhatsApp
             </a>

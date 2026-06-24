@@ -15,7 +15,7 @@ export default function FloatingWhatsApp() {
   }, []);
 
   return (
-    <div className={`fixed bottom-6 right-5 z-50 flex flex-col items-end gap-2 transition-all duration-500 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+    <div className={`fixed bottom-4 right-4 md:bottom-6 md:right-5 z-50 flex flex-col items-end gap-2 transition-all duration-500 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
       {/* Tooltip */}
       {showTooltip && (
         <div className="bg-white rounded-xl shadow-card-hover p-3 max-w-xs mr-1 relative animate-fade-up">
@@ -42,10 +42,10 @@ export default function FloatingWhatsApp() {
           onMouseEnter={() => setShowTooltip(true)}
           onMouseLeave={() => setShowTooltip(false)}
           aria-label="Chat on WhatsApp"
-          className="relative w-14 h-14 rounded-full flex items-center justify-center shadow-solar-lg transition-transform hover:scale-110"
+          className="relative w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-solar-lg transition-transform hover:scale-110"
           style={{ background: 'linear-gradient(135deg, #25D366, #128C7E)' }}
         >
-          <MessageCircle size={26} color="white" fill="white" />
+          <MessageCircle size={24} className="md:w-6 md:h-6" color="white" fill="white" />
         </a>
       </div>
     </div>

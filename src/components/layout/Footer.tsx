@@ -35,7 +35,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#111827] pt-20 pb-8 border-t border-gray-800">
       <div className="container-custom">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+        <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 lg:gap-8 mb-12 md:mb-16">
             
             {/* Column 1: Brand & Info */}
             <div className="flex flex-col">

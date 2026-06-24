@@ -87,11 +87,11 @@ export default function EmiSubsidyPage() {
             </div>
             <div>
               <h3 className="font-poppins font-bold text-xl text-[#1A1A1A] mb-5">Subsidy Amount by Capacity</h3>
-              <div className="space-y-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {SUBSIDY_DATA.map(({ capacity, subsidy, color }) => (
-                  <div key={capacity} className={`flex items-center justify-between p-5 rounded-2xl border ${color}`}>
-                    <div className="font-poppins font-semibold text-base">{capacity} System</div>
-                    <div className="font-poppins font-extrabold text-xl">{subsidy}</div>
+                  <div key={capacity} className={`flex flex-col items-center justify-center text-center p-4 rounded-xl border ${color} w-full`}>
+                    <div className="font-poppins font-semibold text-sm md:text-base mb-1">{capacity}</div>
+                    <div className="font-poppins font-extrabold text-xl md:text-3xl">{subsidy}</div>
                   </div>
                 ))}
               </div>
@@ -172,9 +172,9 @@ export default function EmiSubsidyPage() {
             <h2 className="section-title text-[#1A1A1A]">Who Can Apply?</h2>
           </div>
           <div className="bg-white rounded-2xl p-10 shadow-sm border border-gray-100">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div className="flex flex-col gap-2">
               {ELIGIBILITY.map((e) => (
-                <div key={e} className="flex items-start gap-3 text-sm text-gray-600">
+                <div key={e} className="flex items-start gap-3 text-sm text-gray-600 py-1">
                   <CheckCircle size={18} className="text-brand-green flex-shrink-0 mt-0.5" />
                   {e}
                 </div>
@@ -182,7 +182,7 @@ export default function EmiSubsidyPage() {
             </div>
             <div className="mt-10 pt-8 border-t border-gray-100">
               <h3 className="font-poppins font-bold text-[#1A1A1A] text-lg mb-5">Documents Required</h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm text-gray-600">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm text-gray-600">
                 {['Aadhaar Card', 'PAN Card', 'Electricity Bill', 'Property Document', 'Bank Passbook', 'Passport Photo'].map(d => (
                   <div key={d} className="flex items-center gap-2.5">
                     <div className="w-1.5 h-1.5 rounded-full bg-brand-orange flex-shrink-0" />
@@ -200,7 +200,7 @@ export default function EmiSubsidyPage() {
               href={whatsappLink('Hello! I want to check my eligibility for solar subsidy and EMI plans.')}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-brand-orange text-white font-semibold py-3 px-8 rounded-full flex items-center justify-center gap-2 hover:bg-[#C96A1E] transition-colors inline-flex"
+              className="bg-brand-orange text-white font-semibold py-3 px-8 rounded-full flex items-center justify-center gap-2 hover:bg-[#C96A1E] transition-colors inline-flex w-full md:w-auto min-h-[52px]"
             >
               <MessageCircle size={18} /> Check Eligibility on WhatsApp
             </a>
