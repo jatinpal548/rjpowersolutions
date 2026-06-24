@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { 
   Phone, Mail, MapPin, Clock, MessageCircle, CheckCircle, Send,
   Zap, Shield, IndianRupee, User, Lock, Calendar, Users, Globe 
@@ -40,7 +40,7 @@ export default function ContactPage() {
                 className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-[#16A34A]/20 mb-6"
               >
                 <CheckCircle size={14} className="text-[#16A34A]" />
-                <span className="text-[#16A34A] font-bold text-sm tracking-wide">We're Here to Help</span>
+                <span className="text-[#16A34A] font-bold text-sm tracking-wide">We&apos;re Here to Help</span>
               </motion.div>
               
               <motion.h1
@@ -49,7 +49,7 @@ export default function ContactPage() {
                 transition={{ delay: 0.1 }}
                 className="text-5xl md:text-6xl font-extrabold text-[#111827] mb-6 tracking-tight leading-[1.1] font-poppins"
               >
-                Let's Power a <br />
+                Let&apos;s Power a <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F97316] to-[#E66E00]">Sustainable</span> Future Together
               </motion.h1>
               
@@ -59,7 +59,7 @@ export default function ContactPage() {
                 transition={{ delay: 0.2 }}
                 className="text-[#64748B] text-lg font-medium mb-10 leading-relaxed max-w-lg"
               >
-                Have questions or ready to go solar? Our team in Indore is here to help. Reach out to us and we'll get back within 30 minutes on WhatsApp.
+                Have questions or ready to go solar? Our team in Indore is here to help. Reach out to us and we&apos;ll get back within 30 minutes on WhatsApp.
               </motion.p>
             </div>
 
@@ -135,7 +135,7 @@ export default function ContactPage() {
                 <h2 className="font-poppins font-extrabold text-3xl text-[#111827]">Send Us a Message</h2>
               </div>
             </div>
-            <p className="text-[#64748B] text-base mb-10 pl-16">Fill in the form and we'll send your message directly via WhatsApp.</p>
+            <p className="text-[#64748B] text-base mb-10 pl-16">Fill in the form and we&apos;ll send your message directly via WhatsApp.</p>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -225,7 +225,7 @@ export default function ContactPage() {
                 </button>
                 <div className="flex items-center justify-center gap-1.5 mt-4 text-xs font-medium text-gray-500 text-center px-4">
                   <Lock size={12} className="shrink-0" />
-                  <span>Clicking 'Send via WhatsApp' will open WhatsApp with your message pre-filled.</span>
+                  <span>Clicking &apos;Send via WhatsApp&apos; will open WhatsApp with your message pre-filled.</span>
                 </div>
               </div>
             </form>

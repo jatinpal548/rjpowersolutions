@@ -20,7 +20,7 @@ export default function ContactSection() {
             Get in Touch with <span className="text-[#E07B2A]">Our Experts</span>
           </h2>
           <p className="text-gray-500 mt-4 max-w-2xl mx-auto text-lg">
-            Have questions or ready to go solar? We're here to help you at every step of your solar journey.
+            Have questions or ready to go solar? We&apos;re here to help you at every step of your solar journey.
           </p>
         </div>
 

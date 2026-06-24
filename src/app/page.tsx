@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
@@ -300,7 +300,7 @@ export default function HomePage() {
                   className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-[0_2px_10px_rgb(0,0,0,0.05)] border border-[#16A34A]/20 mb-6 md:mb-8"
                 >
                   <Zap size={14} className="text-[#16A34A] fill-[#16A34A]" />
-                  <span className="text-[#16A34A] font-bold text-[11px] md:text-sm tracking-wide">India's Trusted Solar EPC Company</span>
+                    <span className="text-[#16A34A] font-bold text-[11px] md:text-sm tracking-wide">India&apos;s Trusted Solar EPC Company</span>
                 </motion.div>
               </div>
 

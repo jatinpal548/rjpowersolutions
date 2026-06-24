@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface Testimonial {
@@ -13,13 +13,12 @@ interface Testimonial {
 }
 
 export default function InfiniteTestimonialSlider({ testimonials }: { testimonials: readonly Testimonial[] }) {
-  const [items, setItems] = useState<Testimonial[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
   const isHovered = useRef(false);
+  const items = useMemo(() => [...testimonials, ...testimonials, ...testimonials, ...testimonials, ...testimonials], [testimonials]);
   
   // Initialize with multiple sets to allow infinite scrolling in both directions
   useEffect(() => {
-    setItems([...testimonials, ...testimonials, ...testimonials, ...testimonials, ...testimonials]);
     // Set initial scroll to the middle set to allow scrolling left immediately
     setTimeout(() => {
       if (scrollRef.current) {
