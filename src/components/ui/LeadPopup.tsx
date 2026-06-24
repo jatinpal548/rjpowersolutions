@@ -84,7 +84,7 @@ export default function LeadPopup() {
               </button>
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center p-1 shadow-sm">
-                  <Image src="/logo.png" alt="Logo" width={40} height={40} className="object-contain" />
+                  <Image src="/Logo 2.png" alt="Logo" width={40} height={40} className="object-contain" />
                 </div>
                 <div>
                   <h3 className="font-poppins font-bold text-lg leading-tight">Get Free Solar Quote</h3>

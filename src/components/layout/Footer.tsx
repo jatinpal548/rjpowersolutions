@@ -33,69 +33,59 @@ const footerServices = SERVICES.slice(0, 6);
 
 export default function Footer() {
   return (
-    <footer className="bg-[#FAFBFC] pt-20 pb-8">
+    <footer className="bg-[#111827] pt-20 pb-8 border-t border-gray-800">
       <div className="container-custom">
-        {/* Main White Card */}
-        <div className="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 lg:divide-x divide-gray-100">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
             
             {/* Column 1: Brand & Info */}
-            <div className="p-8 lg:p-10">
+            <div className="flex flex-col">
               <div className="mb-6">
                 <Image
-                  src="/logo.png"
+                  src="/Logo 2.png"
                   alt="RJ Power Solutions"
                   width={140}
                   height={70}
-                  className="h-12 w-auto object-contain"
+                  className="h-12 w-auto object-contain brightness-0 invert"
                 />
               </div>
-              <p className="text-gray-500 text-sm leading-relaxed mb-8">
+              <p className="text-gray-400 text-sm leading-relaxed mb-8">
                 Central India&apos;s trusted solar EPC partner. Transforming homes and businesses with clean, affordable solar energy since 2019.
               </p>
               
               {/* Trust Badges 2x2 Grid */}
-              <div className="grid grid-cols-2 gap-y-6 gap-x-2 mb-8">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0">
-                    <ShieldCheck size={16} className="text-green-600" strokeWidth={2.5} />
-                  </div>
-                  <div className="text-xs font-bold text-gray-800 leading-tight">MNRE Approved<br/><span className="text-[10px] font-medium text-gray-500">EPC Company</span></div>
+              <div className="grid grid-cols-2 gap-3 mb-8">
+                <div className="flex items-center gap-2 bg-white/10 rounded-xl px-3 py-2">
+                  <ShieldCheck size={16} className="text-brand-green flex-shrink-0" />
+                  <span className="text-xs font-semibold text-white">MNRE Approved</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0">
-                    <Award size={16} className="text-green-600" strokeWidth={2.5} />
-                  </div>
-                  <div className="text-xs font-bold text-gray-800 leading-tight">25+ Years<br/><span className="text-[10px] font-medium text-gray-500">Panel Warranty</span></div>
+                <div className="flex items-center gap-2 bg-white/10 rounded-xl px-3 py-2">
+                  <Award size={16} className="text-brand-green flex-shrink-0" />
+                  <span className="text-xs font-semibold text-white">25+ Yr Warranty</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0">
-                    <Landmark size={16} className="text-green-600" strokeWidth={2.5} />
-                  </div>
-                  <div className="text-xs font-bold text-gray-800 leading-tight">Govt. Subsidy<br/><span className="text-[10px] font-medium text-gray-500">Assistance</span></div>
+                <div className="flex items-center gap-2 bg-white/10 rounded-xl px-3 py-2">
+                  <Landmark size={16} className="text-brand-green flex-shrink-0" />
+                  <span className="text-xs font-semibold text-white">Govt. Subsidy</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0">
-                    <Users size={16} className="text-green-600" strokeWidth={2.5} />
-                  </div>
-                  <div className="text-xs font-bold text-gray-800 leading-tight">500+ Happy<br/><span className="text-[10px] font-medium text-gray-500">Customers</span></div>
+                <div className="flex items-center gap-2 bg-white/10 rounded-xl px-3 py-2">
+                  <Users size={16} className="text-brand-green flex-shrink-0" />
+                  <span className="text-xs font-semibold text-white">500+ Customers</span>
                 </div>
               </div>
 
               {/* Follow Us */}
-              <div className="border-t border-gray-50 pt-6 mt-2">
-                <h4 className="text-sm font-bold text-gray-900 mb-4">Follow Us</h4>
+              <div className="pt-2">
+                <h4 className="text-sm font-semibold text-white uppercase tracking-wide mb-4">Follow Us</h4>
                 <div className="flex items-center gap-3">
-                  <a href="#" className="w-9 h-9 rounded-full bg-gray-50 hover:bg-green-50 hover:text-green-600 text-gray-600 flex items-center justify-center transition-colors">
+                  <a href="#" className="w-9 h-9 rounded-full bg-white/10 hover:bg-brand-green text-gray-400 hover:text-white flex items-center justify-center transition-colors">
                     <FacebookIcon />
                   </a>
-                  <a href="#" className="w-9 h-9 rounded-full bg-gray-50 hover:bg-green-50 hover:text-green-600 text-gray-600 flex items-center justify-center transition-colors">
+                  <a href="#" className="w-9 h-9 rounded-full bg-white/10 hover:bg-brand-green text-gray-400 hover:text-white flex items-center justify-center transition-colors">
                     <InstagramIcon />
                   </a>
-                  <a href="#" className="w-9 h-9 rounded-full bg-gray-50 hover:bg-green-50 hover:text-green-600 text-gray-600 flex items-center justify-center transition-colors">
+                  <a href="#" className="w-9 h-9 rounded-full bg-white/10 hover:bg-brand-green text-gray-400 hover:text-white flex items-center justify-center transition-colors">
                     <YoutubeIcon />
                   </a>
-                  <a href="#" className="w-9 h-9 rounded-full bg-gray-50 hover:bg-green-50 hover:text-green-600 text-gray-600 flex items-center justify-center transition-colors">
+                  <a href="#" className="w-9 h-9 rounded-full bg-white/10 hover:bg-brand-green text-gray-400 hover:text-white flex items-center justify-center transition-colors">
                     <WhatsAppIcon />
                   </a>
                 </div>
@@ -103,20 +93,20 @@ export default function Footer() {
             </div>
 
             {/* Column 2: Quick Links */}
-            <div className="p-8 lg:p-10">
+            <div className="flex flex-col">
               <div className="flex items-center gap-2 mb-8">
-                <Link2 size={20} className="text-green-500" strokeWidth={2.5} />
-                <h4 className="font-poppins font-bold text-gray-900 text-[17px]">Quick Links</h4>
+                <Link2 size={20} className="text-brand-green" strokeWidth={2.5} />
+                <h4 className="font-poppins font-semibold text-white uppercase tracking-wide text-sm">Quick Links</h4>
               </div>
               <ul className="space-y-0">
                 {NAV_LINKS.map((link) => (
-                  <li key={link.href} className="border-b border-gray-50 last:border-0">
+                  <li key={link.href} className="border-b border-gray-800 last:border-0">
                     <Link
                       href={link.href}
-                      className="flex items-center justify-between py-3.5 text-[13px] font-semibold text-gray-600 hover:text-green-600 transition-colors group"
+                      className="flex items-center justify-between py-3.5 text-[13px] font-semibold text-gray-400 hover:text-white transition-colors group"
                     >
                       {link.label}
-                      <ChevronRight size={14} className="text-gray-300 group-hover:text-green-500 transition-colors" />
+                      <ChevronRight size={14} className="text-gray-600 group-hover:text-brand-green transition-colors" />
                     </Link>
                   </li>
                 ))}
@@ -124,20 +114,20 @@ export default function Footer() {
             </div>
 
             {/* Column 3: Our Services */}
-            <div className="p-8 lg:p-10">
+            <div className="flex flex-col">
               <div className="flex items-center gap-2 mb-8">
-                <Grid size={20} className="text-green-500" strokeWidth={2.5} />
-                <h4 className="font-poppins font-bold text-gray-900 text-[17px]">Our Services</h4>
+                <Grid size={20} className="text-brand-green" strokeWidth={2.5} />
+                <h4 className="font-poppins font-semibold text-white uppercase tracking-wide text-sm">Our Services</h4>
               </div>
               <ul className="space-y-0">
                 {footerServices.map((service) => (
-                  <li key={service.slug} className="border-b border-gray-50 last:border-0">
+                  <li key={service.slug} className="border-b border-gray-800 last:border-0">
                     <Link
                       href={`/services/${service.slug}`}
-                      className="flex items-center justify-between py-3.5 text-[13px] font-semibold text-gray-600 hover:text-green-600 transition-colors group"
+                      className="flex items-center justify-between py-3.5 text-[13px] font-semibold text-gray-400 hover:text-white transition-colors group"
                     >
                       {service.title}
-                      <ChevronRight size={14} className="text-gray-300 group-hover:text-green-500 transition-colors" />
+                      <ChevronRight size={14} className="text-gray-600 group-hover:text-brand-green transition-colors" />
                     </Link>
                   </li>
                 ))}
@@ -145,53 +135,53 @@ export default function Footer() {
             </div>
 
             {/* Column 4: Contact Us */}
-            <div className="p-8 lg:p-10">
+            <div className="flex flex-col">
               <div className="flex items-center gap-2 mb-8">
-                <PhoneCall size={20} className="text-green-500" strokeWidth={2.5} />
-                <h4 className="font-poppins font-bold text-gray-900 text-[17px]">Contact Us</h4>
+                <PhoneCall size={20} className="text-brand-green" strokeWidth={2.5} />
+                <h4 className="font-poppins font-semibold text-white uppercase tracking-wide text-sm">Contact Us</h4>
               </div>
               <ul className="space-y-6">
                 <li>
                   <a href={`tel:${SITE.phone}`} className="flex items-start gap-4 group">
-                    <div className="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0 group-hover:bg-green-100 transition-colors">
-                      <Phone size={18} className="text-green-600" />
+                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-brand-green transition-colors">
+                      <Phone size={18} className="text-brand-green group-hover:text-white transition-colors" />
                     </div>
                     <div>
-                      <div className="text-[11px] font-semibold text-gray-400 mb-0.5 uppercase tracking-wide">Phone / WhatsApp</div>
-                      <div className="text-[13px] font-bold text-gray-800">{SITE.phone}</div>
+                      <div className="text-[11px] font-semibold text-gray-500 mb-0.5 uppercase tracking-wide">Phone / WhatsApp</div>
+                      <div className="text-[13px] font-bold text-gray-300">{SITE.phone}</div>
                     </div>
                   </a>
                 </li>
                 <li>
                   <a href={`mailto:${SITE.email}`} className="flex items-start gap-4 group">
-                    <div className="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0 group-hover:bg-green-100 transition-colors">
-                      <Mail size={18} className="text-green-600" />
+                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-brand-green transition-colors">
+                      <Mail size={18} className="text-brand-green group-hover:text-white transition-colors" />
                     </div>
                     <div>
-                      <div className="text-[11px] font-semibold text-gray-400 mb-0.5 uppercase tracking-wide">Email</div>
-                      <div className="text-[13px] font-bold text-gray-800">{SITE.email}</div>
+                      <div className="text-[11px] font-semibold text-gray-500 mb-0.5 uppercase tracking-wide">Email</div>
+                      <div className="text-[13px] font-bold text-gray-300">{SITE.email}</div>
                     </div>
                   </a>
                 </li>
                 <li>
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0">
-                      <MapPin size={18} className="text-green-600" />
+                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
+                      <MapPin size={18} className="text-brand-green" />
                     </div>
                     <div>
-                      <div className="text-[11px] font-semibold text-gray-400 mb-0.5 uppercase tracking-wide">Address</div>
-                      <div className="text-[13px] font-bold text-gray-800 leading-tight max-w-[180px]">{SITE.address}</div>
+                      <div className="text-[11px] font-semibold text-gray-500 mb-0.5 uppercase tracking-wide">Address</div>
+                      <div className="text-[13px] font-bold text-gray-300 leading-tight max-w-[180px]">{SITE.address}</div>
                     </div>
                   </div>
                 </li>
                 <li>
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0">
-                      <Clock size={18} className="text-green-600" />
+                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
+                      <Clock size={18} className="text-brand-green" />
                     </div>
                     <div>
-                      <div className="text-[11px] font-semibold text-gray-400 mb-0.5 uppercase tracking-wide">Office Hours</div>
-                      <div className="text-[13px] font-bold text-gray-800 leading-tight">Mon-Sat: 9 AM - 6 PM</div>
+                      <div className="text-[11px] font-semibold text-gray-500 mb-0.5 uppercase tracking-wide">Office Hours</div>
+                      <div className="text-[13px] font-bold text-gray-300 leading-tight">Mon-Sat: 9 AM - 6 PM</div>
                     </div>
                   </div>
                 </li>
@@ -201,27 +191,27 @@ export default function Footer() {
           </div>
           
           {/* Dark Green Bottom Bar */}
-          <div className="bg-[#11231F] text-white px-8 lg:px-10 py-5 rounded-b-[2rem] flex flex-col md:flex-row items-center justify-between gap-4 w-full">
+          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 w-full">
             <div className="flex items-center gap-3">
-              <div className="w-6 h-6 rounded-md bg-green-500/20 flex items-center justify-center">
-                <CheckCircle2 size={14} className="text-green-500" strokeWidth={3} />
+              <div className="w-6 h-6 rounded-md bg-brand-green/20 flex items-center justify-center">
+                <CheckCircle2 size={14} className="text-brand-green" strokeWidth={3} />
               </div>
-              <p className="text-[13px] text-gray-300 font-medium">© {new Date().getFullYear()} RJ Power Solutions. All rights reserved.</p>
+              <p className="text-[13px] text-gray-400 font-medium">© {new Date().getFullYear()} RJ Power Solutions. All rights reserved.</p>
             </div>
             
-            <div className="flex items-center gap-6 text-[13px] font-medium text-gray-300">
+            <div className="flex items-center gap-6 text-[13px] font-medium text-gray-400">
               <Link href="/faq" className="hover:text-white transition-colors">FAQ</Link>
-              <span className="text-gray-500">•</span>
+              <span className="text-gray-700">•</span>
               <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
             </div>
             
-            <div className="text-[13px] text-gray-300 font-medium border-t md:border-t-0 md:border-l border-white/10 pt-4 md:pt-0 md:pl-6">
+            <div className="text-[12px] text-gray-500 font-medium pt-4 md:pt-0">
               Crafted and managed by{' '}
               <a 
                 href="https://instagram.com/the3rdfloor.co" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-[#2DC862] hover:text-[#42E87C] font-semibold transition-colors"
+                className="text-gray-400 hover:text-white font-semibold transition-colors"
               >
                 The3rdFloor Co.
               </a>
@@ -229,7 +219,6 @@ export default function Footer() {
           </div>
           
         </div>
-      </div>
     </footer>
   );
 }

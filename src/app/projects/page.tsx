@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { MessageCircle, ArrowRight } from 'lucide-react';
+import { MapPin, CalendarDays, Zap, ArrowRight, MessageCircle, IndianRupee } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import PageWrapper from '@/components/layout/PageWrapper';
+import PageHero from '@/components/ui/PageHero';
+import ProposalCTA from '@/components/ui/ProposalCTA';
 import { PROJECTS, whatsappLink } from '@/lib/constants';
 
 const CATEGORIES = ['all', 'residential', 'commercial', 'industrial'] as const;
@@ -18,46 +20,53 @@ export default function ProjectsPage() {
 
   return (
     <PageWrapper>
-      {/* Hero */}
-      <section className="pt-32 pb-16 bg-gradient-blue text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-solar-orange/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
-        <div className="container-custom text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-          >
-            <div className="badge bg-white/10 text-white border-white/20 mb-6">Our Projects</div>
-            <h1 className="section-title text-white mb-4">500+ Successful<br /><span className="text-solar-orange">Solar Installations</span></h1>
-            <p className="text-blue-100 max-w-xl mx-auto text-lg">
-              Real projects, real savings. Browse our portfolio of residential, commercial, and industrial solar installations across Indore.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 bg-[#F8FAF7] min-h-screen overflow-hidden">
+        
+        {/* Background Patterns */}
+        <div 
+          className="absolute top-0 left-0 w-96 h-96 opacity-[0.15] pointer-events-none" 
+          style={{ backgroundImage: 'radial-gradient(#16A34A 2.5px, transparent 2.5px)', backgroundSize: '30px 30px' }}
+        ></div>
+        {/* Soft leaf wave graphic (approximated with CSS gradients) */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-[#DFF0E6] to-transparent rounded-bl-full opacity-70 pointer-events-none blur-3xl"></div>
 
-      {/* Gallery */}
-      <section className="section-padding bg-solar-grey">
-        <div className="container-custom">
-          {/* Filter Tabs */}
-          <div className="flex flex-wrap justify-center gap-3 mb-10">
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActive(cat)}
-                className={`px-6 py-2.5 rounded-full font-poppins font-semibold text-sm transition-all capitalize ${
-                  active === cat
-                    ? 'bg-solar-orange text-white shadow-solar'
-                    : 'bg-white text-solar-dark hover:text-solar-orange border border-gray-200'
-                }`}
-              >
-                {cat === 'all' ? 'All Projects' : cat}
-              </button>
-            ))}
+        <div className="container-custom relative z-10">
+          
+          {/* Header Row */}
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-16">
+            <div className="max-w-2xl">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-8 h-0.5 bg-[#16A34A]"></div>
+                <span className="text-[#16A34A] font-bold text-sm tracking-[0.15em] uppercase">Our Projects</span>
+              </div>
+              <h1 className="text-4xl md:text-5xl font-extrabold text-[#111827] mb-4 tracking-tight leading-tight font-poppins">
+                Powering Every Possibility
+              </h1>
+              <p className="text-[#64748B] text-lg font-medium">
+                Explore our successfully completed solar installations across residential, commercial and industrial sectors.
+              </p>
+            </div>
+
+            {/* Filter Tabs */}
+            <div className="flex flex-wrap items-center gap-3">
+              {CATEGORIES.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActive(cat)}
+                  className={`px-6 py-2.5 rounded-full font-medium text-sm transition-all capitalize whitespace-nowrap shadow-sm ${
+                    active === cat
+                      ? 'bg-[#16A34A] text-white border border-[#16A34A]'
+                      : 'bg-white text-[#111827] border border-gray-200 hover:border-[#16A34A] hover:text-[#16A34A]'
+                  }`}
+                >
+                  {cat === 'all' ? 'All Projects' : cat}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filtered.map((project, i) => (
               <motion.div
                 key={project.id}
@@ -65,37 +74,53 @@ export default function ProjectsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="bg-white rounded-2xl overflow-hidden shadow-card card-hover group"
+                className="bg-white rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_rgba(22,163,74,0.1)] transition-all group border border-gray-100 border-b-4 border-b-[#16A34A] flex flex-col"
               >
-                <div className="relative aspect-[4/3] overflow-hidden">
+                {/* Image Section */}
+                <div className="relative aspect-[4/3] overflow-hidden rounded-t-2xl">
                   <Image
                     src={project.image}
                     alt={project.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    priority={project.id <= 2}
+                    priority={project.id <= 3}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute top-3 left-3">
-                    <span className="badge text-xs py-1 px-2.5 capitalize">{project.category}</span>
+                  {/* Category Badge */}
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-[#16A34A] text-white text-[11px] font-bold uppercase tracking-wider py-1.5 px-3.5 rounded-full shadow-md">
+                      {project.category}
+                    </span>
                   </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="font-poppins font-bold text-solar-dark text-lg mb-3">{project.title}</h3>
-                  <div className="grid grid-cols-2 gap-3 mb-4">
-                    <div className="bg-solar-grey rounded-lg p-3 text-center">
-                      <div className="text-solar-orange font-bold font-poppins text-base">⚡ {project.capacity}</div>
-                      <div className="text-xs text-gray-500 mt-0.5">System Size</div>
+
+                {/* Content Section */}
+                <div className="p-6 flex flex-col flex-grow">
+                  <h3 className="font-poppins font-bold text-[#111827] text-xl mb-5 group-hover:text-[#16A34A] transition-colors">{project.title}</h3>
+                  
+                  {/* Info Boxes */}
+                  <div className="grid grid-cols-2 gap-3 mb-6">
+                    <div className="bg-[#F8FAF7] rounded-xl p-3 border border-gray-100 flex flex-col items-center justify-center text-center">
+                      <div className="flex items-center gap-1.5 text-[#16A34A] font-bold font-poppins text-base mb-1">
+                        <Zap size={16} fill="currentColor" /> {project.capacity}
+                      </div>
+                      <div className="text-[11px] text-[#64748B] font-medium uppercase tracking-wide">System Size</div>
                     </div>
-                    <div className="bg-solar-grey rounded-lg p-3 text-center">
-                      <div className="text-green-600 font-bold font-poppins text-base">💰 {project.savings}</div>
-                      <div className="text-xs text-gray-500 mt-0.5">Monthly Savings</div>
+                    <div className="bg-[#F8FAF7] rounded-xl p-3 border border-gray-100 flex flex-col items-center justify-center text-center">
+                      <div className="flex items-center gap-1 text-[#16A34A] font-bold font-poppins text-base mb-1">
+                        <span className="text-[18px]">💰</span> {project.savings}
+                      </div>
+                      <div className="text-[11px] text-[#64748B] font-medium uppercase tracking-wide">Monthly Savings</div>
                     </div>
                   </div>
-                  <div className="flex items-center justify-between text-xs text-gray-500">
-                    <span>📍 {project.location}</span>
-                    <span>⏱ {project.time}</span>
+                  
+                  <div className="mt-auto border-t border-gray-100 pt-4 flex items-center justify-between text-sm text-[#64748B] font-medium">
+                    <span className="flex items-center gap-1.5">
+                      <MapPin size={16} className="text-[#16A34A]" /> {project.location}
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <CalendarDays size={16} className="text-[#16A34A]" /> {project.time}
+                    </span>
                   </div>
                 </div>
               </motion.div>
@@ -103,34 +128,16 @@ export default function ProjectsPage() {
           </div>
 
           {filtered.length === 0 && (
-            <div className="text-center py-16 text-gray-400">
-              <div className="text-5xl mb-4">🔍</div>
-              <p className="font-poppins font-semibold text-lg">No projects found in this category.</p>
+            <div className="text-center py-20 bg-white rounded-3xl border border-gray-100 mt-8 shadow-sm">
+              <div className="text-6xl mb-4 opacity-50">🔍</div>
+              <h3 className="font-poppins font-bold text-xl text-[#111827] mb-2">No projects found</h3>
+              <p className="text-[#64748B] font-medium">Please select a different category to view our installations.</p>
             </div>
           )}
         </div>
       </section>
-
-      {/* CTA */}
-      <section className="py-16 bg-white border-t border-gray-100">
-        <div className="container-custom text-center">
-          <h2 className="font-poppins font-bold text-3xl text-solar-dark mb-4">Want Your Project Here?</h2>
-          <p className="text-gray-500 mb-8 text-lg">Join our growing family of satisfied solar customers in Indore.</p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href={whatsappLink('Hello! I want to start a solar project. Please guide me.')}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary"
-            >
-              <MessageCircle size={18} /> Start Your Project
-            </a>
-            <Link href="/calculator" className="btn-secondary">
-              Estimate Savings <ArrowRight size={16} />
-            </Link>
-          </div>
-        </div>
-      </section>
+      
+      <ProposalCTA customMessage="Hello! I want to start a solar project. Please guide me." />
     </PageWrapper>
   );
 }

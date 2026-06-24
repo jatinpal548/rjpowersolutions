@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import PageWrapper from '@/components/layout/PageWrapper';
 import InfiniteTestimonialSlider from '@/components/ui/InfiniteTestimonialSlider';
+import ContactSection from '@/components/home/ContactSection';
 import { SITE, SERVICES, TESTIMONIALS, PROJECTS, FAQS, whatsappLink } from '@/lib/constants';
 import { sectionVariants, staggerContainer, staggerItem } from '@/components/home/animations';
 
@@ -121,82 +122,177 @@ export default function HomePage() {
 
   return (
     <PageWrapper>
-      {/* ─── HERO ─── */}
-      <section className="relative min-h-[85vh] flex flex-col items-center justify-center overflow-visible pt-24 pb-12 lg:pb-40">
-        {/* Background */}
-        <div className="absolute inset-0 overflow-hidden">
-          <Image
-            src="/hero-solar-new.png"
-            alt="Solar panels on Indian home"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-solar-dark/95 via-solar-dark/70 to-black/20 z-10" />
-        </div>
+      <section className="relative min-h-[85vh] flex flex-col items-center justify-center pt-24 pb-20 lg:pt-32 lg:pb-28 bg-[#F8FAF7] overflow-hidden">
+        {/* Soft Gradients */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#E8F5EE] rounded-bl-full opacity-60 pointer-events-none blur-3xl"></div>
+        <div className="absolute top-20 left-10 w-72 h-72 bg-[#FEF2ED] rounded-full opacity-50 pointer-events-none blur-3xl"></div>
 
-        {/* Content */}
-        <div className="relative container-custom z-20 w-full flex flex-col items-start text-left">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="max-w-3xl"
-          >
-            {/* Top Badge */}
-            <div className="inline-flex items-center gap-2 bg-white/95 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full text-green-700 font-semibold text-sm mb-6 shadow-sm">
-              <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
-                <CheckCircle size={12} className="text-white" strokeWidth={3} />
-              </div>
-              India&apos;s Trusted Solar EPC Company in Indore
-            </div>
+        <div className="relative container-custom z-20 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
 
-            <h1 className="font-poppins font-extrabold text-white mb-6 tracking-tight drop-shadow-lg" style={{ fontSize: 'clamp(2.8rem, 6.5vw, 5.5rem)', lineHeight: 1.1 }}>
-              <span className="block whitespace-nowrap">Power Your Future with</span>
-              <span className="block whitespace-nowrap mt-1">
-                <span className="text-solar-orange">RJ</span>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#85D83E] to-[#B3F078] drop-shadow-none"> Power Solutions</span>
-              </span>
-            </h1>
+            {/* Left Column (Content) */}
+            <div className="max-w-3xl">
+              {/* Top Badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
+                className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-100 mb-6"
+              >
+                <Zap size={16} className="text-[#16A34A]" />
+                <span className="text-[#16A34A] font-bold text-sm tracking-wide">India's Trusted Solar EPC Company</span>
+              </motion.div>
 
-            <p className="text-white/90 text-lg md:text-[21px] max-w-2xl mb-10 leading-relaxed font-medium drop-shadow-md">
-              Central India's leading solar EPC provider. We design and install high-efficiency solar systems to help you save up to 90% on electricity bills.
-            </p>
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
+                className="text-4xl lg:text-[3.8rem] font-extrabold text-[#111827] mb-6 tracking-tight leading-[1.1] font-poppins drop-shadow-sm"
+              >
+                <span className="block whitespace-nowrap">Power Your Future</span>
+                <span className="block mt-1">
+                  with <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F97316] to-[#E66E00]">Smart Solar Energy</span>
+                </span>
+              </motion.h1>
 
-            {/* Buttons */}
-            <div className="flex flex-col sm:flex-row items-center gap-4 mb-10">
-              <a href={heroWhatsApp} target="_blank" rel="noopener noreferrer" className="btn-primary text-base px-6 py-3.5 group shadow-xl shadow-solar-orange/30 w-full sm:w-auto justify-center">
-                <MessageCircle size={18} />
-                Get Free Consultation
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </a>
-              <Link href="/calculator" className="bg-white/10 backdrop-blur-md border border-white/40 hover:bg-white hover:text-solar-dark text-white font-semibold rounded-full flex items-center justify-center gap-2 transition-all duration-300 text-base px-6 py-3.5 w-full sm:w-auto">
-                <Calculator size={18} />
-                Calculate Savings
-              </Link>
-              <a href={`tel:${SITE.phone}`} className="bg-white/10 backdrop-blur-md border border-white/40 hover:bg-white hover:text-solar-dark text-white font-semibold rounded-full flex items-center justify-center gap-2 transition-all duration-300 text-base px-6 py-3.5 w-full sm:w-auto">
-                <Phone size={18} />
-                Call Us Now
-              </a>
-            </div>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+                className="text-[#64748B] text-lg md:text-xl font-medium mb-10 leading-relaxed max-w-2xl"
+              >
+                Save up to 90% on electricity bills with high-efficiency solar solutions for homes, businesses and industries.
+              </motion.p>
 
-            {/* Trust badges */}
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white font-medium drop-shadow-sm">
-              {[
-                'Free Site Survey', 
-                'Gov. Subsidy Help', 
-                '25-Year Warranty', 
-                '500+ Happy Customers'
-              ].map(text => (
-                <div key={text} className="flex items-center gap-2">
-                  <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center shadow-sm">
-                    <CheckCircle size={12} className="text-white" strokeWidth={3} />
+              {/* Buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
+                className="flex flex-col sm:flex-row items-center gap-4 mb-10 w-full sm:w-auto"
+              >
+                <a 
+                  href={heroWhatsApp} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="bg-gradient-to-r from-[#F97316] to-[#E07B2A] text-white font-bold py-4 px-8 rounded-xl flex items-center justify-center gap-2 hover:shadow-lg hover:-translate-y-0.5 transition-all w-full sm:w-auto shadow-sm text-base group"
+                >
+                  <MessageCircle size={18} />
+                  Get Free Consultation
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                </a>
+                <Link 
+                  href="/calculator" 
+                  className="bg-white text-[#111827] font-bold py-4 px-8 rounded-xl flex items-center justify-center gap-2 border border-[#E5E7EB] hover:bg-gray-50 hover:border-gray-300 transition-all shadow-sm w-full sm:w-auto text-base"
+                >
+                  <Calculator size={18} />
+                  Calculate Savings
+                </Link>
+              </motion.div>
+
+              {/* Trust badges - Single Line exactly as requested */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                className="flex flex-wrap lg:flex-nowrap items-center gap-3 w-full"
+              >
+                {[
+                  'Free Site Survey',
+                  'Gov. Subsidy Assistance',
+                  '25-Year Warranty',
+                  '500+ Happy Customers'
+                ].map(text => (
+                  <div key={text} className="flex items-center gap-2 bg-white px-3 py-2 md:px-4 md:py-2.5 rounded-full shadow-sm border border-gray-100 text-[#111827] text-xs md:text-sm font-semibold whitespace-nowrap">
+                    <CheckCircle size={14} className="text-[#16A34A] shrink-0" strokeWidth={3} />
+                    {text}
                   </div>
-                  {text}
-                </div>
-              ))}
+                ))}
+              </motion.div>
             </div>
-          </motion.div>
+
+            {/* Right Column (3D House Illustration) */}
+            <div className="relative w-full h-[350px] md:h-[400px] lg:h-[700px] flex items-center justify-center mt-8 lg:mt-0">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1, ease: "easeOut" }}
+                className="relative w-full max-w-[750px] lg:scale-110 aspect-square"
+              >
+                {/* Subtle Sun Glow */}
+                <div className="absolute top-[10%] right-[10%] w-32 h-32 bg-gradient-to-br from-[#FDE047] to-[#F97316] rounded-full blur-xl opacity-60 shadow-[0_0_50px_rgba(249,115,22,0.3)]"></div>
+
+                {/* Floating Building */}
+                <motion.div
+                  animate={{ y: [-10, 10, -10] }}
+                  transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+                  className="relative w-full h-full z-10"
+                >
+                  <Image
+                    src="/hero-3d-commercial.png"
+                    alt="Premium 3D Solar Home"
+                    fill
+                    className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.15)]"
+                    priority
+                  />
+                  {/* Decorative tiny floating elements */}
+                  <motion.div animate={{ y: [-5, 5, -5] }} transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 1 }} className="absolute top-[25%] left-[5%]">
+                    <Sun className="text-[#F97316] w-5 h-5 opacity-70" />
+                  </motion.div>
+                  <motion.div animate={{ y: [-8, 8, -8] }} transition={{ repeat: Infinity, duration: 6, ease: "easeInOut", delay: 0.5 }} className="absolute bottom-[35%] right-[0%]">
+                    <Zap className="text-[#16A34A] w-5 h-5 opacity-70" />
+                  </motion.div>
+                </motion.div>
+
+                {/* Floating Glassmorphism Cards */}
+                <motion.div 
+                  animate={{ y: [0, -15, 0] }} 
+                  transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+                  className="absolute top-2 right-0 md:top-20 bg-white/90 backdrop-blur-md px-3 py-2 md:px-5 md:py-4 rounded-xl md:rounded-2xl shadow-xl border border-white/50 flex items-center gap-3 md:gap-4 z-20"
+                >
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#E8F5EE] flex items-center justify-center shrink-0">
+                    <IndianRupee className="w-4 h-4 md:w-5 md:h-5 text-[#16A34A]" />
+                  </div>
+                  <div>
+                    <div className="font-bold text-[#111827] font-poppins leading-tight text-sm md:text-base">₹35,000/month</div>
+                    <div className="text-[10px] md:text-xs text-[#64748B] font-medium mt-0.5">Saved on Electricity</div>
+                  </div>
+                </motion.div>
+
+                <motion.div 
+                  animate={{ y: [0, 15, 0] }} 
+                  transition={{ repeat: Infinity, duration: 6, ease: "easeInOut", delay: 1 }}
+                  className="absolute bottom-20 right-0 md:bottom-40 md:right-10 bg-white/90 backdrop-blur-md px-3 py-2 md:px-5 md:py-4 rounded-xl md:rounded-2xl shadow-xl border border-white/50 flex items-center gap-3 md:gap-4 z-20"
+                >
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#E8F5EE] flex items-center justify-center shrink-0">
+                    <TrendingUp className="w-4 h-4 md:w-5 md:h-5 text-[#16A34A]" />
+                  </div>
+                  <div>
+                    <div className="text-[10px] md:text-xs text-[#64748B] font-medium mb-0.5">ROI In</div>
+                    <div className="font-bold text-[#111827] font-poppins leading-tight text-sm md:text-base">3.8 Years</div>
+                  </div>
+                </motion.div>
+
+                <motion.div 
+                  animate={{ y: [-10, 10, -10] }} 
+                  transition={{ repeat: Infinity, duration: 5.5, ease: "easeInOut", delay: 2 }}
+                  className="absolute bottom-6 left-0 md:bottom-28 md:left-10 bg-white/90 backdrop-blur-md px-3 py-2 md:px-5 md:py-4 rounded-xl md:rounded-2xl shadow-xl border border-white/50 flex items-center gap-3 md:gap-4 z-20"
+                >
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#E8F5EE] flex items-center justify-center shrink-0">
+                    <Factory className="w-4 h-4 md:w-5 md:h-5 text-[#16A34A]" />
+                  </div>
+                  <div>
+                    <div className="text-[10px] md:text-xs text-[#64748B] font-medium mb-0.5">CO₂ Reduced</div>
+                    <div className="font-bold text-[#111827] font-poppins leading-tight text-sm md:text-base">18 Tons/Year</div>
+                  </div>
+                </motion.div>
+
+                {/* Soft Shadow Platform */}
+                <div className="absolute bottom-[5%] left-1/2 -translate-x-1/2 w-[70%] h-[20px] bg-black/[0.08] rounded-[100%] blur-xl z-0"></div>
+              </motion.div>
+            </div>
+
+          </div>
         </div>
 
         {/* Floating Stats Bar */}
@@ -204,26 +300,26 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
-          className="relative lg:absolute bottom-0 left-0 right-0 z-30 lg:translate-y-1/2 px-4 mt-12 lg:mt-0 w-full"
+          className="relative lg:absolute bottom-0 left-0 right-0 z-30 lg:translate-y-0 px-4 mt-8 lg:mt-0 w-full"
         >
           <div className="container-custom">
-            <div className="bg-white rounded-[2rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] border border-gray-100 overflow-hidden">
-              
+            <div className="bg-white/90 backdrop-blur-xl rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#E5E7EB] overflow-hidden">
+
               {/* Desktop View: Static Row */}
-              <div className="hidden lg:flex p-10 flex-row justify-between items-center gap-4 divide-x divide-gray-100">
+              <div className="hidden lg:flex p-10 flex-row justify-between items-center gap-4 divide-x divide-gray-100/50">
                 {[
                   { value: '500+', label: 'Installations', sub: 'Successfully Completed', icon: Sun },
                   { value: '5+', label: 'Years Experience', sub: 'In Solar Industry', icon: Award },
                   { value: '50+', label: 'Cities', sub: 'Serving Across MP', icon: Building2 },
                   { value: '98%', label: 'Satisfaction', sub: 'Happy Customers', icon: Star },
                 ].map((stat, i) => (
-                  <div key={i} className="flex items-start text-left gap-5 pl-8 first:pl-0 w-auto">
-                    <div className="w-14 h-14 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0">
-                      <stat.icon size={24} className="text-green-500" strokeWidth={1.5} />
+                  <div key={i} className="flex items-start text-left gap-5 pl-8 first:pl-0 w-auto group transition-transform hover:-translate-y-1">
+                    <div className="w-14 h-14 rounded-[16px] bg-[#E8F5EE] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                      <stat.icon size={26} className="text-[#16A34A]" strokeWidth={1.5} />
                     </div>
                     <div>
-                      <div className="text-[28px] font-poppins font-extrabold text-[#0A1A3A] tracking-tight leading-tight">{stat.value}</div>
-                      <div className="text-sm font-bold text-gray-800">{stat.label}</div>
+                      <div className="text-[28px] font-poppins font-extrabold text-[#111827] tracking-tight leading-tight">{stat.value}</div>
+                      <div className="text-sm font-bold text-[#64748B]">{stat.label}</div>
                       <div className="text-xs text-gray-400 font-medium">{stat.sub}</div>
                     </div>
                   </div>
@@ -232,9 +328,9 @@ export default function HomePage() {
 
               {/* Mobile View: Looping Marquee */}
               <div className="flex lg:hidden overflow-hidden py-6 relative">
-                <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
-                <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
-                
+                <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white/80 to-transparent z-10 pointer-events-none"></div>
+                <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white/80 to-transparent z-10 pointer-events-none"></div>
+
                 <motion.div
                   animate={{ x: ['0%', '-50%'] }}
                   transition={{ repeat: Infinity, ease: 'linear', duration: 15 }}
@@ -273,7 +369,7 @@ export default function HomePage() {
       <section ref={statsRef} className="pt-24 lg:pt-40 pb-20 bg-[#FAFBFC] border-b border-gray-100 overflow-hidden relative">
         {/* Subtle background dot pattern */}
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
-        
+
         <div className="container-custom relative z-10">
           {/* Brands Section */}
           <div className="text-center mb-16">
@@ -281,7 +377,7 @@ export default function HomePage() {
               Trusted Brands We Install
             </h3>
             <div className="w-8 h-0.5 bg-solar-orange mx-auto mb-12"></div>
-            
+
             <div className="flex relative overflow-hidden group">
               <motion.div
                 animate={{ x: ['0%', '-50%'] }}
@@ -305,15 +401,21 @@ export default function HomePage() {
       </section>
 
       {/* ─── WHY CHOOSE US ─── */}
-      <section className="section-padding bg-solar-grey">
+      <section className="section-padding bg-white border-b border-gray-100">
         <div className="container-custom">
-          <AnimatedSection className="text-center mb-14">
-            <div className="badge mb-4">Why Choose RJ Power Solutions</div>
-            <h2 className="section-title">Your Trusted Solar Partner<br /><span className="gradient-text-orange">in Central India</span></h2>
-            <p className="text-gray-500 max-w-2xl mx-auto mt-3 text-lg">We deliver more than solar panels — we deliver energy independence, savings, and peace of mind.</p>
+          <AnimatedSection className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 bg-[#FFF2E8] text-[#E07B2A] font-semibold px-4 py-1.5 rounded-full mb-4 text-sm">
+              <Award size={16} />
+              <span>Why Choose RJ Power Solutions</span>
+            </div>
+            <h2 className="font-poppins font-extrabold text-4xl md:text-5xl text-[#111827] leading-tight">
+              Your Trusted Solar Partner<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F97316] to-[#E66E00]">in Central India</span>
+            </h2>
+            <p className="text-[#64748B] max-w-2xl mx-auto mt-4 text-lg font-medium">We deliver more than solar panels — we deliver energy independence, savings, and peace of mind.</p>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {WHY_CHOOSE.map(({ icon: Icon, title, desc }, i) => (
               <motion.div
                 key={title}
@@ -321,13 +423,13 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="bg-white rounded-2xl p-7 card-hover shadow-card group"
+                className="bg-white rounded-[24px] p-8 border border-[#E5E7EB] shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_12px_30px_rgb(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-300 group"
               >
-                <div className="w-14 h-14 rounded-xl bg-solar-orange-tint flex items-center justify-center mb-5 group-hover:bg-solar-orange transition-colors duration-300">
-                  <Icon size={26} className="text-solar-orange group-hover:text-white transition-colors duration-300" />
+                <div className="w-16 h-16 rounded-[16px] bg-[#FEF2ED] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Icon size={28} className="text-[#E07B2A]" strokeWidth={2} />
                 </div>
-                <h3 className="font-poppins font-bold text-lg text-solar-dark mb-2">{title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
+                <h3 className="font-poppins font-bold text-xl text-[#111827] mb-3 group-hover:text-[#E07B2A] transition-colors">{title}</h3>
+                <p className="text-[#64748B] text-[15px] leading-relaxed font-medium">{desc}</p>
               </motion.div>
             ))}
           </div>
@@ -422,16 +524,15 @@ export default function HomePage() {
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-300 mb-2 font-poppins">Property Type</label>
-                  <div className="grid grid-cols-3 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     {['Residential', 'Commercial', 'Industrial'].map(type => (
                       <button
                         key={type}
                         onClick={() => setPropertyType(type)}
-                        className={`py-3 rounded-xl font-semibold font-poppins text-sm transition-all duration-300 ${
-                          propertyType === type
-                            ? 'bg-solar-orange text-white shadow-solar'
-                            : 'bg-white/10 text-gray-300 hover:bg-white/20'
-                        }`}
+                        className={`py-3 rounded-xl font-semibold font-poppins text-sm transition-all duration-300 ${propertyType === type
+                          ? 'bg-solar-orange text-white shadow-solar'
+                          : 'bg-white/10 text-gray-300 hover:bg-white/20'
+                          }`}
                       >
                         {type}
                       </button>
@@ -451,8 +552,8 @@ export default function HomePage() {
                   className="mt-6 bg-white rounded-2xl p-6 shadow-card border border-solar-orange/20"
                 >
                   <h4 className="font-poppins font-bold text-solar-dark mb-4 text-base">⚡ Results for {propertyType}</h4>
-                  <div className="grid grid-cols-3 gap-4 text-center">
-                    <div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                    <div className="py-2 sm:py-0">
                       <div className="text-solar-orange font-bold text-xl font-poppins">{calcResult.size}</div>
                       <div className="text-xs text-gray-500 mt-1">System Size</div>
                     </div>
@@ -653,8 +754,8 @@ export default function HomePage() {
       {/* ─── TESTIMONIALS — Horizontal Scroll Style ─── */}
       <section className="section-padding bg-solar-dark relative overflow-hidden">
         <div className="container-custom relative z-10">
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 gap-8">
-            <div className="max-w-2xl">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 gap-8 w-full">
+            <div className="max-w-2xl w-full">
               <h2 className="text-white font-poppins font-bold text-4xl md:text-5xl leading-tight">
                 Don&apos;t just take our word for it. We&apos;ve powered 500+ properties.
               </h2>
@@ -686,9 +787,8 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.08 }}
-                className={`bg-solar-grey rounded-2xl overflow-hidden border-2 transition-all duration-300 ${
-                  activeFaq === i ? 'border-solar-orange shadow-solar' : 'border-transparent hover:border-solar-orange/40'
-                }`}
+                className={`bg-solar-grey rounded-2xl overflow-hidden border-2 transition-all duration-300 ${activeFaq === i ? 'border-solar-orange shadow-solar' : 'border-transparent hover:border-solar-orange/40'
+                  }`}
               >
                 <button
                   onClick={() => setActiveFaq(activeFaq === i ? null : i)}
@@ -726,107 +826,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── CONTACT SECTION ─── */}
-      <section className="section-padding bg-white relative" id="contact">
-        <div className="container-custom">
-          <AnimatedSection className="text-center mb-14">
-            <div className="badge mb-4">Contact Us</div>
-            <h2 className="section-title text-solar-dark">Get in Touch with <span className="text-solar-orange">Our Experts</span></h2>
-            <p className="text-gray-500 text-lg mt-3">Have questions or ready to go solar? We're here to help.</p>
-          </AnimatedSection>
-
-          <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            {/* Contact Info */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="bg-solar-grey rounded-3xl p-8 lg:p-12"
-            >
-              <h3 className="font-poppins font-bold text-2xl mb-6 text-solar-dark">Contact Information</h3>
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center flex-shrink-0 shadow-sm">
-                    <MapPin className="text-solar-orange" size={24} />
-                  </div>
-                  <div>
-                    <h4 className="font-poppins font-semibold text-solar-dark text-lg">Office Address</h4>
-                    <p className="text-gray-600 mt-1">{SITE.address}</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center flex-shrink-0 shadow-sm">
-                    <Phone className="text-solar-orange" size={24} />
-                  </div>
-                  <div>
-                    <h4 className="font-poppins font-semibold text-solar-dark text-lg">Phone Number</h4>
-                    <p className="text-gray-600 mt-1">{SITE.phone}</p>
-                    <p className="text-gray-500 text-sm mt-0.5">Mon - Sat, 9:00 AM - 6:00 PM</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center flex-shrink-0 shadow-sm">
-                    <Mail className="text-solar-orange" size={24} />
-                  </div>
-                  <div>
-                    <h4 className="font-poppins font-semibold text-solar-dark text-lg">Email Address</h4>
-                    <p className="text-gray-600 mt-1">{SITE.email}</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="mt-10 pt-8 border-t border-gray-200">
-                <h4 className="font-poppins font-semibold text-solar-dark mb-4">Connect on WhatsApp</h4>
-                <a
-                  href={whatsappLink('Hello! I want to inquire about solar.')}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-green-500 text-white font-poppins font-semibold px-6 py-3 rounded-xl hover:bg-green-600 transition-all inline-flex items-center gap-2 shadow-sm hover:shadow-md"
-                >
-                  <MessageCircle size={20} /> Chat with Us
-                </a>
-              </div>
-            </motion.div>
-
-            {/* Contact Form */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="bg-white rounded-3xl p-8 lg:p-12 shadow-card border border-gray-100"
-            >
-              <h3 className="font-poppins font-bold text-2xl mb-6 text-solar-dark">Send a Message</h3>
-              <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">Full Name</label>
-                    <input type="text" placeholder="John Doe" className="input-field bg-solar-grey border-transparent focus:bg-white" required />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">Phone Number</label>
-                    <input type="tel" placeholder="+91 98765 43210" className="input-field bg-solar-grey border-transparent focus:bg-white" required />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">Email Address</label>
-                  <input type="email" placeholder="john@example.com" className="input-field bg-solar-grey border-transparent focus:bg-white" required />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2 font-poppins">Your Message</label>
-                  <textarea rows={4} placeholder="How can we help you?" className="input-field bg-solar-grey border-transparent focus:bg-white resize-none" required></textarea>
-                </div>
-                <button type="submit" className="btn-primary w-full justify-center text-base py-4 mt-2">
-                  Send Message
-                </button>
-              </form>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      <ContactSection />
     </PageWrapper>
   );
 }

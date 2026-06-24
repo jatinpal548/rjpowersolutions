@@ -2,51 +2,18 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Phone, Mail, MapPin, Clock, MessageCircle, CheckCircle, Send } from 'lucide-react';
+import Image from 'next/image';
+import { 
+  Phone, Mail, MapPin, Clock, MessageCircle, CheckCircle, Send,
+  Zap, Shield, IndianRupee, User, Lock, Calendar, Users, Globe 
+} from 'lucide-react';
 import PageWrapper from '@/components/layout/PageWrapper';
 import { SITE, whatsappLink } from '@/lib/constants';
-
-const CONTACT_INFO = [
-  {
-    icon: Phone,
-    label: 'Phone / WhatsApp',
-    value: SITE.phone,
-    sub: 'Mon–Sat, 9 AM – 6 PM',
-    href: `tel:${SITE.phone}`,
-    color: 'bg-solar-orange-tint text-solar-orange',
-  },
-  {
-    icon: MessageCircle,
-    label: 'WhatsApp',
-    value: 'Chat with us',
-    sub: 'Instant response',
-    href: whatsappLink('Hello RJ Power Solutions! I want to get in touch.'),
-    color: 'bg-green-50 text-green-600',
-    external: true,
-  },
-  {
-    icon: Mail,
-    label: 'Email',
-    value: SITE.email,
-    sub: 'We reply within 24 hrs',
-    href: `mailto:${SITE.email}`,
-    color: 'bg-solar-sky text-solar-blue',
-  },
-  {
-    icon: MapPin,
-    label: 'Office Address',
-    value: SITE.address,
-    sub: 'Visit us for consultation',
-    href: '#',
-    color: 'bg-purple-50 text-purple-600',
-  },
-];
 
 export default function ContactPage() {
   const [form, setForm] = useState({
     name: '', phone: '', email: '', location: '', bill: '', propertyType: 'Residential', message: '',
   });
-  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -56,194 +23,286 @@ export default function ContactPage() {
     e.preventDefault();
     const msg = `Hello RJ Power Solutions! 🌞\n\n📋 New Contact Form Inquiry:\n\n👤 Name: ${form.name}\n📱 Phone: ${form.phone}\n📧 Email: ${form.email || 'Not provided'}\n📍 Location: ${form.location || 'Not provided'}\n🏠 Property Type: ${form.propertyType}\n💡 Monthly Bill: ${form.bill ? '₹' + form.bill : 'Not provided'}\n\n💬 Message:\n${form.message || 'No additional message'}\n\nPlease get back to me at your earliest convenience. Thank you!`;
     window.open(whatsappLink(msg), '_blank');
-    setSubmitted(true);
   };
 
   return (
     <PageWrapper>
-      {/* Hero */}
-      <section className="pt-32 pb-16 bg-gradient-blue text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-solar-orange/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
-        <div className="container-custom text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-          >
-            <div className="badge bg-white/10 text-white border-white/20 mb-6">Contact Us</div>
-            <h1 className="section-title text-white mb-4">Get in Touch with<br /><span className="text-solar-orange">Our Solar Experts</span></h1>
-            <p className="text-blue-100 max-w-xl mx-auto text-lg">
-              Ready to go solar? Have questions? Our team in Indore is here to help. We respond within 30 minutes on WhatsApp.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Contact Info Cards */}
-      <section className="py-12 bg-white">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {CONTACT_INFO.map(({ icon: Icon, label, value, sub, href, color, external }, i) => (
-              <motion.a
-                key={label}
-                href={href}
-                target={external ? '_blank' : undefined}
-                rel={external ? 'noopener noreferrer' : undefined}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="bg-solar-grey rounded-2xl p-6 card-hover text-center group block"
+      {/* 1. HERO SECTION */}
+      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 bg-gradient-to-br from-[#FFF9F5] to-white overflow-hidden">
+        <div className="container-custom relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+            
+            {/* Left Column: Typography */}
+            <div className="max-w-2xl">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-[#16A34A]/20 mb-6"
               >
-                <div className={`w-14 h-14 rounded-full ${color} mx-auto mb-4 flex items-center justify-center`}>
-                  <Icon size={22} />
+                <CheckCircle size={14} className="text-[#16A34A]" />
+                <span className="text-[#16A34A] font-bold text-sm tracking-wide">We're Here to Help</span>
+              </motion.div>
+              
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="text-5xl md:text-6xl font-extrabold text-[#111827] mb-6 tracking-tight leading-[1.1] font-poppins"
+              >
+                Let's Power a <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F97316] to-[#E66E00]">Sustainable</span> Future Together
+              </motion.h1>
+              
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-[#64748B] text-lg font-medium mb-10 leading-relaxed max-w-lg"
+              >
+                Have questions or ready to go solar? Our team in Indore is here to help. Reach out to us and we'll get back within 30 minutes on WhatsApp.
+              </motion.p>
+            </div>
+
+            {/* Right Column: Hero Image & Features */}
+            <div className="relative">
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 }}
+                className="relative w-full h-[300px] md:h-[400px] rounded-3xl overflow-hidden shadow-2xl"
+              >
+                <Image src="/contact-hero.png" alt="Solar Panels" fill className="object-cover" />
+              </motion.div>
+
+              {/* Floating Feature Highlights */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-[110%] max-w-2xl bg-white rounded-2xl shadow-xl border border-gray-100 p-6 hidden md:grid grid-cols-4 gap-4 divide-x divide-gray-100"
+              >
+                <div className="flex flex-col items-center text-center px-2">
+                  <div className="w-10 h-10 rounded-full bg-[#E8F5EE] flex items-center justify-center mb-3 shrink-0">
+                    <Zap size={18} className="text-[#16A34A]" />
+                  </div>
+                  <div className="font-bold text-[#111827] text-sm">Expert Guidance</div>
+                  <div className="text-xs text-[#64748B] mt-1">From solar experts</div>
                 </div>
-                <div className="text-xs text-gray-400 mb-1 font-semibold uppercase tracking-wide">{label}</div>
-                <div className="font-poppins font-bold text-solar-dark text-sm mb-1 break-all group-hover:text-solar-orange transition-colors">{value}</div>
-                <div className="text-xs text-gray-400">{sub}</div>
-              </motion.a>
-            ))}
+                <div className="flex flex-col items-center text-center px-2">
+                  <div className="w-10 h-10 rounded-full bg-[#FFF2E8] flex items-center justify-center mb-3 shrink-0">
+                    <Clock size={18} className="text-[#F97316]" />
+                  </div>
+                  <div className="font-bold text-[#111827] text-sm">Quick Response</div>
+                  <div className="text-xs text-[#64748B] mt-1">Within 30 minutes</div>
+                </div>
+                <div className="flex flex-col items-center text-center px-2">
+                  <div className="w-10 h-10 rounded-full bg-[#E8F5EE] flex items-center justify-center mb-3 shrink-0">
+                    <Shield size={18} className="text-[#16A34A]" />
+                  </div>
+                  <div className="font-bold text-[#111827] text-sm">Trusted Service</div>
+                  <div className="text-xs text-[#64748B] mt-1">Reliable & transparent</div>
+                </div>
+                <div className="flex flex-col items-center text-center px-2">
+                  <div className="w-10 h-10 rounded-full bg-[#FFF2E8] flex items-center justify-center mb-3 shrink-0">
+                    <IndianRupee size={18} className="text-[#F97316]" />
+                  </div>
+                  <div className="font-bold text-[#111827] text-sm">End-to-End Support</div>
+                  <div className="text-xs text-[#64748B] mt-1">From query to installation</div>
+                </div>
+              </motion.div>
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* Form + Office Hours */}
-      <section className="section-padding bg-solar-grey">
+      {/* 2. MAIN CONTENT LAYOUT (Two Column) */}
+      <section className="py-20 lg:pt-32 lg:pb-24 bg-[#FAFBFC] relative z-20">
         <div className="container-custom grid grid-cols-1 lg:grid-cols-3 gap-10">
-          {/* Form */}
+          
+          {/* 3. CONTACT FORM (Left Card) */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="lg:col-span-2 bg-white rounded-2xl p-8 shadow-card"
+            className="lg:col-span-2 bg-white rounded-[24px] p-8 md:p-12 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#E5E7EB]"
           >
-            <h2 className="font-poppins font-bold text-2xl text-solar-dark mb-2">Send Us a Message</h2>
-            <p className="text-gray-500 text-sm mb-7">Fill in the form and we&apos;ll send your message directly via WhatsApp for fastest response.</p>
-
-            {submitted ? (
-              <div className="text-center py-12">
-                <div className="text-6xl mb-5">🎉</div>
-                <h3 className="font-poppins font-bold text-2xl text-solar-dark mb-3">Message Sent!</h3>
-                <p className="text-gray-500 mb-6">Your inquiry has been sent via WhatsApp. Our team will get back to you within 30 minutes.</p>
-                <button
-                  onClick={() => { setSubmitted(false); setForm({ name: '', phone: '', email: '', location: '', bill: '', propertyType: 'Residential', message: '' }); }}
-                  className="btn-secondary"
-                >
-                  Send Another Message
-                </button>
+            <div className="flex items-center gap-4 mb-3">
+              <div className="w-12 h-12 rounded-full bg-[#E8F5EE] flex items-center justify-center shrink-0">
+                <Send size={20} className="text-[#16A34A] -ml-1" />
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-sm font-semibold text-solar-dark mb-2 font-poppins">Full Name *</label>
-                    <input type="text" name="name" required value={form.name} onChange={handleChange} placeholder="Rajesh Sharma" className="input-field" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-solar-dark mb-2 font-poppins">Phone Number *</label>
-                    <input type="tel" name="phone" required value={form.phone} onChange={handleChange} placeholder="+91 98765 43210" className="input-field" />
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-sm font-semibold text-solar-dark mb-2 font-poppins">Email Address</label>
-                    <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="rajesh@example.com" className="input-field" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-solar-dark mb-2 font-poppins">Your Location</label>
-                    <input type="text" name="location" value={form.location} onChange={handleChange} placeholder="e.g. Vijay Nagar, Indore" className="input-field" />
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-sm font-semibold text-solar-dark mb-2 font-poppins">Monthly Electricity Bill (₹)</label>
-                    <input type="number" name="bill" value={form.bill} onChange={handleChange} placeholder="e.g. 3000" className="input-field" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-solar-dark mb-2 font-poppins">Property Type</label>
-                    <select name="propertyType" value={form.propertyType} onChange={handleChange} className="input-field">
-                      <option>Residential</option>
-                      <option>Commercial</option>
-                      <option>Industrial</option>
-                      <option>School/Hospital</option>
-                      <option>Other</option>
-                    </select>
+              <div>
+                <h2 className="font-poppins font-extrabold text-3xl text-[#111827]">Send Us a Message</h2>
+              </div>
+            </div>
+            <p className="text-[#64748B] text-base mb-10 pl-16">Fill in the form and we'll send your message directly via WhatsApp.</p>
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-bold text-[#111827] mb-2 font-poppins">Full Name *</label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <User size={18} className="text-gray-400" />
+                    </div>
+                    <input type="text" name="name" required value={form.name} onChange={handleChange} placeholder="e.g. Rajesh Sharma" className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] outline-none transition-all text-sm bg-gray-50/50 focus:bg-white" />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-solar-dark mb-2 font-poppins">Message / Requirements</label>
+                  <label className="block text-sm font-bold text-[#111827] mb-2 font-poppins">Phone Number *</label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <Phone size={18} className="text-gray-400" />
+                    </div>
+                    <input type="tel" name="phone" required value={form.phone} onChange={handleChange} placeholder="+91 98765 43210" className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] outline-none transition-all text-sm bg-gray-50/50 focus:bg-white" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-bold text-[#111827] mb-2 font-poppins">Email Address</label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <Mail size={18} className="text-gray-400" />
+                    </div>
+                    <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="e.g. rajesh@example.com" className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] outline-none transition-all text-sm bg-gray-50/50 focus:bg-white" />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-bold text-[#111827] mb-2 font-poppins">Your Location</label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <MapPin size={18} className="text-gray-400" />
+                    </div>
+                    <input type="text" name="location" value={form.location} onChange={handleChange} placeholder="e.g. Vijay Nagar, Indore" className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] outline-none transition-all text-sm bg-gray-50/50 focus:bg-white" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-bold text-[#111827] mb-2 font-poppins">Monthly Electricity Bill (₹)</label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <IndianRupee size={18} className="text-gray-400" />
+                    </div>
+                    <input type="number" name="bill" value={form.bill} onChange={handleChange} placeholder="e.g. 3000" className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] outline-none transition-all text-sm bg-gray-50/50 focus:bg-white" />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-bold text-[#111827] mb-2 font-poppins">Property Type</label>
+                  <select name="propertyType" value={form.propertyType} onChange={handleChange} className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] outline-none transition-all text-sm bg-gray-50/50 focus:bg-white">
+                    <option>Residential</option>
+                    <option>Commercial</option>
+                    <option>Industrial</option>
+                    <option>School / Hospital</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-bold text-[#111827] mb-2 font-poppins">Message / Requirements</label>
+                <div className="relative">
+                  <div className="absolute top-4 left-0 pl-4 flex items-start pointer-events-none">
+                    <MessageCircle size={18} className="text-gray-400" />
+                  </div>
                   <textarea
                     name="message"
                     value={form.message}
                     onChange={handleChange}
                     rows={4}
                     placeholder="Tell us about your requirements, any questions, or how we can help you..."
-                    className="input-field resize-none"
+                    className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] outline-none transition-all text-sm resize-none bg-gray-50/50 focus:bg-white"
                   />
                 </div>
-                <button type="submit" className="btn-primary w-full justify-center text-base py-3.5">
-                  <Send size={18} /> Send via WhatsApp
+              </div>
+
+              <div className="pt-2">
+                <button type="submit" className="w-full bg-[#F97316] hover:bg-[#E66E00] text-white font-bold rounded-xl flex items-center justify-center gap-2 py-4 transition-colors shadow-sm">
+                  <MessageCircle size={20} /> Send via WhatsApp
                 </button>
-                <p className="text-center text-xs text-gray-400">
-                  Clicking &ldquo;Send via WhatsApp&rdquo; will open WhatsApp with your message pre-filled.
-                </p>
-              </form>
-            )}
+                <div className="flex items-center justify-center gap-1.5 mt-4 text-xs font-medium text-gray-500 text-center px-4">
+                  <Lock size={12} className="shrink-0" />
+                  <span>Clicking 'Send via WhatsApp' will open WhatsApp with your message pre-filled.</span>
+                </div>
+              </div>
+            </form>
           </motion.div>
 
-          {/* Sidebar */}
+          {/* 4. RIGHT COLUMN CARDS (Top to Bottom) */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.1 }}
+            transition={{ delay: 0.2 }}
             className="space-y-6"
           >
-            {/* Office Hours */}
-            <div className="bg-white rounded-2xl p-6 shadow-card">
-              <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 rounded-xl bg-solar-orange-tint flex items-center justify-center">
-                  <Clock size={18} className="text-solar-orange" />
+            {/* Card 1 (WhatsApp CTA) */}
+            <div className="bg-[#1A7A3C] rounded-[24px] p-8 shadow-sm relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-bl-full pointer-events-none blur-xl"></div>
+              
+              <div className="relative z-10 flex flex-col justify-between h-full">
+                <div>
+                  <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center mb-6">
+                    <MessageCircle size={24} className="text-white" />
+                  </div>
+                  <h3 className="font-poppins font-extrabold text-2xl text-white mb-2">Prefer WhatsApp?</h3>
+                  <p className="text-green-50 text-sm mb-8 font-medium">Chat directly with our solar expert and get answers in minutes.</p>
                 </div>
-                <h3 className="font-poppins font-bold text-solar-dark">Office Hours</h3>
+                
+                <a
+                  href={whatsappLink('Hello! I want to inquire about solar installation.')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white text-[#1A7A3C] font-poppins font-bold px-6 py-4 rounded-xl hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 shadow-sm relative z-10"
+                >
+                  <MessageCircle size={18} /> Start WhatsApp Chat
+                </a>
               </div>
-              <div className="space-y-3 text-sm">
+
+              {/* Phone Illustration */}
+              <div className="absolute -bottom-8 -right-8 w-40 h-40 opacity-40 pointer-events-none">
+                <Image src="/chat-illustration.png" alt="Chat" fill className="object-contain" />
+              </div>
+            </div>
+
+            {/* Card 2 (Office Hours) */}
+            <div className="bg-white rounded-[24px] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#E5E7EB]">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-full bg-[#FFF2E8] flex items-center justify-center shrink-0">
+                  <Clock size={20} className="text-[#F97316]" />
+                </div>
+                <h3 className="font-poppins font-bold text-xl text-[#111827]">Office Hours</h3>
+              </div>
+              <div className="space-y-4 text-[15px]">
                 {[
                   { day: 'Monday – Friday', time: '9:00 AM – 6:00 PM' },
                   { day: 'Saturday', time: '9:00 AM – 2:00 PM' },
-                  { day: 'Sunday', time: 'Closed' },
-                ].map(({ day, time }) => (
-                  <div key={day} className="flex justify-between">
-                    <span className="text-gray-500">{day}</span>
-                    <span className="font-semibold font-poppins text-solar-dark">{time}</span>
+                  { day: 'Sunday', time: 'Closed', highlight: true },
+                ].map(({ day, time, highlight }) => (
+                  <div key={day} className="flex justify-between items-center border-b border-gray-50 pb-3 last:border-0 last:pb-0">
+                    <span className="text-[#64748B] font-medium">{day}</span>
+                    <span className={`font-bold font-poppins ${highlight ? 'text-gray-400' : 'text-[#111827]'}`}>{time}</span>
                   </div>
                 ))}
               </div>
-              <div className="mt-5 pt-5 border-t border-gray-100 text-xs text-gray-400">
-                📱 WhatsApp is available 24/7 for urgent queries
+              <div className="mt-6 bg-[#F8FAF7] rounded-xl p-4 flex items-start gap-3 border border-[#E8F5EE]">
+                <Calendar size={18} className="text-[#16A34A] shrink-0 mt-0.5" />
+                <span className="text-xs font-semibold text-[#111827] leading-relaxed">WhatsApp is available 24/7 for urgent queries</span>
               </div>
             </div>
 
-            {/* Quick WhatsApp */}
-            <div className="bg-green-600 rounded-2xl p-6 text-white">
-              <div className="text-3xl mb-3">💬</div>
-              <h3 className="font-poppins font-bold text-lg mb-2">Prefer WhatsApp?</h3>
-              <p className="text-green-100 text-sm mb-5">Chat directly with our solar expert and get answers in minutes.</p>
-              <a
-                href={whatsappLink('Hello! I want to inquire about solar installation.')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white text-green-600 font-poppins font-bold px-5 py-3 rounded-xl hover:bg-green-50 transition-colors flex items-center justify-center gap-2 text-sm"
-              >
-                <MessageCircle size={16} /> Start WhatsApp Chat
-              </a>
-            </div>
-
-            {/* Why Contact Us */}
-            <div className="bg-white rounded-2xl p-6 shadow-card">
-              <h3 className="font-poppins font-bold text-solar-dark mb-4">Why Reach Out?</h3>
-              <ul className="space-y-3">
+            {/* Card 3 (Why Reach Out?) */}
+            <div className="bg-white rounded-[24px] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#E5E7EB]">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-full bg-[#E8F5EE] flex items-center justify-center shrink-0">
+                  <Users size={20} className="text-[#16A34A]" />
+                </div>
+                <h3 className="font-poppins font-bold text-xl text-[#111827]">Why Reach Out?</h3>
+              </div>
+              <ul className="space-y-4">
                 {[
                   'Free site survey & consultation',
                   'Instant WhatsApp quotes',
@@ -251,16 +310,63 @@ export default function ContactPage() {
                   'EMI and financing guidance',
                   'Maintenance & AMC support',
                 ].map(item => (
-                  <li key={item} className="flex items-center gap-2.5 text-sm text-gray-600">
-                    <CheckCircle size={15} className="text-solar-orange flex-shrink-0" />
+                  <li key={item} className="flex items-start gap-3 text-[15px] text-[#64748B] font-medium">
+                    <CheckCircle size={18} className="text-[#16A34A] shrink-0 mt-0.5" />
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
+
           </motion.div>
         </div>
       </section>
+
+      {/* 5. BOTTOM INFO STRIP (Full Width) */}
+      <section className="bg-[#FFF5ED] border-t border-[#F97316]/10 py-16">
+        <div className="container-custom">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 lg:divide-x lg:divide-[#F97316]/20">
+            
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left px-4">
+              <div className="w-12 h-12 rounded-full bg-white text-[#F97316] flex items-center justify-center mb-4 shadow-sm border border-[#F97316]/20">
+                <Phone size={20} />
+              </div>
+              <div className="font-bold font-poppins text-[#111827] text-lg mb-1">Call / WhatsApp</div>
+              <a href={`tel:${SITE.phone}`} className="font-bold text-[#F97316] text-xl mb-2 hover:underline">{SITE.phone}</a>
+              <div className="text-sm text-[#64748B] font-medium">Mon–Sat, 9 AM – 6 PM</div>
+            </div>
+
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left px-4">
+              <div className="w-12 h-12 rounded-full bg-white text-[#F97316] flex items-center justify-center mb-4 shadow-sm border border-[#F97316]/20">
+                <Mail size={20} />
+              </div>
+              <div className="font-bold font-poppins text-[#111827] text-lg mb-1">Email Address</div>
+              <a href={`mailto:${SITE.email}`} className="font-bold text-[#F97316] text-lg mb-2 hover:underline break-all">{SITE.email}</a>
+              <div className="text-sm text-[#64748B] font-medium">We reply within 24 hrs</div>
+            </div>
+
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left px-4">
+              <div className="w-12 h-12 rounded-full bg-white text-[#F97316] flex items-center justify-center mb-4 shadow-sm border border-[#F97316]/20">
+                <MapPin size={20} />
+              </div>
+              <div className="font-bold font-poppins text-[#111827] text-lg mb-1">Office Address</div>
+              <div className="text-sm text-[#111827] font-bold mb-2">123, Solar Street, Vijay Nagar, Indore, MP 452010</div>
+              <div className="text-sm text-[#64748B] font-medium">Visit us for consultation</div>
+            </div>
+
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left px-4">
+              <div className="w-12 h-12 rounded-full bg-white text-[#F97316] flex items-center justify-center mb-4 shadow-sm border border-[#F97316]/20">
+                <Globe size={20} />
+              </div>
+              <div className="font-bold font-poppins text-[#111827] text-lg mb-1">Service Area</div>
+              <div className="text-sm text-[#111827] font-bold mb-2">Indore & nearby areas</div>
+              <div className="text-sm text-[#64748B] font-medium">On-site visits available</div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
     </PageWrapper>
   );
 }

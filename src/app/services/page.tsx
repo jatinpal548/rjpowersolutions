@@ -5,6 +5,10 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Home, Building2, Factory, Wrench, Sparkles, Zap, ArrowRight, CheckCircle } from 'lucide-react';
 import PageWrapper from '@/components/layout/PageWrapper';
+import PageHero from '@/components/ui/PageHero';
+import SectionLabel from '@/components/ui/SectionLabel';
+import ProposalCTA from '@/components/ui/ProposalCTA';
+import PremiumComponents from '@/components/services/PremiumComponents';
 import { SERVICES, whatsappLink } from '@/lib/constants';
 
 
@@ -17,30 +21,20 @@ export default function ServicesPage() {
   return (
     <PageWrapper>
       {/* Hero */}
-      <section className="pt-32 pb-16 bg-gradient-blue text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-solar-orange/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
-        <div className="container-custom text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-          >
-            <div className="badge bg-white/10 text-white border-white/20 mb-6">Our Services</div>
-            <h1 className="section-title text-white mb-4">Complete Solar Solutions<br /><span className="text-solar-orange">Under One Roof</span></h1>
-            <p className="text-blue-100 max-w-xl mx-auto text-lg">
-              From residential rooftops to industrial plants — we handle everything end-to-end with certified expertise.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        badgeText="Our Services"
+        titlePart1="Complete Solar Solutions"
+        titleKeyword="Under One Roof"
+        subtitle="From residential rooftops to industrial plants — we handle everything end-to-end with certified expertise."
+        keywordColor="orange"
+      />
 
       {/* Services Grid */}
-      <section className="section-padding bg-solar-grey">
+      <section className="py-20 lg:py-28 bg-brand-bg">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {SERVICES.map((service, i) => {
               const Icon = ICON_MAP[service.icon] || Home;
-              const isBlue = service.color === 'blue';
               return (
                 <motion.div
                   key={service.slug}
@@ -48,41 +42,45 @@ export default function ServicesPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="bg-white rounded-2xl overflow-hidden shadow-card card-hover group flex flex-col"
+                  className="bg-white rounded-[24px] overflow-hidden shadow-[0_4px_20px_rgb(0,0,0,0.05)] hover:shadow-[0_12px_30px_rgb(0,0,0,0.1)] hover:-translate-y-2 transition-all duration-300 flex flex-col group border border-[#E5E7EB]"
                 >
-                  {/* Header */}
-                  <div className={`p-7 ${isBlue ? 'bg-gradient-blue' : 'bg-gradient-cta'}`}>
-                    <div className="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center mb-4">
-                      <Icon size={28} className="text-white" />
+                  <div className="p-8 flex flex-col flex-grow">
+                    {/* Header */}
+                    <div className="flex items-center gap-5 mb-6">
+                      <div className="w-16 h-16 rounded-[16px] bg-gradient-to-br from-[#E8F5EE] to-[#DCFCE7] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-sm border border-[#16A34A]/10">
+                        <Icon size={30} className="text-[#16A34A]" />
+                      </div>
+                      <h2 className="font-poppins font-bold text-[#111827] text-2xl group-hover:text-[#16A34A] transition-colors">{service.title}</h2>
                     </div>
-                    <h2 className="font-poppins font-bold text-white text-xl">{service.title}</h2>
-                  </div>
-                  {/* Body */}
-                  <div className="p-7 flex flex-col flex-grow">
-                    <p className="text-gray-600 text-sm mb-5 leading-relaxed">{service.desc}</p>
-                    <ul className="space-y-2.5 mb-6 flex-grow">
-                      {service.benefits.slice(0, 4).map((b) => (
-                        <li key={b} className="flex items-start gap-2.5 text-sm text-gray-600">
-                          <CheckCircle size={15} className="text-solar-orange flex-shrink-0 mt-0.5" />
-                          {b}
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="flex gap-3 mt-auto">
-                      <Link
-                        href={`/services/${service.slug}`}
-                        className="btn-primary text-sm py-2.5 px-4 flex-1 justify-center"
-                      >
-                        Learn More <ArrowRight size={14} />
-                      </Link>
-                      <a
-                        href={whatsappLink(`Hello! I am interested in ${service.title}. Can you please provide details?`)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-secondary text-sm py-2.5 px-4 justify-center"
-                      >
-                        Enquire
-                      </a>
+                    {/* Body */}
+                    <div className="flex flex-col flex-grow">
+                      <p className="text-[#64748B] text-[15px] mb-8 leading-relaxed font-medium">{service.desc}</p>
+                      <ul className="space-y-4 mb-10 flex-grow">
+                        {service.benefits.slice(0, 4).map((b) => (
+                          <li key={b} className="flex items-start gap-3 text-[15px] text-[#475569] font-medium">
+                            <div className="mt-0.5 w-5 h-5 rounded-full bg-[#E8F5EE] flex items-center justify-center flex-shrink-0">
+                              <CheckCircle size={14} className="text-[#16A34A]" />
+                            </div>
+                            <span className="leading-tight pt-0.5">{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="flex gap-3 mt-auto">
+                        <Link
+                          href={`/services/${service.slug}`}
+                          className="bg-white text-[#111827] font-bold py-3.5 px-4 flex-1 rounded-xl flex items-center justify-center whitespace-nowrap border border-[#E5E7EB] hover:bg-gray-50 hover:border-gray-300 transition-all shadow-sm text-[15px]"
+                        >
+                          Learn More
+                        </Link>
+                        <a
+                          href={whatsappLink(`Hello! I am interested in ${service.title}. Can you please provide details?`)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-gradient-to-r from-[#F97316] to-[#E07B2A] text-white font-bold py-3.5 px-4 flex-1 rounded-xl flex items-center justify-center whitespace-nowrap hover:shadow-lg hover:-translate-y-0.5 transition-all text-[15px]"
+                        >
+                          Enquire
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </motion.div>
@@ -92,44 +90,34 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      {/* Premium Components Section */}
+      <PremiumComponents />
+
       {/* Process */}
-      <section className="section-padding bg-white">
+      <section className="py-20 lg:py-28 bg-white">
         <div className="container-custom">
-          <div className="text-center mb-12">
-            <div className="badge mb-4">Our Process</div>
-            <h2 className="section-title">How We Work —<br /><span className="gradient-text-blue">Simple, Fast, Professional</span></h2>
+          <div className="text-center mb-16">
+            <div className="mb-4">
+              <SectionLabel text="Our Process" />
+            </div>
+            <h2 className="section-title text-[#1A1A1A]">How We Work —<br /><span className="text-brand-green">Simple, Fast, Professional</span></h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 relative">
             {['Free Site Survey', 'Custom Design', 'Subsidy Help', 'Installation', 'Net Metering', 'Ongoing Support'].map((step, i) => (
-              <div key={step} className="text-center relative">
-                <div className="w-14 h-14 rounded-full bg-solar-orange text-white font-poppins font-bold text-lg flex items-center justify-center mx-auto mb-3 shadow-solar">
+              <div key={step} className="text-center relative z-10">
+                <div className="w-14 h-14 rounded-full bg-brand-green text-white font-poppins font-bold text-lg flex items-center justify-center mx-auto mb-4 shadow-sm border-[4px] border-white">
                   {i + 1}
                 </div>
-                <p className="text-sm font-semibold font-poppins text-solar-dark">{step}</p>
-                {i < 5 && (
-                  <div className="hidden lg:block absolute top-7 left-3/4 w-1/2 h-0.5 bg-solar-orange/30" />
-                )}
+                <p className="text-sm font-semibold font-poppins text-gray-800">{step}</p>
               </div>
             ))}
+            {/* Horizontal Line connecting steps */}
+            <div className="hidden lg:block absolute top-7 left-[8%] right-[8%] h-0.5 bg-gray-200 z-0" />
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16 bg-gradient-cta text-white text-center">
-        <div className="container-custom">
-          <h2 className="font-poppins font-bold text-3xl mb-4">Not Sure Which Service You Need?</h2>
-          <p className="text-orange-100 mb-8 text-lg max-w-xl mx-auto">Contact us and our solar experts will guide you to the perfect solution for your property.</p>
-          <a
-            href={whatsappLink('Hello! I need help choosing the right solar service for my property.')}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-white text-solar-orange font-poppins font-bold px-8 py-4 rounded-xl hover:bg-orange-50 transition-all shadow-lg inline-flex items-center gap-2"
-          >
-            Talk to an Expert <ArrowRight size={18} />
-          </a>
-        </div>
-      </section>
+      <ProposalCTA customMessage="Hello! I need help choosing the right solar service for my property." />
     </PageWrapper>
   );
 }

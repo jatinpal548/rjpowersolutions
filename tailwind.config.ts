@@ -9,6 +9,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        brand: {
+          green: '#1A7A3C',
+          orange: '#E07B2A',
+          bg: '#FAF8F5',
+          'green-light': '#E8F5EE',
+        },
         solar: {
           orange: '#F05A28',
           'orange-dark': '#C4461B',
