@@ -190,6 +190,56 @@ export default function HomePage() {
   const [activeProject, setActiveProject] = useState(1);
   const statsRef = useRef<HTMLDivElement>(null);
 
+  // Swipe Handlers for Services Carousel
+  const [serviceTouchStart, setServiceTouchStart] = useState<number | null>(null);
+  const [serviceTouchEnd, setServiceTouchEnd] = useState<number | null>(null);
+
+  // Swipe Handlers for Projects Carousel
+  const [projectTouchStart, setProjectTouchStart] = useState<number | null>(null);
+  const [projectTouchEnd, setProjectTouchEnd] = useState<number | null>(null);
+
+  const minSwipeDistance = 50;
+
+  const onServiceTouchStart = (e: React.TouchEvent) => {
+    setServiceTouchEnd(null);
+    setServiceTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onServiceTouchMove = (e: React.TouchEvent) => {
+    setServiceTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onServiceTouchEnd = () => {
+    if (!serviceTouchStart || !serviceTouchEnd) return;
+    const distance = serviceTouchStart - serviceTouchEnd;
+    if (distance > minSwipeDistance) {
+      setActiveService((prev) => (prev === FEATURED_SERVICES.length - 1 ? 0 : prev + 1));
+    }
+    if (distance < -minSwipeDistance) {
+      setActiveService((prev) => (prev === 0 ? FEATURED_SERVICES.length - 1 : prev - 1));
+    }
+  };
+
+  const onProjectTouchStart = (e: React.TouchEvent) => {
+    setProjectTouchEnd(null);
+    setProjectTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onProjectTouchMove = (e: React.TouchEvent) => {
+    setProjectTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onProjectTouchEnd = () => {
+    if (!projectTouchStart || !projectTouchEnd) return;
+    const distance = projectTouchStart - projectTouchEnd;
+    if (distance > minSwipeDistance) {
+      setActiveProject((prev) => (prev === PROJECTS.length - 1 ? 0 : prev + 1));
+    }
+    if (distance < -minSwipeDistance) {
+      setActiveProject((prev) => (prev === 0 ? PROJECTS.length - 1 : prev - 1));
+    }
+  };
+
   const c500 = useCounter(500, 2000, statsVisible);
   const c5 = useCounter(5, 1500, statsVisible);
   const c100 = useCounter(100, 2000, statsVisible);
@@ -602,7 +652,12 @@ export default function HomePage() {
           </div>
 
           {/* Top Row: Featured Services (Mobile Carousel) */}
-          <div className="lg:hidden mb-8 w-full overflow-hidden relative">
+          <div 
+            className="lg:hidden mb-8 w-full overflow-hidden relative"
+            onTouchStart={onServiceTouchStart}
+            onTouchMove={onServiceTouchMove}
+            onTouchEnd={onServiceTouchEnd}
+          >
             <div 
               className="flex transition-transform duration-500 ease-out will-change-transform gap-4"
               style={{ transform: `translateX(calc(-${activeService * 100}% - ${activeService * 16}px))` }}
@@ -964,7 +1019,12 @@ export default function HomePage() {
           </div>
 
           {/* Projects Mobile Carousel */}
-          <div className="lg:hidden w-full overflow-hidden relative">
+          <div 
+            className="lg:hidden w-full overflow-hidden relative"
+            onTouchStart={onProjectTouchStart}
+            onTouchMove={onProjectTouchMove}
+            onTouchEnd={onProjectTouchEnd}
+          >
             <div 
               className="flex transition-transform duration-500 ease-out will-change-transform gap-4"
               style={{ transform: `translateX(calc(-${activeProject * 100}% - ${activeProject * 16}px))` }}
