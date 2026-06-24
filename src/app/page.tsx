@@ -6,8 +6,8 @@ import Link from 'next/link';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import {
   Sun, Home, Building2, Factory, Wrench, Sparkles, Zap,
-  CheckCircle, Star, ChevronDown, ArrowRight, Phone, MessageCircle,
-  TrendingUp, Shield, Clock, Award, HeadphonesIcon,
+  CheckCircle, Star, ChevronDown, ArrowRight, ArrowLeft, Phone, MessageCircle,
+  TrendingUp, Shield, Clock, Award, HeadphonesIcon, Users,
   Calculator, ChevronRight, Quote, Landmark, IndianRupee, Percent,
   MapPin, Mail
 } from 'lucide-react';
@@ -43,14 +43,112 @@ const ICON_MAP: Record<string, React.ComponentType<{ size?: number; className?: 
 };
 
 const WHY_CHOOSE = [
-  { icon: Award, title: 'Expert Installation', desc: 'Certified and experienced solar technicians with 5+ years of hands-on experience.' },
-  { icon: Shield, title: 'Premium Components', desc: 'Tier-1 solar panels and inverters from globally trusted brands for lasting performance.' },
-  { icon: TrendingUp, title: 'Maximum Savings', desc: 'Cut electricity bills by up to 90% with perfectly sized solar systems.' },
-  { icon: CheckCircle, title: 'Subsidy Support', desc: 'Complete assistance with PM Surya Ghar subsidy — up to ₹78,000 benefit.' },
-  { icon: Sun, title: 'End-to-End Service', desc: 'Survey → Design → Installation → Net Metering → Maintenance, all under one roof.' },
-  { icon: HeadphonesIcon, title: 'Dedicated Support', desc: 'Fast, responsive after-sales support and AMC plans to protect your investment.' },
+  { icon: Award, title: 'Expert Installation', desc: 'Certified technicians with 5+ years experience.' },
+  { icon: Shield, title: 'Premium Components', desc: 'Tier-1 solar panels & inverters for lasting performance.' },
+  { icon: TrendingUp, title: 'Maximum Savings', desc: 'Cut electricity bills by up to 90% with perfectly sized systems.' },
+  { icon: CheckCircle, title: 'Subsidy Support', desc: 'Complete assistance with PM Surya Ghar subsidy up to ₹78,000.' },
+  { icon: Sun, title: 'End-to-End Service', desc: 'Survey, Design, Installation, Net Metering & Maintenance.' },
+  { icon: HeadphonesIcon, title: 'Dedicated Support', desc: 'Fast, responsive after-sales support & AMC plans.' },
 ];
 
+const FEATURED_SERVICES = [
+  {
+    id: 'residential',
+    title: 'Residential Solar',
+    desc: 'Perfect solar solutions for homes and villas.',
+    image: '/services/residential.png',
+    icon: Home,
+    badgeText: 'Homes & Villas',
+    highlightIcon: Zap,
+    highlightTitle: 'Save up to 90%',
+    highlightSubtitle: 'ON ELECTRICITY BILLS',
+    tagIcon: CheckCircle,
+    tagText: '5kW - 20kW Range',
+    link: '/services/residential',
+    highlightBg: 'bg-[#FEF2ED]',
+    highlightIconColor: 'text-[#F97316]',
+  },
+  {
+    id: 'commercial',
+    title: 'Commercial Solar',
+    desc: 'Cut operational costs for offices, malls & shops.',
+    image: '/services/commercial.png',
+    icon: Building2,
+    badgeText: 'Offices & Buildings',
+    highlightIcon: TrendingUp,
+    highlightTitle: 'Reduce Costs',
+    highlightSubtitle: 'BY UP TO 60%',
+    tagIcon: CheckCircle,
+    tagText: '20kW - 500kW Range',
+    link: '/services/commercial',
+    highlightBg: 'bg-[#EFF6FF]',
+    highlightIconColor: 'text-[#3B82F6]',
+  },
+  {
+    id: 'industrial',
+    title: 'Industrial Solar',
+    desc: 'Massive savings for factories and warehouses.',
+    image: '/services/industrial.png',
+    icon: Factory,
+    badgeText: 'Factories & Warehouses',
+    highlightIcon: Award,
+    highlightTitle: 'High Savings',
+    highlightSubtitle: 'MAXIMUM ROI',
+    tagIcon: CheckCircle,
+    tagText: '500kW+ Range',
+    link: '/services/industrial',
+    highlightBg: 'bg-[#FEFCE8]',
+    highlightIconColor: 'text-[#EAB308]',
+  },
+  {
+    id: 'maintenance',
+    title: 'Solar Maintenance',
+    desc: 'Keep your system performing at peak efficiency with expert checks.',
+    image: '/services/maintenance.png',
+    icon: Wrench,
+    badgeText: 'Max Performance',
+    highlightIcon: Shield,
+    highlightTitle: 'Peak Efficiency',
+    highlightSubtitle: 'REGULAR CHECKS',
+    tagIcon: CheckCircle,
+    tagText: 'Expert Service',
+    link: '/services/maintenance',
+    highlightBg: 'bg-[#EFF6FF]',
+    highlightIconColor: 'text-[#3B82F6]',
+  },
+  {
+    id: 'cleaning',
+    title: 'Panel Cleaning',
+    desc: 'Boost output by 20-30% with professional deep cleaning services.',
+    image: '/services/cleaning.png',
+    icon: Sparkles,
+    badgeText: 'Higher Output',
+    highlightIcon: Sparkles,
+    highlightTitle: 'Boost Output',
+    highlightSubtitle: 'BY 20-30%',
+    tagIcon: CheckCircle,
+    tagText: 'Deep Cleaning',
+    link: '/services/cleaning',
+    highlightBg: 'bg-[#FEF2ED]',
+    highlightIconColor: 'text-[#F97316]',
+  },
+  {
+    id: 'net-metering',
+    title: 'Net Metering',
+    desc: 'Sell surplus power back to the grid and earn monetary credit.',
+    image: '/services/net_metering.png',
+    icon: Zap,
+    badgeText: 'Earn from Surplus',
+    highlightIcon: Zap,
+    highlightTitle: 'Earn Credits',
+    highlightSubtitle: 'SELL SURPLUS POWER',
+    tagIcon: CheckCircle,
+    tagText: 'Grid Connected',
+    link: '/services/net-metering',
+    highlightBg: 'bg-[#E8F5EE]',
+    highlightIconColor: 'text-[#16A34A]',
+  }
+];
 
 
 const BrandLogos = [
@@ -88,6 +186,8 @@ export default function HomePage() {
   const [billAmount, setBillAmount] = useState('');
   const [propertyType, setPropertyType] = useState('Residential');
   const [calcResult, setCalcResult] = useState<null | { size: string; savings: string; payback: string }>(null);
+  const [activeService, setActiveService] = useState(1);
+  const [activeProject, setActiveProject] = useState(1);
   const statsRef = useRef<HTMLDivElement>(null);
 
   const c500 = useCounter(500, 2000, statsVisible);
@@ -122,247 +222,238 @@ export default function HomePage() {
 
   return (
     <PageWrapper>
-      <section className="relative min-h-[85vh] flex flex-col items-center justify-center pt-24 pb-20 lg:pt-32 lg:pb-28 bg-[#F8FAF7] overflow-hidden">
-        {/* Soft Gradients */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#E8F5EE] rounded-bl-full opacity-60 pointer-events-none blur-3xl"></div>
-        <div className="absolute top-20 left-10 w-72 h-72 bg-[#FEF2ED] rounded-full opacity-50 pointer-events-none blur-3xl"></div>
+      <section className="relative flex flex-col justify-start md:justify-center pt-24 md:pt-32 pb-0 md:pb-32 lg:pb-40 bg-white md:bg-gray-50">
+        {/* Desktop Background Image */}
+        <div className="absolute inset-0 z-0 overflow-hidden hidden md:block">
+          <Image
+            src="/hero-bg-img.png"
+            alt="Solar Installation"
+            fill
+            className="object-cover object-[70%_center] lg:object-center"
+            priority
+          />
+          {/* Gradient Overlay for text readability on the left */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent w-full md:w-[65%]"></div>
+        </div>
 
-        <div className="relative container-custom z-20 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+        <div className="relative container-custom z-20 w-full mt-2 md:mt-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center">
 
             {/* Left Column (Content) */}
-            <div className="max-w-3xl">
+            <div className="max-w-[800px] relative z-10 w-full md:w-[120%] lg:w-[130%]">
               {/* Top Badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: 'easeOut' }}
-                className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-100 mb-6"
-              >
-                <Zap size={16} className="text-[#16A34A]" />
-                <span className="text-[#16A34A] font-bold text-sm tracking-wide">India's Trusted Solar EPC Company</span>
-              </motion.div>
+              <div className="flex md:block justify-center w-full md:w-auto">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease: 'easeOut' }}
+                  className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-[0_2px_10px_rgb(0,0,0,0.05)] border border-[#16A34A]/20 mb-6 md:mb-8"
+                >
+                  <Zap size={14} className="text-[#16A34A] fill-[#16A34A]" />
+                  <span className="text-[#16A34A] font-bold text-[11px] md:text-sm tracking-wide">India's Trusted Solar EPC Company</span>
+                </motion.div>
+              </div>
 
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
-                className="text-4xl lg:text-[3.8rem] font-extrabold text-[#111827] mb-6 tracking-tight leading-[1.1] font-poppins drop-shadow-sm"
+                className="text-center md:text-left text-4xl sm:text-5xl lg:text-[4rem] font-extrabold text-[#111827] mb-4 md:mb-6 tracking-tight leading-[1.1] font-poppins md:whitespace-nowrap"
               >
-                <span className="block whitespace-nowrap">Power Your Future</span>
-                <span className="block mt-1">
-                  with <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F97316] to-[#E66E00]">Smart Solar Energy</span>
-                </span>
+                Power Your Future<br />
+                with <span className="text-[#F97316]">Solar Energy</span>
               </motion.h1>
 
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-                className="text-[#64748B] text-lg md:text-xl font-medium mb-10 leading-relaxed max-w-2xl"
+                className="text-center md:text-left mx-auto md:mx-0 text-[#64748B] text-[15px] sm:text-lg lg:text-xl font-medium mb-8 md:mb-10 leading-relaxed max-w-lg"
               >
-                Save up to 90% on electricity bills with high-efficiency solar solutions for homes, businesses and industries.
+                Save up to 90% on electricity bills with<br className="hidden sm:block" />
+                high-efficiency solar solutions for<br className="hidden sm:block" />
+                homes, businesses and industries.
               </motion.p>
 
-              {/* Buttons */}
+              {/* Desktop Buttons */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
-                className="flex flex-col sm:flex-row items-center gap-4 mb-10 w-full sm:w-auto"
+                className="hidden md:flex flex-col sm:flex-row items-center gap-4 mb-14 w-full sm:w-auto"
               >
-                <a 
-                  href={heroWhatsApp} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="bg-gradient-to-r from-[#F97316] to-[#E07B2A] text-white font-bold py-4 px-8 rounded-xl flex items-center justify-center gap-2 hover:shadow-lg hover:-translate-y-0.5 transition-all w-full sm:w-auto shadow-sm text-base group"
+                <a
+                  href={heroWhatsApp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#F97316] hover:bg-[#E66E00] text-white font-bold py-4 px-8 rounded-xl flex items-center justify-center gap-2 transition-all w-full sm:w-auto shadow-md text-base group"
                 >
-                  <MessageCircle size={18} />
-                  Get Free Consultation
-                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                  <MessageCircle size={20} className="font-normal" />
+                  Get Free Consultation &rarr;
                 </a>
-                <Link 
-                  href="/calculator" 
-                  className="bg-white text-[#111827] font-bold py-4 px-8 rounded-xl flex items-center justify-center gap-2 border border-[#E5E7EB] hover:bg-gray-50 hover:border-gray-300 transition-all shadow-sm w-full sm:w-auto text-base"
+                <Link
+                  href="/calculator"
+                  className="bg-white text-[#111827] font-bold py-4 px-8 rounded-xl flex items-center justify-center gap-2 shadow-sm hover:bg-gray-50 transition-all w-full sm:w-auto text-base border border-gray-200"
                 >
-                  <Calculator size={18} />
+                  <Calculator size={20} />
                   Calculate Savings
                 </Link>
               </motion.div>
 
-              {/* Trust badges - Single Line exactly as requested */}
+              {/* Mobile Buttons */}
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-                className="flex flex-wrap lg:flex-nowrap items-center gap-3 w-full"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
+                className="flex md:hidden items-center gap-3 w-full mb-8"
               >
-                {[
-                  'Free Site Survey',
-                  'Gov. Subsidy Assistance',
-                  '25-Year Warranty',
-                  '500+ Happy Customers'
-                ].map(text => (
-                  <div key={text} className="flex items-center gap-2 bg-white px-3 py-2 md:px-4 md:py-2.5 rounded-full shadow-sm border border-gray-100 text-[#111827] text-xs md:text-sm font-semibold whitespace-nowrap">
-                    <CheckCircle size={14} className="text-[#16A34A] shrink-0" strokeWidth={3} />
-                    {text}
-                  </div>
-                ))}
+                <a href={heroWhatsApp} className="flex-1 bg-[#F97316] text-white font-bold py-3.5 px-2 rounded-xl flex items-center justify-center gap-1.5 shadow-md text-[13px] leading-tight text-center">
+                  <MessageCircle size={14} /> Get Free Quote &rarr;
+                </a>
+                <Link href="/calculator" className="flex-1 bg-white text-[#111827] font-bold py-3.5 px-2 rounded-xl flex items-center justify-center gap-1.5 shadow-sm border border-gray-200 text-[13px] leading-tight text-center">
+                  <Calculator size={14} /> Calculate Savings &rarr;
+                </Link>
+              </motion.div>
+
+              {/* Mobile Stats Box */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
+                className="md:hidden w-full mb-6 bg-white rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.05)] border border-gray-100 px-2 py-5"
+              >
+                <div className="grid grid-cols-4 gap-1 divide-x divide-gray-100">
+                  {[
+                    { value: '500+', label: 'Installations', icon: Sun },
+                    { value: '25+', label: 'Years Experience', icon: Users },
+                    { value: '100%', label: 'Quality Assurance', icon: Shield },
+                    { value: '500+', label: 'Happy Customers', icon: Star },
+                  ].map((stat, i) => (
+                    <div key={i} className="flex flex-col items-center text-center px-1">
+                      <div className="w-8 h-8 rounded-full bg-[#E8F5EE] flex items-center justify-center mb-2">
+                        <stat.icon size={16} className="text-[#16A34A]" strokeWidth={2} />
+                      </div>
+                      <div className="text-sm font-poppins font-extrabold text-[#16A34A] leading-tight mb-0.5">{stat.value}</div>
+                      <div className="text-[9px] font-bold text-[#64748B] leading-tight mt-1">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Mobile Hero Image */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5, ease: 'easeOut' }}
+                className="relative w-full h-[220px] md:hidden rounded-2xl overflow-hidden mb-8 shadow-sm"
+              >
+                <Image src="/hero-bg-mobile.png" alt="Solar Installation" fill className="object-cover object-center" priority />
+                <motion.div animate={{ y: [-2, 2, -2] }} transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }} className="absolute top-[20%] left-[5%] bg-white/95 backdrop-blur-md rounded-lg px-2 py-1 text-[9px] font-bold text-[#111827] flex items-center gap-1 shadow-sm border border-gray-100">
+                  <Home size={10} className="text-[#16A34A]" /> Residential
+                </motion.div>
+                <motion.div animate={{ y: [-2, 2, -2] }} transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }} className="absolute top-[10%] left-[45%] -translate-x-1/2 bg-white/95 backdrop-blur-md rounded-lg px-2 py-1 text-[9px] font-bold text-[#111827] flex items-center gap-1 shadow-sm border border-gray-100">
+                  <Building2 size={10} className="text-[#16A34A]" /> Commercial
+                </motion.div>
+                <motion.div animate={{ y: [-2, 2, -2] }} transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut", delay: 2 }} className="absolute bottom-[20%] right-[5%] bg-white/95 backdrop-blur-md rounded-lg px-2 py-1 text-[9px] font-bold text-[#111827] flex items-center gap-1 shadow-sm border border-gray-100">
+                  <Factory size={10} className="text-[#16A34A]" /> Industrial
+                </motion.div>
               </motion.div>
             </div>
 
-            {/* Right Column (3D House Illustration) */}
-            <div className="relative w-full h-[350px] md:h-[400px] lg:h-[700px] flex items-center justify-center mt-8 lg:mt-0">
+            {/* Right Column (Empty to let background show, but has floating cards) */}
+            <div className="relative w-full h-[300px] lg:h-[500px] hidden md:block pointer-events-none">
+              {/* Floating Cards */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1, ease: "easeOut" }}
-                className="relative w-full max-w-[750px] lg:scale-110 aspect-square"
+                animate={{ y: [0, -10, 0] }}
+                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+                className="absolute top-10 right-0 bg-white px-5 py-3.5 rounded-2xl shadow-[0_10px_40px_rgb(0,0,0,0.1)] flex items-center gap-4 z-20 border border-white/50"
               >
-                {/* Subtle Sun Glow */}
-                <div className="absolute top-[10%] right-[10%] w-32 h-32 bg-gradient-to-br from-[#FDE047] to-[#F97316] rounded-full blur-xl opacity-60 shadow-[0_0_50px_rgba(249,115,22,0.3)]"></div>
+                <div className="w-10 h-10 rounded-full bg-[#E8F5EE] flex items-center justify-center shrink-0">
+                  <IndianRupee className="w-5 h-5 text-[#16A34A]" />
+                </div>
+                <div>
+                  <div className="font-extrabold text-[#111827] font-poppins text-lg">₹35,000/month</div>
+                  <div className="text-xs text-[#64748B] font-bold">Saved on Electricity</div>
+                </div>
+              </motion.div>
 
-                {/* Floating Building */}
-                <motion.div
-                  animate={{ y: [-10, 10, -10] }}
-                  transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-                  className="relative w-full h-full z-10"
-                >
-                  <Image
-                    src="/hero-3d-commercial.png"
-                    alt="Premium 3D Solar Home"
-                    fill
-                    className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.15)]"
-                    priority
-                  />
-                  {/* Decorative tiny floating elements */}
-                  <motion.div animate={{ y: [-5, 5, -5] }} transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 1 }} className="absolute top-[25%] left-[5%]">
-                    <Sun className="text-[#F97316] w-5 h-5 opacity-70" />
-                  </motion.div>
-                  <motion.div animate={{ y: [-8, 8, -8] }} transition={{ repeat: Infinity, duration: 6, ease: "easeInOut", delay: 0.5 }} className="absolute bottom-[35%] right-[0%]">
-                    <Zap className="text-[#16A34A] w-5 h-5 opacity-70" />
-                  </motion.div>
-                </motion.div>
-
-                {/* Floating Glassmorphism Cards */}
-                <motion.div 
-                  animate={{ y: [0, -15, 0] }} 
-                  transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-                  className="absolute top-2 right-0 md:top-20 bg-white/90 backdrop-blur-md px-3 py-2 md:px-5 md:py-4 rounded-xl md:rounded-2xl shadow-xl border border-white/50 flex items-center gap-3 md:gap-4 z-20"
-                >
-                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#E8F5EE] flex items-center justify-center shrink-0">
-                    <IndianRupee className="w-4 h-4 md:w-5 md:h-5 text-[#16A34A]" />
-                  </div>
-                  <div>
-                    <div className="font-bold text-[#111827] font-poppins leading-tight text-sm md:text-base">₹35,000/month</div>
-                    <div className="text-[10px] md:text-xs text-[#64748B] font-medium mt-0.5">Saved on Electricity</div>
-                  </div>
-                </motion.div>
-
-                <motion.div 
-                  animate={{ y: [0, 15, 0] }} 
-                  transition={{ repeat: Infinity, duration: 6, ease: "easeInOut", delay: 1 }}
-                  className="absolute bottom-20 right-0 md:bottom-40 md:right-10 bg-white/90 backdrop-blur-md px-3 py-2 md:px-5 md:py-4 rounded-xl md:rounded-2xl shadow-xl border border-white/50 flex items-center gap-3 md:gap-4 z-20"
-                >
-                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#E8F5EE] flex items-center justify-center shrink-0">
-                    <TrendingUp className="w-4 h-4 md:w-5 md:h-5 text-[#16A34A]" />
-                  </div>
-                  <div>
-                    <div className="text-[10px] md:text-xs text-[#64748B] font-medium mb-0.5">ROI In</div>
-                    <div className="font-bold text-[#111827] font-poppins leading-tight text-sm md:text-base">3.8 Years</div>
-                  </div>
-                </motion.div>
-
-                <motion.div 
-                  animate={{ y: [-10, 10, -10] }} 
-                  transition={{ repeat: Infinity, duration: 5.5, ease: "easeInOut", delay: 2 }}
-                  className="absolute bottom-6 left-0 md:bottom-28 md:left-10 bg-white/90 backdrop-blur-md px-3 py-2 md:px-5 md:py-4 rounded-xl md:rounded-2xl shadow-xl border border-white/50 flex items-center gap-3 md:gap-4 z-20"
-                >
-                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#E8F5EE] flex items-center justify-center shrink-0">
-                    <Factory className="w-4 h-4 md:w-5 md:h-5 text-[#16A34A]" />
-                  </div>
-                  <div>
-                    <div className="text-[10px] md:text-xs text-[#64748B] font-medium mb-0.5">CO₂ Reduced</div>
-                    <div className="font-bold text-[#111827] font-poppins leading-tight text-sm md:text-base">18 Tons/Year</div>
-                  </div>
-                </motion.div>
-
-                {/* Soft Shadow Platform */}
-                <div className="absolute bottom-[5%] left-1/2 -translate-x-1/2 w-[70%] h-[20px] bg-black/[0.08] rounded-[100%] blur-xl z-0"></div>
+              <motion.div
+                animate={{ y: [0, 10, 0] }}
+                transition={{ repeat: Infinity, duration: 6, ease: "easeInOut", delay: 1 }}
+                className="absolute top-44 right-20 bg-white px-5 py-3.5 rounded-2xl shadow-[0_10px_40px_rgb(0,0,0,0.1)] flex items-center gap-4 z-20 border border-white/50"
+              >
+                <div className="w-10 h-10 rounded-full bg-[#E8F5EE] flex items-center justify-center shrink-0">
+                  <TrendingUp className="w-5 h-5 text-[#16A34A]" />
+                </div>
+                <div>
+                  <div className="text-xs text-[#64748B] font-bold">ROI in</div>
+                  <div className="font-extrabold text-[#111827] font-poppins text-lg">3.8 Years</div>
+                </div>
               </motion.div>
             </div>
 
           </div>
         </div>
 
-        {/* Floating Stats Bar */}
+
+
+        {/* Feature List (Desktop Only) */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
+          className="absolute bottom-28 lg:bottom-24 left-0 z-30 w-full pointer-events-none hidden md:block"
+        >
+          <div className="container-custom flex justify-start">
+            <div className="bg-white rounded-r-2xl lg:rounded-2xl -ml-4 lg:ml-0 shadow-[0_8px_30px_rgb(0,0,0,0.06)] px-6 lg:px-8 py-5 inline-flex flex-wrap lg:flex-nowrap items-center gap-6 lg:gap-10 border border-gray-100 pointer-events-auto">
+              {[
+                { text: 'Free Site Survey', icon: MapPin },
+                { text: 'Gov. Subsidy Assistance', icon: Shield },
+                { text: '25-Year Warranty', icon: CheckCircle },
+                { text: '500+ Happy Customers', icon: CheckCircle }
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-2.5 text-[#111827] text-sm font-bold whitespace-nowrap">
+                  <item.icon size={20} className="text-[#16A34A]" strokeWidth={2.5} />
+                  {item.text}
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Floating Stats Bar (Desktop) */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
-          className="relative lg:absolute bottom-0 left-0 right-0 z-30 lg:translate-y-0 px-4 mt-8 lg:mt-0 w-full"
+          transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
+          className="absolute bottom-0 left-0 right-0 z-30 translate-y-1/2 px-4 w-full hidden md:block"
         >
           <div className="container-custom">
-            <div className="bg-white/90 backdrop-blur-xl rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#E5E7EB] overflow-hidden">
-
-              {/* Desktop View: Static Row */}
-              <div className="hidden lg:flex p-10 flex-row justify-between items-center gap-4 divide-x divide-gray-100/50">
+            <div className="bg-white rounded-[2rem] shadow-[0_10px_40px_rgb(0,0,0,0.08)] border border-[#E5E7EB] overflow-hidden">
+              <div className="flex p-8 flex-row justify-between items-center gap-4">
                 {[
                   { value: '500+', label: 'Installations', sub: 'Successfully Completed', icon: Sun },
                   { value: '5+', label: 'Years Experience', sub: 'In Solar Industry', icon: Award },
                   { value: '50+', label: 'Cities', sub: 'Serving Across MP', icon: Building2 },
                   { value: '98%', label: 'Satisfaction', sub: 'Happy Customers', icon: Star },
                 ].map((stat, i) => (
-                  <div key={i} className="flex items-start text-left gap-5 pl-8 first:pl-0 w-auto group transition-transform hover:-translate-y-1">
-                    <div className="w-14 h-14 rounded-[16px] bg-[#E8F5EE] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <div key={i} className="flex items-start text-left gap-5 group transition-transform hover:-translate-y-1">
+                    <div className="w-14 h-14 rounded-[1.2rem] bg-[#E8F5EE] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                       <stat.icon size={26} className="text-[#16A34A]" strokeWidth={1.5} />
                     </div>
                     <div>
-                      <div className="text-[28px] font-poppins font-extrabold text-[#111827] tracking-tight leading-tight">{stat.value}</div>
+                      <div className="text-[28px] font-poppins font-extrabold text-[#111827] tracking-tight leading-tight mb-0.5">{stat.value}</div>
                       <div className="text-sm font-bold text-[#64748B]">{stat.label}</div>
-                      <div className="text-xs text-gray-400 font-medium">{stat.sub}</div>
+                      <div className="text-[13px] text-[#64748B] font-medium mt-0.5">{stat.sub}</div>
                     </div>
                   </div>
                 ))}
               </div>
-
-              {/* Mobile View: Looping Marquee */}
-              <div className="flex lg:hidden overflow-hidden py-6 relative">
-                <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white/80 to-transparent z-10 pointer-events-none"></div>
-                <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white/80 to-transparent z-10 pointer-events-none"></div>
-
-                <motion.div
-                  animate={{ x: ['0%', '-50%'] }}
-                  transition={{ repeat: Infinity, ease: 'linear', duration: 15 }}
-                  className="flex items-center gap-10 px-4 whitespace-nowrap w-max"
-                >
-                  {[
-                    { value: '500+', label: 'Installations', sub: 'Successfully Completed', icon: Sun },
-                    { value: '5+', label: 'Years Exp.', sub: 'In Solar Industry', icon: Award },
-                    { value: '50+', label: 'Cities', sub: 'Serving Across MP', icon: Building2 },
-                    { value: '98%', label: 'Satisfaction', sub: 'Happy Customers', icon: Star },
-                    { value: '500+', label: 'Installations', sub: 'Successfully Completed', icon: Sun },
-                    { value: '5+', label: 'Years Exp.', sub: 'In Solar Industry', icon: Award },
-                    { value: '50+', label: 'Cities', sub: 'Serving Across MP', icon: Building2 },
-                    { value: '98%', label: 'Satisfaction', sub: 'Happy Customers', icon: Star },
-                  ].map((stat, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0">
-                        <stat.icon size={20} className="text-green-500" strokeWidth={1.5} />
-                      </div>
-                      <div className="text-left">
-                        <div className="text-2xl font-poppins font-extrabold text-[#0A1A3A] tracking-tight leading-tight">{stat.value}</div>
-                        <div className="text-xs font-bold text-gray-800">{stat.label}</div>
-                        <div className="text-[10px] text-gray-400 font-medium">{stat.sub}</div>
-                      </div>
-                    </div>
-                  ))}
-                </motion.div>
-              </div>
-
             </div>
           </div>
         </motion.div>
+
+
       </section>
 
       {/* ─── TRUSTED BRANDS & STATS ─── */}
@@ -403,19 +494,26 @@ export default function HomePage() {
       {/* ─── WHY CHOOSE US ─── */}
       <section className="section-padding bg-white border-b border-gray-100">
         <div className="container-custom">
-          <AnimatedSection className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 bg-[#FFF2E8] text-[#E07B2A] font-semibold px-4 py-1.5 rounded-full mb-4 text-sm">
+          <AnimatedSection className="text-center mb-8 md:mb-16">
+            <div className="hidden md:inline-flex items-center gap-2 bg-[#FFF2E8] text-[#E07B2A] font-semibold px-4 py-1.5 rounded-full mb-4 text-sm">
               <Award size={16} />
               <span>Why Choose RJ Power Solutions</span>
             </div>
-            <h2 className="font-poppins font-extrabold text-4xl md:text-5xl text-[#111827] leading-tight">
+            
+            <div className="flex md:hidden items-center justify-center gap-4 mb-4">
+              <div className="h-px bg-[#16A34A]/40 w-6"></div>
+              <span className="text-[#16A34A] font-bold text-[13px]">Why Choose RJ Power Solutions</span>
+              <div className="h-px bg-[#16A34A]/40 w-6"></div>
+            </div>
+
+            <h2 className="hidden md:block font-poppins font-extrabold text-4xl md:text-5xl text-[#111827] leading-tight">
               Your Trusted Solar Partner<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F97316] to-[#E66E00]">in Central India</span>
             </h2>
-            <p className="text-[#64748B] max-w-2xl mx-auto mt-4 text-lg font-medium">We deliver more than solar panels — we deliver energy independence, savings, and peace of mind.</p>
+            <p className="hidden md:block text-[#64748B] max-w-2xl mx-auto mt-4 text-lg font-medium">We deliver more than solar panels — we deliver energy independence, savings, and peace of mind.</p>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
             {WHY_CHOOSE.map(({ icon: Icon, title, desc }, i) => (
               <motion.div
                 key={title}
@@ -423,13 +521,13 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="bg-white rounded-[24px] p-8 border border-[#E5E7EB] shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_12px_30px_rgb(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-300 group"
+                className="bg-white rounded-[16px] md:rounded-[24px] p-4 md:p-8 border border-[#E5E7EB] shadow-[0_4px_20px_rgb(0,0,0,0.02)] hover:shadow-[0_12px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 md:hover:-translate-y-2 transition-all duration-300 group flex flex-col items-center text-center"
               >
-                <div className="w-16 h-16 rounded-[16px] bg-[#FEF2ED] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Icon size={28} className="text-[#E07B2A]" strokeWidth={2} />
+                <div className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-[#E8F5EE] flex items-center justify-center mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Icon size={18} className="text-[#16A34A] md:w-7 md:h-7" strokeWidth={2} />
                 </div>
-                <h3 className="font-poppins font-bold text-xl text-[#111827] mb-3 group-hover:text-[#E07B2A] transition-colors">{title}</h3>
-                <p className="text-[#64748B] text-[15px] leading-relaxed font-medium">{desc}</p>
+                <h3 className="font-poppins font-bold text-[13px] md:text-xl text-[#111827] mb-1.5 md:mb-3 group-hover:text-[#16A34A] transition-colors leading-tight">{title}</h3>
+                <p className="text-[#64748B] text-[10px] md:text-[15px] leading-snug md:leading-relaxed font-medium">{desc}</p>
               </motion.div>
             ))}
           </div>
@@ -438,48 +536,244 @@ export default function HomePage() {
 
 
 
-      {/* ─── SERVICES ─── */}
-      <section className="section-padding bg-white relative">
-        {/* Dark top half like Design 1 Services */}
-        <div className="absolute top-0 left-0 w-full h-[320px] bg-solar-dark" />
+      {/* ─── NEW PREMIUM SERVICES SECTION ─── */}
+      <section className="py-24 bg-[#FAFBFC] relative overflow-hidden">
+        {/* Subtle background glow */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-[#E8F5EE] to-transparent rounded-full opacity-50 blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-[#FEF2ED] to-transparent rounded-full opacity-50 blur-3xl translate-y-1/2 -translate-x-1/4 pointer-events-none"></div>
+
         <div className="container-custom relative z-10">
-          <AnimatedSection className="text-center mb-14">
-            <div className="badge bg-white/10 text-white border-white/20 mb-4">Our Services</div>
-            <h2 className="section-title text-white">Complete Solar Solutions<br /><span className="text-solar-orange">for Every Property Type</span></h2>
+          <AnimatedSection className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-100 mb-6">
+              <span className="text-[#F97316] font-bold text-sm tracking-wide">Our Services</span>
+            </div>
+            <h2 className="font-poppins font-extrabold text-4xl md:text-5xl text-[#111827] leading-tight mb-6">
+              Complete Solar Solutions <br />
+              <span className="text-[#F97316]">for Every Property Type</span>
+            </h2>
+            <p className="text-[#64748B] text-lg font-medium leading-relaxed">
+              From homes to industries, we provide end-to-end solar solutions designed to save money and power a sustainable future.
+            </p>
           </AnimatedSection>
 
-          <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {SERVICES.map((service, i) => {
-              const Icon = ICON_MAP[service.icon] || Sun;
-              const isBlue = service.color === 'blue';
-              return (
-                <motion.div
-                  key={service.slug}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.15 }}
-                >
-                  <Link
-                    href={`/services/${service.slug}`}
-                    className="group block bg-white rounded-2xl p-7 card-hover border-2 border-transparent hover:border-solar-orange shadow-card h-full flex flex-col"
-                  >
-                    <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-5 transition-colors duration-300 ${isBlue ? 'bg-solar-sky group-hover:bg-solar-blue' : 'bg-solar-orange-tint group-hover:bg-solar-orange'}`}>
-                      <Icon size={26} className={`transition-colors duration-300 ${isBlue ? 'text-solar-blue group-hover:text-white' : 'text-solar-orange group-hover:text-white'}`} />
+          {/* Top Row: Featured Services (Desktop Grid) */}
+          <div className="hidden lg:grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+            {FEATURED_SERVICES.slice(0, 3).map((svc, i) => (
+              <motion.div
+                key={svc.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="group bg-white rounded-[24px] border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col"
+              >
+                <div className="relative h-[240px] w-full overflow-hidden bg-gray-50">
+                  <Image src={svc.image} alt={svc.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm border border-white/50">
+                    <svc.icon size={14} className="text-[#16A34A]" />
+                    <span className="text-[#16A34A] text-xs font-bold uppercase tracking-wider">{svc.badgeText}</span>
+                  </div>
+                </div>
+                <div className="p-8 flex flex-col flex-grow">
+                  <h3 className="font-poppins font-bold text-2xl text-[#111827] mb-2">{svc.title}</h3>
+                  <p className="text-[#64748B] text-[15px] font-medium mb-6">{svc.desc}</p>
+
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className={`flex items-center gap-3 flex-1 ${svc.highlightBg} rounded-xl px-4 py-3`}>
+                      <svc.highlightIcon className={`${svc.highlightIconColor} w-6 h-6 shrink-0`} />
+                      <div>
+                        <div className="text-[#111827] text-sm font-bold">{svc.highlightTitle}</div>
+                        <div className="text-[#64748B] text-[10px] font-medium uppercase tracking-wide">{svc.highlightSubtitle}</div>
+                      </div>
                     </div>
-                    <h3 className="font-poppins font-bold text-lg text-solar-dark mb-2 group-hover:text-solar-orange transition-colors duration-300">{service.title}</h3>
-                    <p className="text-gray-500 text-sm mb-4 flex-grow">{service.shortDesc}</p>
-                    <span className="flex items-center gap-1.5 text-solar-orange text-sm font-semibold font-poppins group/link">
-                      Learn More <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                    </span>
-                  </Link>
-                </motion.div>
-              );
-            })}
+                  </div>
+
+                  <div className="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-[#16A34A] bg-[#E8F5EE] px-3 py-1.5 rounded-lg text-xs font-bold">
+                      <svc.tagIcon size={14} /> {svc.tagText}
+                    </div>
+                    <Link href={svc.link} className="flex items-center gap-1.5 text-[#F97316] font-bold text-sm group/btn hover:text-[#E66E00] transition-colors">
+                      Learn More <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
 
-          <AnimatedSection className="text-center mt-10" delay={0.2}>
-            <Link href="/services" className="btn-secondary">
+          {/* Top Row: Featured Services (Mobile Carousel) */}
+          <div className="lg:hidden mb-8 w-full overflow-hidden relative">
+            <div 
+              className="flex transition-transform duration-500 ease-out will-change-transform gap-4"
+              style={{ transform: `translateX(calc(-${activeService * 100}% - ${activeService * 16}px))` }}
+            >
+              {FEATURED_SERVICES.map((svc, i) => (
+                <div key={svc.id} className="min-w-full shrink-0 flex">
+                  <div className="group w-full bg-white rounded-[24px] border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.06)] overflow-hidden flex flex-col h-full transform transition-transform duration-300">
+                    <div className="relative h-[240px] w-full overflow-hidden bg-gray-50">
+                      <Image src={svc.image} alt={svc.title} fill className="object-cover" />
+                      <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-2.5 py-1.5 rounded-md flex items-center gap-1.5 shadow-sm border border-white/50">
+                        <svc.icon size={12} className="text-[#16A34A]" />
+                        <span className="text-[#16A34A] text-[10px] font-extrabold uppercase tracking-widest">{svc.badgeText}</span>
+                      </div>
+                    </div>
+                    <div className="p-8 flex flex-col flex-grow">
+                      <h3 className="font-poppins font-bold text-[22px] text-[#111827] mb-2">{svc.title}</h3>
+                      <p className="text-[#64748B] text-[15px] font-medium mb-5">{svc.desc}</p>
+
+                      <div className="flex items-center gap-3 mb-5">
+                        <div className={`flex items-center gap-3 flex-1 ${svc.highlightBg} rounded-xl px-4 py-3`}>
+                          <svc.highlightIcon className={`${svc.highlightIconColor} w-5 h-5 shrink-0`} />
+                          <div>
+                            <div className="text-[#111827] text-[13px] font-extrabold">{svc.highlightTitle}</div>
+                            <div className="text-[#64748B] text-[9px] font-bold uppercase tracking-wider mt-0.5">{svc.highlightSubtitle}</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="mt-auto pt-4 flex items-center justify-between">
+                        <div className="flex items-center gap-1.5 text-[#16A34A] bg-[#E8F5EE] px-2.5 py-1 rounded-md text-[11px] font-bold">
+                          <svc.tagIcon size={12} /> {svc.tagText}
+                        </div>
+                        <Link href={svc.link} className="flex items-center gap-1 text-[#F97316] font-bold text-sm">
+                          Learn More <ArrowRight size={14} />
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Carousel Controls */}
+            <div className="flex items-center justify-center gap-6 mt-8">
+              <button 
+                onClick={() => setActiveService(activeService === 0 ? FEATURED_SERVICES.length - 1 : activeService - 1)} 
+                className="w-10 h-10 rounded-full flex items-center justify-center border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 active:scale-95 shadow-sm transition-all duration-300"
+                aria-label="Previous service"
+              >
+                <ArrowLeft size={18} strokeWidth={2.5} />
+              </button>
+              <div className="flex gap-2.5">
+                {FEATURED_SERVICES.map((_, i) => (
+                  <button 
+                    key={i} 
+                    onClick={() => setActiveService(i)} 
+                    className={`h-2 rounded-full transition-all duration-300 ${activeService === i ? 'w-6 bg-[#16A34A]' : 'w-2 bg-gray-300'}`}
+                    aria-label={`Go to slide ${i + 1}`}
+                  />
+                ))}
+              </div>
+              <button 
+                onClick={() => setActiveService((activeService + 1) % FEATURED_SERVICES.length)} 
+                className="w-10 h-10 rounded-full flex items-center justify-center border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 active:scale-95 shadow-sm transition-all duration-300"
+                aria-label="Next service"
+              >
+                <ArrowRight size={18} strokeWidth={2.5} />
+              </button>
+            </div>
+          </div>
+
+          {/* Bottom Row: Support Services */}
+          <div className="hidden lg:grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            {/* 4. Maintenance */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.3 }}
+              className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col xl:flex-row overflow-hidden hover:-translate-y-1"
+            >
+              <div className="relative w-full xl:w-2/5 h-48 xl:h-auto overflow-hidden">
+                <Image src="/services/maintenance.png" alt="Solar Maintenance" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+                <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-md px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
+                  <CheckCircle size={12} className="text-[#16A34A]" />
+                  <span className="text-[#111827] text-[10px] font-bold uppercase tracking-wider">Max Performance</span>
+                </div>
+              </div>
+              <div className="p-5 flex flex-col justify-between flex-1">
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-8 h-8 rounded-lg bg-[#EFF6FF] flex items-center justify-center shrink-0">
+                      <Wrench className="text-[#3B82F6] w-4 h-4" />
+                    </div>
+                    <h4 className="font-poppins font-bold text-lg text-[#111827]">Solar Maintenance</h4>
+                  </div>
+                  <p className="text-[#64748B] text-sm mb-4 line-clamp-2">Keep your system performing at peak efficiency with expert checks.</p>
+                </div>
+                <Link href="/services/maintenance" className="flex items-center gap-1.5 text-[#F97316] font-bold text-sm group/btn hover:text-[#E66E00] transition-colors mt-auto">
+                  Learn More <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* 5. Panel Cleaning */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.4 }}
+              className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col xl:flex-row overflow-hidden hover:-translate-y-1"
+            >
+              <div className="relative w-full xl:w-2/5 h-48 xl:h-auto overflow-hidden">
+                <Image src="/services/cleaning.png" alt="Panel Cleaning" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+                <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-md px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
+                  <CheckCircle size={12} className="text-[#16A34A]" />
+                  <span className="text-[#111827] text-[10px] font-bold uppercase tracking-wider">Higher Output</span>
+                </div>
+              </div>
+              <div className="p-5 flex flex-col justify-between flex-1">
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-8 h-8 rounded-lg bg-[#FEF2ED] flex items-center justify-center shrink-0">
+                      <Sparkles className="text-[#F97316] w-4 h-4" />
+                    </div>
+                    <h4 className="font-poppins font-bold text-lg text-[#111827]">Panel Cleaning</h4>
+                  </div>
+                  <p className="text-[#64748B] text-sm mb-4 line-clamp-2">Boost output by 20-30% with professional deep cleaning services.</p>
+                </div>
+                <Link href="/services/cleaning" className="flex items-center gap-1.5 text-[#F97316] font-bold text-sm group/btn hover:text-[#E66E00] transition-colors mt-auto">
+                  Learn More <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* 6. Net Metering */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.5 }}
+              className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col xl:flex-row overflow-hidden hover:-translate-y-1"
+            >
+              <div className="relative w-full xl:w-2/5 h-48 xl:h-auto overflow-hidden">
+                <Image src="/services/net_metering.png" alt="Net Metering" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+                <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-md px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
+                  <CheckCircle size={12} className="text-[#16A34A]" />
+                  <span className="text-[#111827] text-[10px] font-bold uppercase tracking-wider">Earn from Surplus</span>
+                </div>
+              </div>
+              <div className="p-5 flex flex-col justify-between flex-1">
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-8 h-8 rounded-lg bg-[#E8F5EE] flex items-center justify-center shrink-0">
+                      <Zap className="text-[#16A34A] w-4 h-4" />
+                    </div>
+                    <h4 className="font-poppins font-bold text-lg text-[#111827]">Net Metering</h4>
+                  </div>
+                  <p className="text-[#64748B] text-sm mb-4 line-clamp-2">Sell surplus power back to the grid and earn monetary credit.</p>
+                </div>
+                <Link href="/services/net-metering" className="flex items-center gap-1.5 text-[#F97316] font-bold text-sm group/btn hover:text-[#E66E00] transition-colors mt-auto">
+                  Learn More <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </motion.div>
+
+          </div>
+
+          <AnimatedSection className="text-center mt-12" delay={0.4}>
+            <Link href="/services" className="inline-flex items-center justify-center gap-2 bg-white text-[#111827] font-bold py-3.5 px-8 rounded-xl border border-gray-200 hover:bg-gray-50 hover:border-gray-300 transition-all shadow-sm">
               View All Services <ArrowRight size={16} />
             </Link>
           </AnimatedSection>
@@ -610,100 +904,23 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── SUBSIDY & FINANCING — from Design 1 ─── */}
-      <section className="section-padding bg-solar-grey">
-        <div className="container-custom">
-          <AnimatedSection className="text-center mb-14">
-            <div className="badge mb-4">Subsidy &amp; Financing</div>
-            <h2 className="section-title">Making Solar <span className="gradient-text-orange">Affordable</span></h2>
-            <p className="text-gray-500 max-w-2xl mx-auto mt-3 text-lg">Government subsidies and easy EMI options to make clean energy accessible to everyone.</p>
-          </AnimatedSection>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* PM Surya Ghar */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="bg-white rounded-3xl p-8 border-2 border-solar-orange/20 relative overflow-hidden shadow-card"
-            >
-              <div className="absolute top-0 right-0 bg-solar-orange text-white text-xs font-bold px-4 py-1.5 rounded-bl-xl uppercase tracking-wide font-poppins">
-                Govt. Scheme
-              </div>
-              <div className="flex items-center gap-4 mb-6">
-                <div className="bg-solar-orange-tint p-4 rounded-2xl">
-                  <Landmark size={28} className="text-solar-orange" />
-                </div>
-                <h3 className="font-poppins font-bold text-2xl text-solar-dark">PM Surya Ghar</h3>
-              </div>
-              <p className="text-gray-500 mb-6">
-                Avail massive direct-to-bank subsidies under PM Surya Ghar Muft Bijli Yojana for residential installations.
-              </p>
-              <div className="bg-solar-grey rounded-2xl p-5 mb-6">
-                <div className="text-sm font-semibold text-gray-400 uppercase mb-2 tracking-wide">Maximum Subsidy</div>
-                <div className="text-3xl font-poppins font-bold text-solar-dark flex items-center">
-                  <IndianRupee size={26} className="text-solar-orange mr-1" /> 78,000
-                </div>
-              </div>
-              <ul className="space-y-3">
-                {['Up to 3kW capacity covered', 'Direct Bank Transfer (DBT)', 'We handle all documentation'].map((f, i) => (
-                  <li key={i} className="flex items-center gap-3 text-sm font-medium text-gray-600">
-                    <CheckCircle size={18} className="text-green-500 flex-shrink-0" /> {f}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-
-            {/* Easy Financing */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-solar-blue text-white rounded-3xl p-8 relative overflow-hidden shadow-blue-lg"
-            >
-              <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-white/5 rounded-full blur-2xl" />
-              <div className="flex items-center gap-4 mb-6">
-                <div className="bg-white/10 p-4 rounded-2xl">
-                  <Percent size={28} className="text-solar-orange" />
-                </div>
-                <h3 className="font-poppins font-bold text-2xl">Easy Financing</h3>
-              </div>
-              <p className="text-blue-200 mb-6">
-                Partnered with leading nationalized and private banks to offer seamless solar loans at attractive interest rates.
-              </p>
-              <div className="bg-white/10 rounded-2xl p-5 mb-6 border border-white/10">
-                <div className="text-sm font-semibold text-blue-300 uppercase mb-2 tracking-wide">Starting Interest Rate</div>
-                <div className="text-3xl font-poppins font-bold text-solar-orange">7% p.a.</div>
-              </div>
-              <ul className="space-y-3">
-                {['Zero processing fee options', 'Up to 5-year tenure', 'Minimal documentation needed'].map((f, i) => (
-                  <li key={i} className="flex items-center gap-3 text-sm font-medium text-blue-100">
-                    <CheckCircle size={18} className="text-solar-orange flex-shrink-0" /> {f}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
       {/* ─── PROJECTS SHOWCASE — Design 1 hover reveal ─── */}
       <section className="section-padding bg-white">
         <div className="container-custom">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-14 gap-6">
-            <AnimatedSection>
-              <div className="badge mb-4">Our Work</div>
-              <h2 className="section-title">Real Projects,<br /><span className="gradient-text-orange">Real Results</span></h2>
-              <p className="text-gray-500 text-lg mt-3">A glimpse of our engineering excellence across Madhya Pradesh.</p>
+          <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-10 md:mb-14 gap-6">
+            <AnimatedSection className="text-center md:text-left w-full md:w-auto">
+              <div className="badge mb-4 mx-auto md:mx-0">Our Work</div>
+              <h2 className="section-title text-3xl md:text-4xl lg:text-5xl">Real Projects, <br className="hidden md:block" /><span className="gradient-text-orange">Real Results</span></h2>
+              <p className="text-gray-500 text-sm md:text-lg mt-3 max-w-md mx-auto md:mx-0">A glimpse of our engineering excellence across Madhya Pradesh.</p>
             </AnimatedSection>
-            <Link href="/projects" className="btn-secondary flex-shrink-0">
+            <Link href="/projects" className="btn-secondary flex-shrink-0 w-full md:w-auto justify-center text-sm md:text-base py-3.5">
               View All Projects <ArrowRight size={16} />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {/* Projects Desktop Grid */}
+          <div className="hidden lg:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {PROJECTS.map((project, i) => (
               <motion.div
                 key={project.id}
@@ -721,10 +938,8 @@ export default function HomePage() {
                     className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
-                  {/* Gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-solar-dark/90 via-solar-dark/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
-
-                  {/* Badges */}
+                  
                   <div className="absolute top-4 left-4 flex gap-2">
                     <span className="badge text-xs py-1 px-2.5">
                       {project.category.charAt(0).toUpperCase() + project.category.slice(1)}
@@ -735,7 +950,6 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                {/* Content hover reveal */}
                 <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
                   <h3 className="font-poppins font-bold text-base transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                     {project.title}
@@ -747,6 +961,70 @@ export default function HomePage() {
                 </div>
               </motion.div>
             ))}
+          </div>
+
+          {/* Projects Mobile Carousel */}
+          <div className="lg:hidden w-full overflow-hidden relative">
+            <div 
+              className="flex transition-transform duration-500 ease-out will-change-transform gap-4"
+              style={{ transform: `translateX(calc(-${activeProject * 100}% - ${activeProject * 16}px))` }}
+            >
+              {PROJECTS.map((project, i) => (
+                <div key={project.id} className="min-w-full shrink-0 flex">
+                  <div className="group relative w-full rounded-2xl overflow-hidden shadow-card cursor-pointer">
+                    <div className="relative aspect-[4/3] w-full">
+                      <Image src={project.image} alt={project.title} fill className="object-cover" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/90 via-[#111827]/30 to-transparent"></div>
+                      
+                      <div className="absolute top-4 left-4 flex gap-2">
+                        <span className="badge text-xs py-1 px-2.5 bg-white/20 backdrop-blur-md text-white border-white/20">
+                          {project.category.charAt(0).toUpperCase() + project.category.slice(1)}
+                        </span>
+                        <span className="bg-solar-orange text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider font-poppins">
+                          {project.capacity}
+                        </span>
+                      </div>
+
+                      <div className="absolute bottom-0 left-0 p-5 w-full">
+                        <h3 className="font-poppins font-bold text-lg text-white mb-2">{project.title}</h3>
+                        <div className="flex flex-wrap items-center gap-3 text-white/90 text-xs">
+                          <span className="flex items-center gap-1"><MapPin size={12} className="text-solar-orange" /> {project.location}</span>
+                          <span className="flex items-center gap-1"><Zap size={12} className="text-solar-orange" /> {project.savings}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Carousel Controls */}
+            <div className="flex items-center justify-center gap-6 mt-8">
+              <button 
+                onClick={() => setActiveProject(activeProject === 0 ? PROJECTS.length - 1 : activeProject - 1)} 
+                className="w-10 h-10 rounded-full flex items-center justify-center border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 active:scale-95 shadow-sm transition-all duration-300"
+                aria-label="Previous project"
+              >
+                <ArrowLeft size={18} strokeWidth={2.5} />
+              </button>
+              <div className="flex gap-2.5">
+                {PROJECTS.map((_, i) => (
+                  <button 
+                    key={i} 
+                    onClick={() => setActiveProject(i)} 
+                    className={`h-2 rounded-full transition-all duration-300 ${activeProject === i ? 'w-6 bg-[#F97316]' : 'w-2 bg-gray-300'}`}
+                    aria-label={`Go to slide ${i + 1}`}
+                  />
+                ))}
+              </div>
+              <button 
+                onClick={() => setActiveProject((activeProject + 1) % PROJECTS.length)} 
+                className="w-10 h-10 rounded-full flex items-center justify-center border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 active:scale-95 shadow-sm transition-all duration-300"
+                aria-label="Next project"
+              >
+                <ArrowRight size={18} strokeWidth={2.5} />
+              </button>
+            </div>
           </div>
         </div>
       </section>

@@ -1,6 +1,7 @@
 'use client';
 
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Home, Building2, Factory, Wrench, Sparkles, Zap, ArrowRight, CheckCircle } from 'lucide-react';
@@ -30,11 +31,16 @@ export default function ServicesPage() {
       />
 
       {/* Services Grid */}
-      <section className="py-20 lg:py-28 bg-brand-bg">
-        <div className="container-custom">
+      <section className="pt-12 lg:pt-16 pb-20 lg:pb-28 bg-[#FAFBFC] relative overflow-hidden">
+        {/* Subtle background glow */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-[#E8F5EE] to-transparent rounded-full opacity-50 blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none"></div>
+        
+        <div className="container-custom relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {SERVICES.map((service, i) => {
               const Icon = ICON_MAP[service.icon] || Home;
+              const imgName = service.slug.replace('-', '_');
+              
               return (
                 <motion.div
                   key={service.slug}
@@ -42,45 +48,46 @@ export default function ServicesPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="bg-white rounded-[24px] overflow-hidden shadow-[0_4px_20px_rgb(0,0,0,0.05)] hover:shadow-[0_12px_30px_rgb(0,0,0,0.1)] hover:-translate-y-2 transition-all duration-300 flex flex-col group border border-[#E5E7EB]"
+                  className="group bg-white rounded-[24px] border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col"
                 >
-                  <div className="p-8 flex flex-col flex-grow">
-                    {/* Header */}
-                    <div className="flex items-center gap-5 mb-6">
-                      <div className="w-16 h-16 rounded-[16px] bg-gradient-to-br from-[#E8F5EE] to-[#DCFCE7] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-sm border border-[#16A34A]/10">
-                        <Icon size={30} className="text-[#16A34A]" />
-                      </div>
-                      <h2 className="font-poppins font-bold text-[#111827] text-2xl group-hover:text-[#16A34A] transition-colors">{service.title}</h2>
+                  <div className="relative h-[240px] w-full overflow-hidden bg-gray-50">
+                    <Image src={`/services/${imgName}.png`} alt={service.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm border border-white/50">
+                      <Icon size={14} className="text-[#16A34A]" />
+                      <span className="text-[#16A34A] text-xs font-bold uppercase tracking-wider">{service.title}</span>
                     </div>
-                    {/* Body */}
-                    <div className="flex flex-col flex-grow">
-                      <p className="text-[#64748B] text-[15px] mb-8 leading-relaxed font-medium">{service.desc}</p>
-                      <ul className="space-y-4 mb-10 flex-grow">
-                        {service.benefits.slice(0, 4).map((b) => (
-                          <li key={b} className="flex items-start gap-3 text-[15px] text-[#475569] font-medium">
-                            <div className="mt-0.5 w-5 h-5 rounded-full bg-[#E8F5EE] flex items-center justify-center flex-shrink-0">
-                              <CheckCircle size={14} className="text-[#16A34A]" />
-                            </div>
-                            <span className="leading-tight pt-0.5">{b}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="flex gap-3 mt-auto">
-                        <Link
-                          href={`/services/${service.slug}`}
-                          className="bg-white text-[#111827] font-bold py-3.5 px-4 flex-1 rounded-xl flex items-center justify-center whitespace-nowrap border border-[#E5E7EB] hover:bg-gray-50 hover:border-gray-300 transition-all shadow-sm text-[15px]"
-                        >
-                          Learn More
-                        </Link>
-                        <a
-                          href={whatsappLink(`Hello! I am interested in ${service.title}. Can you please provide details?`)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="bg-gradient-to-r from-[#F97316] to-[#E07B2A] text-white font-bold py-3.5 px-4 flex-1 rounded-xl flex items-center justify-center whitespace-nowrap hover:shadow-lg hover:-translate-y-0.5 transition-all text-[15px]"
-                        >
-                          Enquire
-                        </a>
-                      </div>
+                  </div>
+                  
+                  <div className="p-8 flex flex-col flex-grow">
+                    <h3 className="font-poppins font-bold text-2xl text-[#111827] mb-3 group-hover:text-[#16A34A] transition-colors">{service.title}</h3>
+                    <p className="text-[#64748B] text-[15px] font-medium mb-6 leading-relaxed line-clamp-2">{service.desc}</p>
+                    
+                    <ul className="space-y-3 mb-8 flex-grow">
+                      {service.benefits.slice(0, 3).map((b) => (
+                        <li key={b} className="flex items-start gap-3 text-[14px] text-[#475569] font-medium">
+                          <div className="mt-0.5 w-5 h-5 rounded-full bg-[#E8F5EE] flex items-center justify-center flex-shrink-0">
+                            <CheckCircle size={12} className="text-[#16A34A]" />
+                          </div>
+                          <span className="leading-tight pt-0.5">{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="flex gap-3 mt-auto pt-6 border-t border-gray-100">
+                      <Link
+                        href={`/services/${service.slug}`}
+                        className="bg-white text-[#111827] font-bold py-3 px-4 flex-1 rounded-xl flex items-center justify-center whitespace-nowrap border border-[#E5E7EB] hover:bg-gray-50 hover:border-gray-300 transition-all shadow-sm text-[14px] group/btn"
+                      >
+                        Learn More <ArrowRight size={14} className="ml-1.5 group-hover/btn:translate-x-1 transition-transform" />
+                      </Link>
+                      <a
+                        href={whatsappLink(`Hello! I am interested in ${service.title}. Can you please provide details?`)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-gradient-to-r from-[#F97316] to-[#E07B2A] text-white font-bold py-3 px-4 flex-1 rounded-xl flex items-center justify-center whitespace-nowrap hover:shadow-lg hover:-translate-y-0.5 transition-all text-[14px]"
+                      >
+                        Enquire Now
+                      </a>
                     </div>
                   </div>
                 </motion.div>

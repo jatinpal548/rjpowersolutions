@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { CheckCircle } from 'lucide-react';
 import React from 'react';
 
 interface PageHeroProps {
@@ -23,59 +22,70 @@ export default function PageHero({
   keywordColor = 'green',
   children,
 }: PageHeroProps) {
-  const keywordClass = keywordColor === 'green' ? 'text-brand-green' : 'text-brand-orange';
+  const keywordClass = keywordColor === 'green' ? 'text-[#16A34A]' : 'text-[#F97316]';
 
   return (
-    <section className="relative w-full flex flex-col items-center justify-center pt-32 pb-16 lg:pt-40 lg:pb-24 overflow-hidden bg-gradient-to-b from-[#FAF8F5] to-[#FDF0E8]">
-      <div className="container-custom relative z-20 text-center max-w-4xl mx-auto flex flex-col items-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md border border-brand-green/20 px-4 py-2 rounded-full text-brand-green font-semibold text-sm mb-6 shadow-sm"
-        >
-          <div className="w-5 h-5 bg-brand-green rounded-full flex items-center justify-center">
-            <CheckCircle size={12} className="text-white" strokeWidth={3} />
+    <section className="relative pt-32 pb-0 lg:pt-40 lg:pb-0 bg-[#F8FAF7] overflow-hidden">
+      {/* Background Patterns */}
+      <div 
+        className="absolute top-0 left-0 w-96 h-96 opacity-[0.15] pointer-events-none" 
+        style={{ backgroundImage: 'radial-gradient(#16A34A 2.5px, transparent 2.5px)', backgroundSize: '30px 30px' }}
+      ></div>
+      {/* Soft leaf wave graphic (approximated with CSS gradients) */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-[#DFF0E6] to-transparent rounded-bl-full opacity-70 pointer-events-none blur-3xl"></div>
+
+      <div className="container-custom relative z-10">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8">
+          <div className="max-w-2xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+              className="flex items-center gap-3 mb-4"
+            >
+              <div className="w-8 h-0.5 bg-[#16A34A]"></div>
+              <span className="text-[#16A34A] font-bold text-sm tracking-[0.15em] uppercase">
+                {badgeText}
+              </span>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
+              className="text-4xl md:text-5xl font-extrabold text-[#111827] mb-4 tracking-tight leading-tight font-poppins"
+            >
+              {titlePart1}{' '}
+              <span className={keywordClass}>{titleKeyword}</span>
+              {titlePart2 && (
+                <>
+                  <br />
+                  {titlePart2}
+                </>
+              )}
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
+              className="text-[#64748B] text-lg font-medium leading-relaxed"
+            >
+              {subtitle}
+            </motion.p>
           </div>
-          {badgeText}
-        </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
-          className="font-poppins font-extrabold text-[#1A1A1A] mb-6 tracking-tight drop-shadow-sm leading-tight"
-          style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}
-        >
-          {titlePart1}{' '}
-          <span className={keywordClass}>{titleKeyword}</span>
-          {titlePart2 && (
-            <>
-              <br />
-              {titlePart2}
-            </>
+          {children && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3, ease: 'easeOut' }}
+              className="w-full lg:w-auto mt-6 lg:mt-0"
+            >
+              {children}
+            </motion.div>
           )}
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-          className="text-gray-500 text-lg md:text-[21px] max-w-2xl leading-relaxed font-medium mb-8"
-        >
-          {subtitle}
-        </motion.p>
-        
-        {children && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
-            className="w-full"
-          >
-            {children}
-          </motion.div>
-        )}
+        </div>
       </div>
     </section>
   );

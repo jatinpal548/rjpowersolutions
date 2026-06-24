@@ -66,7 +66,7 @@ export default function FaqPage() {
       </PageHero>
 
       {/* FAQ */}
-      <section className="py-20 lg:py-28 bg-brand-bg">
+      <section className="pt-12 lg:pt-16 pb-20 lg:pb-28 bg-brand-bg">
         <div className="container-custom max-w-4xl">
           {/* Category Filter */}
           <div className="flex flex-wrap gap-3 mb-10 justify-center">

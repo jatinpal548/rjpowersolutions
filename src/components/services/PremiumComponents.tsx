@@ -9,37 +9,37 @@ const PRODUCTS = [
     title: 'Solar Panels',
     brands: ['Waaree', 'LONGi', 'Jinko Solar', 'Adani Solar'],
     desc: 'High-efficiency Tier-1 solar panels designed for maximum power generation and long-term reliability.',
-    img: 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=800&auto=format&fit=crop',
+    img: '/products/panel.png',
   },
   {
     title: 'Solar Inverters',
     brands: ['Growatt', 'Sungrow', 'Solis'],
     desc: 'Advanced inverter technology for optimal energy conversion and system performance.',
-    img: 'https://images.unsplash.com/photo-1548611716-e5225abaf02e?q=80&w=800&auto=format&fit=crop',
+    img: '/products/inverter.png',
   },
   {
     title: 'Mounting Structures',
     brands: ['Tata Steel', 'Waaree'],
     desc: 'Corrosion-resistant mounting systems engineered for durability and structural stability.',
-    img: 'https://images.unsplash.com/photo-1582214400329-87c2fb2408ce?q=80&w=800&auto=format&fit=crop',
+    img: '/products/mounting.png',
   },
   {
     title: 'DC & AC Cables',
     brands: ['Polycab', 'KEI'],
     desc: 'High-quality solar cables for safe and efficient power transmission.',
-    img: 'https://images.unsplash.com/photo-1544724569-5f546fd6f2b6?q=80&w=800&auto=format&fit=crop',
+    img: '/products/cables.png',
   },
   {
     title: 'Protection Devices',
     brands: ['Siemens', 'Schneider Electric', 'ABB'],
     desc: 'Premium safety and protection systems for long-term operational security.',
-    img: 'https://images.unsplash.com/photo-1558442074-3c19857bc1dc?q=80&w=800&auto=format&fit=crop',
+    img: '/products/protection.png',
   },
   {
     title: 'Monitoring Systems',
     brands: ['Smart Tracking', 'Remote Access'],
     desc: 'Smart monitoring and remote performance tracking for complete solar visibility.',
-    img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop',
+    img: '/products/monitoring.png',
   }
 ];
 
@@ -98,6 +98,7 @@ export default function PremiumComponents() {
                   src={product.img}
                   alt={product.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>

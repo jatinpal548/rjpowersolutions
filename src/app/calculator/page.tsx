@@ -4,8 +4,8 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Calculator, MessageCircle, Sun, TrendingUp, Zap, Clock, 
+import {
+  Calculator, MessageCircle, Sun, TrendingUp, Zap, Clock,
   CheckCircle2, Building2, Factory, Home, Leaf, ArrowRight,
   ShieldCheck, PhoneCall, Download, ChevronDown, IndianRupee
 } from 'lucide-react';
@@ -97,7 +97,7 @@ export default function CalculatorPage() {
       if (systemKw > 10) costPerKw = 60000;
       if (systemKw > 50) costPerKw = 55000;
       if (systemKw > 100) costPerKw = 50000;
-      
+
       const grossCost = systemKw * costPerKw;
 
       // Subsidy: Only residential gets PM Surya Ghar subsidy
@@ -124,7 +124,7 @@ export default function CalculatorPage() {
       for (let year = 1; year <= 25; year++) {
         const yearSavings = currentGeneration * currentTariff;
         cumulativeSavings += yearSavings;
-        
+
         projections.push({
           year,
           savings: Math.round(yearSavings),
@@ -175,20 +175,20 @@ export default function CalculatorPage() {
 
         <div className="container-custom relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-            
+
             {/* Left Column: Typography */}
             <div className="max-w-2xl">
               <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-100 mb-6">
                 <Zap size={16} className="text-[#16A34A]" />
                 <span className="text-[#16A34A] font-bold text-sm tracking-wide">Solar Savings Calculator</span>
               </div>
-              
+
               <h1 className="text-5xl md:text-6xl font-extrabold text-[#111827] mb-6 tracking-tight leading-[1.1] font-poppins">
                 Calculate Your <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F97316] to-[#E66E00]">Solar Savings</span> in <br />
                 30 Seconds
               </h1>
-              
+
               <p className="text-[#64748B] text-lg md:text-xl font-medium mb-8 leading-relaxed max-w-lg">
                 Discover your ideal solar system size, estimated monthly savings, government subsidy benefits, and ROI instantly.
               </p>
@@ -210,66 +210,27 @@ export default function CalculatorPage() {
             {/* Right Column: Illustration & Floating Cards */}
             <div className="relative w-full h-[500px] lg:h-[600px] hidden md:block">
               {/* Central Illustration (We'll use the existing commercial image or a stylized setup) */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8 }}
                 className="absolute inset-0 flex items-center justify-center"
               >
-                <div className="relative w-[90%] h-[90%]">
-                  <Image 
-                    src="/hero-3d-commercial.png" 
-                    alt="Solar Building" 
-                    fill 
-                    className="object-contain"
+                <motion.div 
+                  animate={{ y: [0, -15, 0] }}
+                  transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+                  className="relative w-full h-full scale-110 lg:scale-[1.3] xl:scale-[1.6] 2xl:scale-[1.7]"
+                >
+                  <Image
+                    src="/calculator-hero-img.png"
+                    alt="Solar Building Group"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.15)]"
                     priority
                   />
-                  {/* Subtle Sun */}
-                  <div className="absolute top-0 right-10 w-24 h-24 bg-gradient-to-br from-[#FDE047] to-[#F97316] rounded-full blur-sm opacity-80 shadow-[0_0_50px_rgba(249,115,22,0.5)]"></div>
-                </div>
-              </motion.div>
 
-              {/* Floating Cards */}
-              <motion.div 
-                animate={{ y: [0, -15, 0] }} 
-                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-                className="absolute top-16 right-0 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/50 flex items-center gap-4 z-20"
-              >
-                <div className="w-10 h-10 rounded-full bg-[#E8F5EE] flex items-center justify-center">
-                  <IndianRupee size={20} className="text-[#16A34A]" />
-                </div>
-                <div>
-                  <div className="font-bold text-[#111827]">₹35,000/month</div>
-                  <div className="text-xs text-[#64748B] font-medium">Saved</div>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                animate={{ y: [0, 15, 0] }} 
-                transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-                className="absolute bottom-32 right-10 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/50 flex items-center gap-4 z-20"
-              >
-                <div className="w-10 h-10 rounded-full bg-[#E8F5EE] flex items-center justify-center">
-                  <TrendingUp size={20} className="text-[#16A34A]" />
-                </div>
-                <div>
-                  <div className="text-xs text-[#64748B] font-medium mb-0.5">ROI in</div>
-                  <div className="font-bold text-[#111827]">3.8 Years</div>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                animate={{ y: [0, -10, 0] }} 
-                transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut" }}
-                className="absolute bottom-10 left-10 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/50 flex items-center gap-4 z-20"
-              >
-                <div className="w-10 h-10 rounded-full bg-[#E8F5EE] flex items-center justify-center">
-                  <Leaf size={20} className="text-[#16A34A]" />
-                </div>
-                <div>
-                  <div className="text-xs text-[#64748B] font-medium mb-0.5">CO₂ Reduced</div>
-                  <div className="font-bold text-[#111827]">18 Tons/Year</div>
-                </div>
+                </motion.div>
               </motion.div>
 
             </div>
@@ -281,7 +242,7 @@ export default function CalculatorPage() {
       <section className="py-20 bg-white relative" id="calculator">
         <div className="container-custom max-w-6xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
+
             {/* Left: Calculator Form (40% roughly lg:col-span-5) */}
             <div className="lg:col-span-5">
               <div className="bg-white rounded-3xl p-8 shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-gray-100 sticky top-28">
@@ -314,9 +275,9 @@ export default function CalculatorPage() {
                   <div>
                     <label className="block text-sm font-bold text-[#111827] mb-2 font-poppins">State</label>
                     <div className="relative">
-                      <select 
-                        value={state} 
-                        onChange={e => setState(e.target.value)} 
+                      <select
+                        value={state}
+                        onChange={e => setState(e.target.value)}
                         className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#16A34A] focus:ring-2 focus:ring-[#16A34A]/20 outline-none transition-all appearance-none text-[#111827] font-medium bg-white"
                       >
                         {STATES.map(s => <option key={s}>{s}</option>)}
@@ -340,13 +301,12 @@ export default function CalculatorPage() {
                           <button
                             key={t.id}
                             onClick={() => setType(t.id)}
-                            className={`flex flex-col items-center justify-center gap-1.5 py-3 rounded-lg text-sm font-bold transition-all ${
-                              isActive 
-                                ? 'bg-[#16A34A] text-white shadow-md transform scale-[1.02]' 
-                                : 'text-[#64748B] hover:bg-white hover:shadow-sm'
-                            }`}
+                            className={`flex flex-col items-center justify-center gap-1.5 py-3 rounded-lg text-sm font-bold transition-all ${isActive
+                              ? 'bg-[#16A34A] text-white shadow-md transform scale-[1.02]'
+                              : 'text-[#64748B] hover:bg-white hover:shadow-sm'
+                              }`}
                           >
-                            <Icon size={18} className={isActive ? "text-white" : "text-gray-400"} /> 
+                            <Icon size={18} className={isActive ? "text-white" : "text-gray-400"} />
                             {t.id}
                           </button>
                         );
@@ -528,19 +488,19 @@ export default function CalculatorPage() {
       {/* 3. ANALYTICS SECTION (Only visible after calculation) */}
       <AnimatePresence>
         {result && (
-          <motion.section 
+          <motion.section
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="py-12 bg-white border-t border-gray-50"
           >
             <div className="container-custom max-w-6xl">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                
+
                 {/* Chart 1: Savings Growth (Visual Approximation) */}
                 <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex flex-col">
                   <h4 className="font-bold text-[#111827] mb-1">Savings Growth Over Time</h4>
                   <p className="text-xs text-[#64748B] mb-6">With 5% annual tariff increase</p>
-                  
+
                   <div className="flex-grow flex items-end gap-1 h-40 relative">
                     {/* CSS Line Chart visualization using bars with border-radius to simulate curve points */}
                     {result.projections.filter((p, i) => i % 5 === 0 || i === 24).map((p, i, arr) => {
@@ -569,7 +529,7 @@ export default function CalculatorPage() {
                 <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex flex-col">
                   <h4 className="font-bold text-[#111827] mb-1">25-Year ROI Projection</h4>
                   <div className="font-poppins font-bold text-2xl text-[#16A34A] mb-6">{formatCurrency(result.totalSavings25)} <span className="text-sm font-medium text-[#64748B]">Total Profit</span></div>
-                  
+
                   <div className="flex-grow flex items-end gap-1.5 h-32">
                     {/* CSS Bar Chart */}
                     {result.projections.filter((p, i) => i % 2 === 0).map((p) => {
@@ -578,11 +538,11 @@ export default function CalculatorPage() {
                       const isNegative = p.netProfit < 0;
                       return (
                         <div key={p.year} className="flex-1 flex flex-col items-center justify-end h-full group relative">
-                           {/* Tooltip */}
-                           <div className="absolute -top-8 bg-[#111827] text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap z-20">
-                              Yr {p.year}: {formatCurrency(p.netProfit)}
-                            </div>
-                          <div 
+                          {/* Tooltip */}
+                          <div className="absolute -top-8 bg-[#111827] text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap z-20">
+                            Yr {p.year}: {formatCurrency(p.netProfit)}
+                          </div>
+                          <div
                             className={`w-full rounded-t-sm transition-all duration-500 ${isNegative ? 'bg-[#EF4444]/60' : 'bg-[#16A34A]/80 group-hover:bg-[#16A34A]'}`}
                             style={{ height: `${Math.abs(heightPct)}%` }}
                           ></div>
@@ -599,7 +559,7 @@ export default function CalculatorPage() {
                   <h4 className="font-bold text-[#111827] mb-1 z-10">Energy Production</h4>
                   <div className="font-poppins font-bold text-3xl text-[#111827] mb-1 z-10">{result.annualGeneration.toLocaleString()} kWh</div>
                   <p className="text-xs text-[#64748B] mb-6 z-10">Annual Generation Capacity</p>
-                  
+
                   <div className="relative w-32 h-32 z-10">
                     <svg viewBox="0 0 36 36" className="w-full h-full transform -rotate-90">
                       <path
@@ -628,7 +588,7 @@ export default function CalculatorPage() {
 
               </div>
               <p className="text-center text-xs text-[#64748B] mt-6 flex items-center justify-center gap-1">
-                 <ShieldCheck size={14} className="text-[#16A34A]" /> Actual results may vary based on location, roof orientation, shading, and electricity usage patterns.
+                <ShieldCheck size={14} className="text-[#16A34A]" /> Actual results may vary based on location, roof orientation, shading, and electricity usage patterns.
               </p>
             </div>
           </motion.section>
@@ -646,18 +606,19 @@ export default function CalculatorPage() {
               <p className="text-[#64748B] font-medium mb-10 text-lg">
                 From residential rooftops to large-scale industrial complexes, we deliver high-performance solar solutions.
               </p>
-              
+
               <div className="grid grid-cols-2 gap-6">
                 {[
-                  { title: 'Commercial Buildings', img: '/hero-3d-commercial.png' },
+                  { title: 'Housing Societies', img: '/hero-3d-commercial.png' },
                   { title: 'Residential Homes', img: '/hero-3d-house.png' },
                 ].map((item, i) => (
                   <div key={i} className="group">
                     <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-3 bg-white border border-gray-100 shadow-sm">
-                      <Image 
-                        src={item.img} 
-                        alt={item.title} 
-                        fill 
+                      <Image
+                        src={item.img}
+                        alt={item.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
@@ -693,16 +654,16 @@ export default function CalculatorPage() {
           <div className="bg-gradient-to-br from-[#E8F5EE] to-[#DCFCE7] rounded-[2.5rem] p-10 md:p-16 relative overflow-hidden border border-[#16A34A]/20">
             {/* Background elements */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4"></div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
               <div>
                 <h2 className="font-poppins font-extrabold text-4xl text-[#111827] mb-4">
-                  Want an Exact <br/><span className="text-[#F97316]">Solar Proposal?</span>
+                  Want an Exact <br /><span className="text-[#F97316]">Solar Proposal?</span>
                 </h2>
                 <p className="text-[#111827]/70 font-medium mb-8 text-lg">
                   Get a free site assessment and customized engineering quotation tailored to your roof.
                 </p>
-                
+
                 <div className="flex flex-col sm:flex-row gap-4">
                   <a
                     href={whatsappLink(`Hello! I used the calculator and want a free site assessment. My estimated bill is ₹${bill || '...'}`)}

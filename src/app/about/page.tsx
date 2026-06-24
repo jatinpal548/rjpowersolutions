@@ -48,7 +48,7 @@ export default function AboutPage() {
       />
 
       {/* Story Section */}
-      <section className="py-20 lg:py-28 bg-brand-bg">
+      <section className="pt-12 lg:pt-16 pb-20 lg:pb-28 bg-brand-bg">
         <div className="container-custom grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
           <AnimatedSection direction="left">
             <div className="mb-5">

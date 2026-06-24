@@ -90,14 +90,19 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* Mobile menu toggle */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="lg:hidden p-2 rounded-md transition-colors text-solar-dark hover:text-solar-orange"
-            aria-label="Toggle menu"
-          >
-            {menuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile controls */}
+          <div className="flex lg:hidden items-center gap-2.5">
+            <a href={`tel:${SITE.phone}`} className="w-10 h-10 rounded-xl bg-[#E8F5EE] flex items-center justify-center text-[#16A34A] shadow-sm border border-green-50 transition-transform active:scale-95">
+              <Phone size={18} />
+            </a>
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="w-10 h-10 rounded-xl flex items-center justify-center border border-gray-100 shadow-sm transition-colors text-gray-700 bg-white hover:bg-gray-50 active:scale-95"
+              aria-label="Toggle menu"
+            >
+              {menuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
       </header>
 

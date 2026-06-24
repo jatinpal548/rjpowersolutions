@@ -63,8 +63,7 @@ export default function EmiSubsidyPage() {
         keywordColor="orange"
       />
 
-      {/* Government Subsidy */}
-      <section className="py-20 lg:py-28 bg-brand-bg">
+      <section className="pt-12 lg:pt-16 pb-20 lg:pb-28 bg-brand-bg">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
             <div>
