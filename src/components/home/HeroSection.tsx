@@ -14,7 +14,7 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { SITE, whatsappLink } from '@/lib/constants';
-import { sectionVariants, staggerContainer, staggerItem } from './animations';
+import { sectionVariants } from './animations';
 
 const TRUST_BADGES = [
   'Free Site Survey',
@@ -164,7 +164,7 @@ export default function HeroSection() {
               boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
             }}
           >
-            {HERO_STATS.map((stat, i) => (
+            {HERO_STATS.map((stat) => (
               <div key={stat.label} className="flex-1 min-w-[100px] text-center">
                 <div className="text-3xl md:text-4xl font-poppins font-extrabold text-solar-orange mb-1">
                   {stat.value}

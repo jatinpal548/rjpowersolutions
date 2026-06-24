@@ -44,7 +44,6 @@ export default async function ServiceDetailPage({ params }: Props) {
   if (!service) notFound();
 
   const Icon = ICON_MAP[service.icon] || Home;
-  const isBlue = service.color === 'blue';
   const faqs = SERVICE_FAQS[slug] || FAQS.slice(0, 5);
 
   return (

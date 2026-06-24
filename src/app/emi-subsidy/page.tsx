@@ -1,6 +1,5 @@
 'use client';
 
-import type { Metadata } from 'next';
 import { motion } from 'framer-motion';
 import { CheckCircle, MessageCircle } from 'lucide-react';
 import PageWrapper from '@/components/layout/PageWrapper';

@@ -6,41 +6,15 @@ import Link from 'next/link';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import {
   Sun, Home, Building2, Factory, Wrench, Sparkles, Zap,
-  CheckCircle, Star, ChevronDown, ArrowRight, ArrowLeft, Phone, MessageCircle,
-  TrendingUp, Shield, Clock, Award, HeadphonesIcon, Users,
-  Calculator, ChevronRight, Quote, Landmark, IndianRupee, Percent,
-  MapPin, Mail
+  CheckCircle, Star, ChevronDown, ArrowRight, ArrowLeft, MessageCircle,
+  TrendingUp, Shield, Award, HeadphonesIcon, Users,
+  Calculator, ChevronRight,
+  MapPin, IndianRupee
 } from 'lucide-react';
 import PageWrapper from '@/components/layout/PageWrapper';
 import InfiniteTestimonialSlider from '@/components/ui/InfiniteTestimonialSlider';
 import ContactSection from '@/components/home/ContactSection';
-import { SITE, SERVICES, TESTIMONIALS, PROJECTS, FAQS, whatsappLink } from '@/lib/constants';
-import { sectionVariants, staggerContainer, staggerItem } from '@/components/home/animations';
-
-// Animated counter hook
-function useCounter(target: number, duration = 2000, startCounting = false) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (!startCounting) return;
-    let start = 0;
-    const step = target / (duration / 16);
-    const timer = setInterval(() => {
-      start += step;
-      if (start >= target) {
-        setCount(target);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(start));
-      }
-    }, 16);
-    return () => clearInterval(timer);
-  }, [target, duration, startCounting]);
-  return count;
-}
-
-const ICON_MAP: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
-  Home, Building2, Factory, Wrench, Sparkles, Zap,
-};
+import { TESTIMONIALS, PROJECTS, FAQS, whatsappLink } from '@/lib/constants';
 
 const WHY_CHOOSE = [
   { icon: Award, title: 'Expert Installation', desc: 'Certified technicians with 5+ years experience.' },
@@ -181,7 +155,7 @@ function AnimatedSection({ children, className = '', delay = 0 }: { children: Re
 }
 
 export default function HomePage() {
-  const [statsVisible, setStatsVisible] = useState(false);
+  const [, setStatsVisible] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [billAmount, setBillAmount] = useState('');
   const [propertyType, setPropertyType] = useState('Residential');
@@ -239,11 +213,6 @@ export default function HomePage() {
       setActiveProject((prev) => (prev === 0 ? PROJECTS.length - 1 : prev - 1));
     }
   };
-
-  const c500 = useCounter(500, 2000, statsVisible);
-  const c5 = useCounter(5, 1500, statsVisible);
-  const c100 = useCounter(100, 2000, statsVisible);
-  const c98 = useCounter(98, 1800, statsVisible);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -358,7 +327,9 @@ export default function HomePage() {
                 className="flex md:hidden items-center gap-3 w-full mb-8"
               >
                 <a href={heroWhatsApp} className="flex-1 bg-[#F97316] text-white font-bold py-3.5 px-2 rounded-xl flex items-center justify-center gap-1.5 shadow-md text-[13px] leading-tight text-center">
-                  <MessageCircle size={14} /> Get Free Quote &rarr;
+                  <MessageCircle size={14} />
+                  <span>Get Free Quote</span>
+                  <span aria-hidden="true">→</span>
                 </a>
                 <Link href="/calculator" className="flex-1 bg-white text-[#111827] font-bold py-3.5 px-2 rounded-xl flex items-center justify-center gap-1.5 shadow-sm border border-gray-200 text-[13px] leading-tight text-center">
                   <Calculator size={14} /> Calculate Savings &rarr;
@@ -662,7 +633,7 @@ export default function HomePage() {
               className="flex transition-transform duration-500 ease-out will-change-transform gap-4"
               style={{ transform: `translateX(calc(-${activeService * 100}% - ${activeService * 16}px))` }}
             >
-              {FEATURED_SERVICES.map((svc, i) => (
+              {FEATURED_SERVICES.map((svc) => (
                 <div key={svc.id} className="min-w-full shrink-0 flex">
                   <div className="group w-full bg-white rounded-[24px] border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.06)] overflow-hidden flex flex-col h-full transform transition-transform duration-300">
                     <div className="relative h-[240px] w-full overflow-hidden bg-gray-50">
@@ -1029,7 +1000,7 @@ export default function HomePage() {
               className="flex transition-transform duration-500 ease-out will-change-transform gap-4"
               style={{ transform: `translateX(calc(-${activeProject * 100}% - ${activeProject * 16}px))` }}
             >
-              {PROJECTS.map((project, i) => (
+              {PROJECTS.map((project) => (
                 <div key={project.id} className="min-w-full shrink-0 flex">
                   <div className="group relative w-full rounded-2xl overflow-hidden shadow-card cursor-pointer">
                     <div className="relative aspect-[4/3] w-full">

@@ -9,7 +9,6 @@ import { Menu, X, Phone } from 'lucide-react';
 import { NAV_LINKS, SITE, whatsappLink } from '@/lib/constants';
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();

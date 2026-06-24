@@ -2,10 +2,9 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Calculator, MessageCircle, Sun, TrendingUp, Zap, Clock,
+  Calculator, Sun, TrendingUp, Zap, Clock,
   CheckCircle2, Building2, Factory, Home, Leaf, ArrowRight,
   ShieldCheck, PhoneCall, Download, ChevronDown, IndianRupee
 } from 'lucide-react';
@@ -24,13 +23,6 @@ const TARIFF: Record<string, number> = {
   'Karnataka': 7.0,
   'Tamil Nadu': 8.0,
   'Other': 7.5,
-};
-
-// Current MNRE Subsidy slabs for Residential
-const SUBSIDY: Record<string, number> = {
-  '1': 30000,
-  '2': 60000,
-  '3': 78000,
 };
 
 interface YearlyProjection {

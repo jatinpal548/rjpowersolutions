@@ -1,15 +1,14 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
-import { Target, Eye, Sun, ArrowRight, ShieldCheck, Zap, Users, Trophy, CheckCircle, Shield, Star } from 'lucide-react';
+import { Target, Eye, Users, CheckCircle, Shield, Star } from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import PageWrapper from '@/components/layout/PageWrapper';
 import PageHero from '@/components/ui/PageHero';
 import SectionLabel from '@/components/ui/SectionLabel';
 import ProposalCTA from '@/components/ui/ProposalCTA';
-import { SITE, whatsappLink } from '@/lib/constants';
+import { SITE } from '@/lib/constants';
 
 const TRUST_PILLARS = [
   { icon: Users, title: 'Skilled Team', desc: 'Our certified technicians and engineers bring years of hands-on solar experience to every project.' },

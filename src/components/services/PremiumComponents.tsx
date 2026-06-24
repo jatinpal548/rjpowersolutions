@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Zap, Sun, Award, CheckCircle2, Factory } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 import SectionLabel from '@/components/ui/SectionLabel';
 
 const PRODUCTS = [

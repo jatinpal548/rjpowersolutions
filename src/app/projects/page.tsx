@@ -2,13 +2,11 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { MapPin, CalendarDays, Zap, ArrowRight, MessageCircle, IndianRupee } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { MapPin, CalendarDays, Zap } from 'lucide-react';
+import { motion } from 'framer-motion';
 import PageWrapper from '@/components/layout/PageWrapper';
-import PageHero from '@/components/ui/PageHero';
 import ProposalCTA from '@/components/ui/ProposalCTA';
-import { PROJECTS, whatsappLink } from '@/lib/constants';
+import { PROJECTS } from '@/lib/constants';
 
 const CATEGORIES = ['all', 'residential', 'commercial', 'industrial'] as const;
 type Category = typeof CATEGORIES[number];
